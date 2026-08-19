@@ -233,9 +233,7 @@ def canonical_json(value: object) -> bytes:
 def tree_hash(root: Path, *, exclude: Iterable[str] = ()) -> str:
     excluded = {item.replace("\\", "/") for item in exclude}
     entries: list[dict[str, str]] = []
-    for path in sorted(root.rglob("*")):
-        if not path.is_file() or path.is_symlink():
-            continue
+    for path in iter_files(root):
         relative = path.relative_to(root).as_posix()
         if relative in excluded:
             continue
