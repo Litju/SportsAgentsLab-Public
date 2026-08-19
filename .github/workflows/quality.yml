@@ -32,6 +32,7 @@ jobs:
       MEF_DATABASE_RUNTIME_URL: postgresql://mef_runtime:CHANGE_ME@127.0.0.1:5432/mef_test
       MEF_MIGRATION_PASSWORD: CHANGE_ME
       MEF_RUNTIME_PASSWORD: CHANGE_ME
+      MEF_PUBLIC_SOURCE_RELEASE: ${{ github.repository == 'Litju/SportsAgentsLab-Public' && '1' || '0' }}
       MEF_SECRET_SCAN_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
       MEF_SOURCE_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       MEF_SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
