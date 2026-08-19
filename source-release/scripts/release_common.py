@@ -328,7 +328,7 @@ def generate_env_example_text(text: str) -> str:
 
 
 def iter_files(root: Path) -> Iterable[Path]:
-    for path in sorted(root.rglob("*")):
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
         if path.is_symlink() or not path.is_file():
             continue
         relative_parts = {part.lower() for part in path.relative_to(root).parts}
