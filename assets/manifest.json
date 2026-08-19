@@ -1,0 +1,90 @@
+{
+  "assets": [
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/agents-and-responsibilities.svg",
+      "sha256": "0a3a39ffee08b38e8db5bcb82971a2247071534edfcbc9d1337ee36670a695b0"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/cmj-case-study-flow.svg",
+      "sha256": "e99f489441c22b49f1f38abd72af004299d939e99d4fb330080fb37ba4e96865"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/current-capabilities.svg",
+      "sha256": "ecf0feb3c88a1373db92e8eeecdcec928d96d9799d35968f5a50637cf6cbc12d"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/evidence-to-decision.svg",
+      "sha256": "2634dcd4ec0c5f3adff0bc68dd2445b95192caf136121856388b9871e0d2680d"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/measurement-agent-overview.svg",
+      "sha256": "239b2f577241f22329005c86d452c3a039d5b5c45107537a8ab3a556bef9fea3"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/public-code-architecture.svg",
+      "sha256": "7581edd52f52d25dc9eca8442664fab2a9bb64489df92b1cfa423baa9ccf9a7b"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/roadmap.svg",
+      "sha256": "6929bd6d2e4e9c1612c474f424b4ddc5fb1bb124a94f357121ca70431c9ba66e"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/scientific-computation-vs-ai.svg",
+      "sha256": "feb03254003b134f5a949828e65359015c841505f804f706702f42222559b8ba"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/diagrams/system-overview.svg",
+      "sha256": "8c1301a9602d6b6cbbb891a966b1305a96058513a1b6a8979c541aefc6aed4d7"
+    },
+    {
+      "kind": "png",
+      "path": "assets/plots/cmj-force-time.png",
+      "sha256": "d8702ba7383161c0302076e48bd6d3dfa606a1c4ee65e167c364587535da0a1d"
+    },
+    {
+      "kind": "svg",
+      "path": "assets/plots/cmj-force-time.svg",
+      "sha256": "c761f93fad501df66499a3eb7e4f9aa49bed4a6197ab1100b3a92a178d3b3783"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/agents.png",
+      "sha256": "814c0679abbc8e1710b25f926fc4ebb92a09746dce77981b824cb08ebd750b63"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/measurement-cmj.png",
+      "sha256": "f5dab3920166f68edfdaae8651cc66554c48a5a8440356d45cb5ae44ae1f5336"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/monitoring.png",
+      "sha256": "0c0a7d2fffee86407fc6f52d136153758c5ff1a5e2abd0d4d766c44cf179f99f"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/overview.png",
+      "sha256": "b407a59503ad54a31a0c475db2fd2498de8619044e5a293bf113c8284b7125c7"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/prescription.png",
+      "sha256": "80a74f12357e10cdd0d8ff970fff224559dc8fedbe32345c75c34eb082d882f6"
+    },
+    {
+      "kind": "png",
+      "path": "assets/screenshots/research.png",
+      "sha256": "f4b6126d3a194b12f514542e232551198ca4fef79502e5bc0b57c399a5c9d204"
+    }
+  ],
+  "schema_version": 1
+}

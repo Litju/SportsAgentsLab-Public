@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "SportsAgentsLab Public Source-Available Technical Snapshot"
+message: "Please cite the public snapshot by repository URL and release or commit date."
+type: software
+authors:
+  - family-names: Rodriguez
+    given-names: Julio
+repository-code: "https://github.com/Litju/SportsAgentsLab-Public"
+license: "LicenseRef-SportsAgentsLab-Public-Source-Available"
+version: "1.0.0"
+date-released: 2026-08-19
