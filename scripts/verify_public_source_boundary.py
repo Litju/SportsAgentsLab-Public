@@ -14,6 +14,8 @@ def verify(root: Path) -> list[str]:
     findings: list[str] = []
     for path in root.rglob("*"):
         relative = path.relative_to(root)
+        if relative.parts and relative.parts[0] == ".git":
+            continue
         if path.is_symlink():
             findings.append(f"symlink: {relative}")
         if path.is_file() and path.suffix.lower() in FORBIDDEN_SUFFIXES:
