@@ -315,9 +315,37 @@ function declarationMismatchCode(
   return key === "unit" ? "INCOMPATIBLE_UNIT" : key === "axis" ? "INCOMPATIBLE_AXIS" : `INCOMPATIBLE_${key.toUpperCase()}`;
 }
 
+function isDecimalLiteral(value: string): boolean {
+  let index = 0;
+  if (value[index] === "+" || value[index] === "-") index += 1;
+  let integerDigits = 0;
+  while (value.charCodeAt(index) >= 48 && value.charCodeAt(index) <= 57) {
+    integerDigits += 1;
+    index += 1;
+  }
+  let fractionDigits = 0;
+  if (value[index] === ".") {
+    index += 1;
+    while (value.charCodeAt(index) >= 48 && value.charCodeAt(index) <= 57) {
+      fractionDigits += 1;
+      index += 1;
+    }
+  }
+  if (integerDigits === 0 && fractionDigits === 0) return false;
+  if (value[index] === "e" || value[index] === "E") {
+    index += 1;
+    if (value[index] === "+" || value[index] === "-") index += 1;
+    const exponentStart = index;
+    while (value.charCodeAt(index) >= 48 && value.charCodeAt(index) <= 57) index += 1;
+    if (index === exponentStart) return false;
+  }
+  return index === value.length;
+}
+
 function parsedNumber(raw: string): number | undefined {
-  if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/u.test(raw.trim())) return undefined;
-  const value = Number(raw);
+  const trimmed = raw.trim();
+  if (!isDecimalLiteral(trimmed)) return undefined;
+  const value = Number(trimmed);
   return Number.isFinite(value) ? value : undefined;
 }
 

@@ -29,7 +29,8 @@ export function sha256Hex(bytes: Uint8Array): Sha256 {
 }
 
 function validatePrefix(prefix: string): string {
-  const normalized = prefix.replace(/\/+$/u, "");
+  let normalized = prefix;
+  while (normalized.endsWith("/")) normalized = normalized.slice(0, -1);
   if (
     normalized.length === 0 ||
     normalized.startsWith("/") ||
