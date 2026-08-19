@@ -23,6 +23,7 @@ def emit(
     public_root: Path | None,
     output: Path | None,
     *,
+    status: str = "PASS",
     private_pr: str | None = None,
     private_pr_state: str = "OPEN",
     private_base_head: str | None = None,
@@ -55,7 +56,7 @@ def emit(
     receipt: dict[str, object] = {
         "schema": "sportsagentslab.private-release-receipt.v1",
         "mission": "SPORTSAGENTSLAB_FULL_PUBLIC_SOURCE_RELEASE_V1",
-        "status": "PASS",
+        "status": status,
         "private_base_head": base_head,
         "private_release_branch": inventory["private_release_branch"],
         "private_head": inventory["private_head"],
@@ -138,6 +139,7 @@ def main() -> int:
     parser.add_argument("--repo", type=Path, default=Path.cwd())
     parser.add_argument("--public", type=Path, default=None)
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--status", default="PASS")
     parser.add_argument("--private-pr")
     parser.add_argument("--private-pr-state", default="OPEN")
     parser.add_argument("--private-base-head")
@@ -153,6 +155,7 @@ def main() -> int:
         args.repo,
         args.public,
         args.output,
+        status=args.status,
         private_pr=args.private_pr,
         private_pr_state=args.private_pr_state,
         private_base_head=args.private_base_head,
