@@ -41,6 +41,28 @@ def clear_worktree(public_repo: Path) -> None:
             shutil.rmtree(child)
 
 
+def sync_public_branch(private_repo: Path, public_repo: Path, stage: Path, *, branch: str = PUBLIC_BRANCH) -> bool:
+    private_repo = private_repo.resolve()
+    public_repo = public_repo.resolve()
+    if private_repo == public_repo:
+        raise ValueError("private and public repositories must be different")
+    build(private_repo, stage)
+    run(public_repo, "git", "fetch", "origin", "main")
+    status = run(public_repo, "git", "status", "--short").stdout.strip()
+    if status:
+        raise ValueError(f"public repository is dirty:\n{status}")
+    run(public_repo, "git", "switch", branch)
+    clear_worktree(public_repo)
+    shutil.copytree(stage, public_repo, dirs_exist_ok=True)
+    run(public_repo, "git", "add", "--all")
+    staged = run(public_repo, "git", "diff", "--cached", "--name-only").stdout.strip()
+    if not staged:
+        return False
+    run(public_repo, "git", "commit", "-m", "docs: update SportsAgentsLab public source release")
+    run(public_repo, "git", "push", "origin", branch)
+    return True
+
+
 def publish(private_repo: Path, public_repo: Path | None, stage: Path, *, authorized: bool) -> str:
     if not authorized:
         raise ValueError("public publication requires explicit authorization")
@@ -105,10 +127,15 @@ def main() -> int:
     parser.add_argument("--public-repo", type=Path, required=True)
     parser.add_argument("--stage", type=Path, default=None)
     parser.add_argument("--publish", action="store_true")
+    parser.add_argument("--update-existing", action="store_true")
     args = parser.parse_args()
     if not args.publish:
         raise SystemExit("publish_public_pr.py requires --publish")
     stage = args.stage or (Path(__import__("tempfile").gettempdir()) / STAGE_NAME)
+    if args.update_existing:
+        changed = sync_public_branch(args.repo, args.public_repo, stage)
+        print("PUBLIC_BRANCH_UPDATED=" + str(changed).lower())
+        return 0
     publish(args.repo, args.public_repo, stage, authorized=args.publish)
     return 0
 
