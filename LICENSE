@@ -1,0 +1,30 @@
+SportsAgentsLab Public Source-Available License
+Version 1.0 — 2026-08-19
+
+Copyright © 2026 Julio Rodriguez. All Rights Reserved.
+
+This repository and all code, documentation, diagrams, screenshots, synthetic
+datasets, examples, specifications, and other materials are proprietary. They
+are made publicly accessible for viewing, demonstration, professional
+evaluation, and portfolio or research inspection only. Public availability does
+not make these materials open source.
+
+Except for rights necessarily granted directly under GitHub's Terms of Service
+for public repository functionality, NO license or permission is granted to:
+
+* use the materials in production;
+* copy them beyond platform-granted functionality;
+* modify them or create derivative works;
+* redistribute, republish, sublicense, sell, or commercialize them;
+* host them as a service or incorporate them into a product or service;
+* use them to create or improve a competing product or service;
+* extract or reuse code, diagrams, specifications, synthetic data, screenshots,
+  or documentation;
+* use any material for AI/ML training, fine-tuning, evaluation, benchmark
+  construction, or model or agent development.
+
+No patent, trademark, or implied license is granted. Commercial or other use
+requires separate written permission from the copyright owner.
+
+Nothing in this license attempts to remove rights that GitHub itself grants
+users under its Terms of Service for public repository functionality.
