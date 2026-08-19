@@ -75,6 +75,8 @@ const pythonCommand = [
   "--all-packages",
   "pip-audit",
   "--strict",
+  "--no-deps",
+  "--disable-pip",
   "--format",
   "json",
   "--output",
