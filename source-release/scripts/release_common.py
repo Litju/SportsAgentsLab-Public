@@ -107,6 +107,19 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def canonical_tree_bytes(path: Path) -> bytes:
+    """Hash text as Git stores it, regardless of Windows checkout mode."""
+
+    data = path.read_bytes()
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return data
+    if "\x00" in text:
+        return data
+    return text.replace("\r\n", "\n").encode("utf-8")
+
+
 def public_path_for(relative: str) -> str:
     if relative.startswith(GENERATED_PREFIX):
         return relative[len(GENERATED_PREFIX) :]
@@ -226,7 +239,7 @@ def tree_hash(root: Path, *, exclude: Iterable[str] = ()) -> str:
         relative = path.relative_to(root).as_posix()
         if relative in excluded:
             continue
-        entries.append({"path": relative, "sha256": sha256_file(path)})
+        entries.append({"path": relative, "sha256": sha256_bytes(canonical_tree_bytes(path))})
     return sha256_bytes(canonical_json(entries))
 
 

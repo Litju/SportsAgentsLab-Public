@@ -47,9 +47,25 @@ def reset_stage(stage: Path) -> None:
     stage.mkdir(parents=True, exist_ok=False)
 
 
-def copy_file(source: Path, destination: Path, *, transform: str | None = None) -> None:
+def tracked_blob(repo: Path, relative: str) -> bytes:
+    result = subprocess.run(
+        ["git", "-C", str(repo), "cat-file", "blob", f"HEAD:{relative}"],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return result.stdout
+
+
+def copy_file(
+    source: Path,
+    destination: Path,
+    *,
+    data: bytes | None = None,
+    transform: str | None = None,
+) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
-    data = source.read_bytes()
+    data = source.read_bytes() if data is None else data
     if transform == "config":
         try:
             data = redact_config_text(data.decode("utf-8")).encode("utf-8")
@@ -85,11 +101,22 @@ def build(repo: Path, stage: Path) -> dict[str, object]:
             continue
         source = repo_path(repo, record.path)
         destination = stage / Path(*record.public_path.split("/"))
+        source_bytes = tracked_blob(repo, record.path)
         if record.classification == "PUBLISH_REDACTED":
-            copy_file(source, destination, transform="archive" if source.suffix.lower() == ".zip" else "config")
+            copy_file(
+                source,
+                destination,
+                data=source_bytes,
+                transform="archive" if source.suffix.lower() == ".zip" else "config",
+            )
         elif record.classification == "PUBLISH_GENERATED_TEMPLATE":
             if record.path.startswith("source-release/public/") or record.path.endswith(".env.example"):
-                copy_file(source, destination, transform="config" if record.path.endswith(".env.example") else None)
+                copy_file(
+                    source,
+                    destination,
+                    data=source_bytes,
+                    transform="config" if record.path.endswith(".env.example") else None,
+                )
             elif record.path in {"README.md", "CONTRIBUTING.md"}:
                 # The public governance asset under source-release/public/ is
                 # the intentional root replacement for the private document.
@@ -97,7 +124,7 @@ def build(repo: Path, stage: Path) -> dict[str, object]:
             else:
                 raise ValueError(f"generated template has no generator mapping: {record.path}")
         else:
-            copy_file(source, destination)
+            copy_file(source, destination, data=source_bytes)
 
     public_metadata = {
         "schema": "sportsagentslab.public-source-release.v1",
