@@ -7,7 +7,7 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@ai-sdk/openai": "4.0.40",
+    "@ai-sdk/openai": "4.0.42",
     "@hookform/resolvers": "^5.9.0",
     "@mef/acquisition-configuration": "workspace:*",
     "@mef/canonical-acquisition": "workspace:*",
