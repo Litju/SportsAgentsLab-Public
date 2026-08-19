@@ -1,0 +1,16 @@
+{
+  "candidate": "ml106-force-plate-imports-configuration-ux-v1",
+  "commit": "314f194",
+  "gates": {
+    "p0_protected_contracts": true,
+    "p0_build": true,
+    "p1_accessibility": true,
+    "p1_keyboard": true,
+    "p1_reduced_motion": true,
+    "p1_responsive": true
+  },
+  "limitations": [
+    "Local API detail data could not be loaded because the authentication provider is unavailable; no synthetic configuration data was injected.",
+    "Hosted ML-106 Preview was not requalified because the known Vercel deployment quota remains unavailable."
+  ]
+}

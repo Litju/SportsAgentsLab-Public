@@ -1,0 +1,36 @@
+case_id,layer,expected,result,executable_evidence
+QUALIFIED_REFERENCE_SOURCE,source,reference adapter resolves exact fixture,PASS,packages/ingestion-adk/test/reference.test.ts :: reference adapter passes positive and negative conformance checks
+UNSUPPORTED_SOURCE,source,unsupported schema is typed UNSUPPORTED_SCHEMA,PASS,packages/ingestion-adk/test/reference.test.ts :: negative fixture corpus fails closed with the declared error
+MALFORMED_SOURCE,source,malformed source is typed MALFORMED_SOURCE,PASS,packages/ingestion-adk/test/reference.test.ts :: negative fixture corpus fails closed with the declared error
+AMBIGUOUS_SOURCE,source,duplicate registry matches return ambiguous,PASS,packages/ingestion-adk/test/reference.test.ts :: fixture corpus preserves unknown conflicting reordered and unsupported classifications
+DUPLICATE_SOURCE_CONTENT,source,same bytes share content identity and preserve attempts,PASS,packages/operational-state/test/operational-state.test.ts :: duplicate bytes share one content identity but preserve distinct import attempts
+SCHEMA_DRIFT,source,schema fingerprints remain explicit across copy/value/reordered fixtures,PASS,packages/ingestion-adk/test/reference.test.ts :: fixture corpus preserves unknown conflicting reordered and unsupported classifications
+UNKNOWN_UNIT,canonical,unresolved unit remains unresolved and no channel is synthesized,PASS,packages/canonical-acquisition/test/canonical.test.ts :: unresolved source declarations fail closed without synthesizing a channel
+WRONG_AXIS,canonical,unknown or conflicting axis remains explicit,PASS,packages/canonical-acquisition/test/canonical.test.ts :: timestamp declaration range count and index integrity findings fail closed
+IRREGULAR_TIMEBASE,canonical,irregular intervals are reported without repair,PASS,packages/canonical-acquisition/test/canonical.test.ts :: irregular intervals are reported and never repaired
+DUPLICATE_TIMESTAMP,canonical,duplicate timestamp is a finding,PASS,packages/canonical-acquisition/test/canonical.test.ts :: timestamp declaration range count and index integrity findings fail closed
+MISSING_SAMPLE,canonical,missing value or index is a finding,PASS,packages/canonical-acquisition/test/canonical.test.ts :: timestamp declaration range count and index integrity findings fail closed
+NONFINITE_VALUE,canonical,nonfinite value is a finding and review state,PASS,packages/canonical-acquisition/test/canonical.test.ts :: missing extra and non-finite controls remain explicit
+NO_REPAIR,canonical,no filtering resampling interpolation or synthetic channel creation,PASS,packages/canonical-acquisition/test/canonical.test.ts :: irregular intervals are reported and never repaired; unresolved source declarations fail closed without synthesizing a channel
+SINGLE_TOTAL_FZ,configuration,single.total_fz resolves from canonical evidence and exact interval,PASS,packages/acquisition-configuration/test/resolver.test.ts :: resolves single.total_fz from canonical channel and exact interval
+DUAL_INDEPENDENT_FZ,configuration,dual.independent_fz requires explicit sync and plate identities,PASS,packages/acquisition-configuration/test/resolver.test.ts :: resolves dual.independent_fz only with explicit sync and plate identities
+UNKNOWN_RATE,configuration,unknown rate is not defaulted,PASS,packages/acquisition-configuration/test/resolver.test.ts :: does not default unknown rate or axis
+UNKNOWN_SYNC,configuration,equal counts do not imply synchronization,PASS,packages/acquisition-configuration/test/resolver.test.ts :: does not infer synchronization from equal sample counts
+CONFLICT_SAMPLE_RATE,configuration,conflicting rates produce CONFLICTING_METADATA,PASS,packages/acquisition-configuration/test/resolver.test.ts :: fails closed on conflicting explicit sample rates
+CONFLICT_AXIS,configuration,conflicting axes produce CONFLICTING_METADATA,PASS,packages/acquisition-configuration/test/resolver.test.ts :: fails closed on conflicting axis declarations
+UNKNOWN_PROCESSING,configuration,missing preprocessing calibration and zeroing remain unknown,PASS,packages/acquisition-configuration/test/resolver.test.ts :: resolves single.total_fz from canonical channel and exact interval
+UNSUPPORTED_UNSYNC,configuration,explicit unsynchronized dual acquisition remains unsupported,PASS,packages/acquisition-configuration/test/resolver.test.ts :: keeps explicit unsynchronization unsupported for a dual contract
+MARKETING_LABEL,configuration,producer label has no physical-quantity authority,PASS,packages/acquisition-configuration/test/resolver.test.ts :: does not treat a marketing label as a force quantity
+DIMENSION_LABEL,configuration,dimension label has no qualification authority,PASS,packages/acquisition-configuration/test/resolver.test.ts :: preserves declared preprocessing and ignores dimension labels
+SOURCE_ARTIFACT_IMMUTABILITY,immutability,source metadata cannot be silently changed,PASS,packages/operational-state/test/operational-state.test.ts :: same source identity cannot silently change immutable metadata
+SOURCE_OBSERVATION_IMMUTABILITY,immutability,observations are append-only and bounded metadata,PASS,packages/operational-state/migrations/006_ml103_source_observation.sql :: append-only trigger and no raw rows
+CANONICAL_IMMUTABILITY,immutability,canonical records are append-only,PASS,packages/operational-state/migrations/007_ml104_canonical_acquisition.sql :: append-only trigger and no signal rows
+CONFIGURATION_IMMUTABILITY,immutability,resolution records are append-only,PASS,packages/operational-state/migrations/008_ml105_configuration_resolution.sql :: append-only trigger and revoked update/delete
+AGENT_UNKNOWN,agent,unknown fields remain UNKNOWN,PASS,apps/practitioner-web/test/measurement-agent-tools.test.ts :: measurement-agent evaluation keeps missing sample rate and axis UNKNOWN
+AGENT_CONFLICT,agent,conflicts remain surfaced,PASS,apps/practitioner-web/test/measurement-agent-tools.test.ts :: measurement-agent evaluation surfaces conflicting metadata
+AGENT_UNSUPPORTED,agent,unsupported acquisition is refused,PASS,apps/practitioner-web/test/measurement-agent-tools.test.ts :: measurement-agent evaluation refuses unsupported unsynchronized acquisition
+AGENT_PROVENANCE,agent,exact IDs and provenance are returned,PASS,apps/practitioner-web/test/measurement-agent-tools.test.ts :: measurement-agent evaluation returns exact IDs and prevents direct qualification mutation
+DIRECT_MUTATION,agent,direct mapping or qualification mutation is forbidden,PASS,apps/practitioner-web/test/measurement-agent-tools.test.ts :: human_authority qualification_mutation is NOT_PERFORMED
+RLS_TENANT_ISOLATION,security,tenant A cannot read or write tenant B,PASS,packages/operational-state/scripts/ci-rls.mjs :: POSTGRES_RLS_CI cross_tenant PASS
+RLS_PRINCIPAL_BOUNDARY,security,non-member principal is denied,PASS,packages/operational-state/scripts/ci-rls.mjs :: principal_boundary PASS
+RLS_FORCE,security,forced RLS is enabled,PASS,packages/operational-state/scripts/ci-rls.mjs :: force_rls PASS

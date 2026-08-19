@@ -1,0 +1,105 @@
+MISSION=SPORTSAGENTSLAB_MEASUREMENT_AGENT_B01_CLOSE_AND_B02_ML109
+STATUS=PASS_WITH_LIMITATIONS
+
+ML108_PR=10
+ML108_QUALIFIED_HEAD=f5c342b761b0fb08447d38c6a44d6bcd13f09965
+ML108_MERGE_COMMIT=7c5c39e21cdef14147ab86e829a0d4fd942ec6a3
+ML108_ACCEPTED_MAIN_HEAD=7c5c39e21cdef14147ab86e829a0d4fd942ec6a3
+ML108_STATUS=DONE
+B01_STATUS=CLOSED
+
+B02_STATUS=ACTIVE
+CURRENT_GATE=ML-109
+
+ML109_BRANCH=work/ml109-b02-cmj-processor-contract-v1
+ML109_BRANCH_BASE=10e57092f6956456134450c901a58daf76f685b0
+ML109_FINAL_HEAD=f20b694
+ML109_PR=11
+ML109_PR_STATE=DRAFT_OPEN
+ML109_LINEAR_STATUS=IN_REVIEW
+
+PROTOCOL_ID=CMJ-U-BI-HOH
+PROTOCOL_VERSION=1.0.0
+
+ELIGIBLE_ACQUISITION_CONFIGURATIONS=single.total_fz;dual.independent_fz
+SAMPLE_RATE_RULE=explicit qualified recorded rate >=1000 Hz; unknown/below fail closed; irregular timebase and missing samples fail; resampling NO
+QUIET_STANDING_RULE=one-second inclusive timestamp window; latest valid candidate; max absolute deviation <=5% of mean and range <=10% of mean; zero missing tolerance
+BODY_SYSTEM_WEIGHT_RULE=unloaded body_weight_N is accepted quiet-window mean total force; calculation system_weight_N is the same; dual channels sum before mean; mass=weight/g
+GRAVITY_CONSTANT=9.80665 m/s^2 standard gravity; non-configurable v1
+
+EVENTS=MOVEMENT_ONSET;TAKEOFF;LANDING
+MOVEMENT_ONSET_RULE=first sample of persistent 20 ms total force <=95% body weight after quiet standing; no interpolation
+TAKEOFF_RULE=first sample of persistent 20 ms total force <=20 N after movement onset; no interpolation
+LANDING_RULE=first sample of persistent 20 ms total force >=20 N after takeoff; no interpolation
+PHASES_INCLUDED=none
+
+NET_FORCE_FORMULA=F_net=F_vertical-system_weight_N; upward positive; N
+ACCELERATION_FORMULA=a=F_net/m; m=system_weight_N/9.80665; m/s^2
+VELOCITY_INTEGRATION_METHOD=left-to-right cumulative trapezoid; v(onset)=0; binary64
+DISPLACEMENT_INTEGRATION_METHOD=left-to-right cumulative trapezoid of velocity; x(onset)=0; binary64
+IMPULSE_CONVENTION=net impulse onset-to-takeoff only; N*s; takeoff velocity=impulse/mass
+PRIMARY_JUMP_HEIGHT_METRIC=jump_height_impulse_momentum_m=v_takeoff^2/(2g); takeoff-to-apex
+
+CMJ_VERTICAL_CORE_METRICS=jump_height_impulse_momentum_m;takeoff_velocity_m_per_s;net_impulse_onset_to_takeoff_Ns;body_weight_N;body_mass_kg;pre_takeoff_displacement_m;time_to_takeoff_s;time_in_air_s
+EXCLUDED_METRICS=flight_time_jump_height_m;RFD;arbitrary high-variance metrics;asymmetry diagnosis;vendor-proprietary;longitudinal;readiness/fatigue;clinical/diagnostic
+
+TRIAL_QUALITY_STATES=ACQUISITION_INELIGIBLE;PROCESSOR_FAILURE;EVENT_FAILURE;INTEGRITY_WARNING;METRIC_UNAVAILABLE;REVIEW_REQUIRED;EXCLUDED;VALID_INCLUDED
+FAILURE_CODES=NO_QUALIFIED_QUIET_STANDING;BODY_WEIGHT_UNAVAILABLE;INVALID_MASS;MOVEMENT_ONSET_NOT_FOUND;TAKEOFF_NOT_FOUND;LANDING_NOT_FOUND;EVENT_ORDER_INVALID;TIMEBASE_INVALID;SAMPLE_RATE_UNSUPPORTED;NONFINITE_SIGNAL;MISSING_SAMPLE;CONFIGURATION_INELIGIBLE;INTEGRATION_PRECONDITION_FAILED;SOURCE_CHAIN_INELIGIBLE;PROTOCOL_INELIGIBLE;NONPOSITIVE_SYSTEM_WEIGHT
+PRECISION_POLICY=IEEE 754 binary64; finite JSON; canonical sorted UTF-8 serialization; negative zero normalized; no parallel reduction
+ROUNDING_POLICY=INTERMEDIATE_ROUNDING=NO; display rounding only and never feeds downstream calculations
+
+DETERMINISTIC_EXECUTION=same canonical acquisition + configuration resolution + contract/metric/numerical versions yields same quiet result, system weight, events, trace, metrics, quality, and hash; no randomness/LLM/locale/wall-clock semantics
+CALCULATION_TRACE=canonical input hash; configuration hash; quiet window; system weight; mass/gravity; event indices/times; net-force transform; integration policy; metric graph; quality findings; no duplicated raw high-rate data
+RESULT_HASH=SHA-256 semantic hash of canonical input/configuration hashes, versions, events, metric values, and quality; excludes created_at/request ID/hostname/path/runtime timestamp
+
+SCIENTIFIC_SOURCE_LEDGER=docs/evidence/ml109/ML109_SCIENTIFIC_SOURCE_LEDGER.md
+CONTRACT_SELF_CONSISTENCY=PASS; manifest_sha256=28f3f5cbbbe8d49585cd59fb317dd6d42aa4ed402e78cca7cd2688c0f4a6ef3c
+ANALYTICAL_SANITY_EXAMPLES=constant quiet force; known net impulse; analytical ballistic height; formula checks only
+
+PRODUCTION_PROCESSOR_IMPLEMENTED=NO
+ML110_CORPUS_IMPLEMENTED=NO
+
+SKILL_POLICY=EXPLICIT_INVOCATION_ONLY
+STATSMODELS_USED=YES; stability/variability review only; no statistical processor
+SCIKIT_LEARN_USED=YES; reproducible evaluation/leakage boundary review only; no ML processor
+PYMC_USED=NO; no uncertainty model materially required
+SCIENTIFIC_VISUALIZATION_USED=YES; future trace/event/unit rendering semantics only
+
+BIOMECHANICS_REVIEW=PASS
+SIGNAL_PROCESSING_REVIEW=PASS
+NUMERICAL_METHODS_REVIEW=PASS
+STATISTICAL_REVIEW=PASS
+RESEARCH_METHODS_REVIEW=PASS
+SOFTWARE_CONTRACT_REVIEW=PASS
+
+BROAD_SKILL_DISCOVERY_PERFORMED=NO
+NEW_SKILLS_INSTALLED=NO
+SKILL_DRIVEN_SCOPE_CREEP=NO
+
+SCIENTIFIC_DISAGREEMENTS_RECORDED=YES; onset, sampling, filtering, and jump-height alternatives recorded and adjudicated in source ledger
+ENGINEERING_POLICIES_EXPLICIT=YES; thresholds, persistence, candidate-window selection, no preprocessing, schema/hash serialization, and quality taxonomy
+UNRESOLVED_SCIENTIFIC_DECISIONS=NONE_FOR_V1_CONTRACT; ML-110 validation questions remain open by design
+
+AUTHORITY_VERIFIER=PASS
+PNPM_VALIDATE=PASS
+TYPECHECK=PASS
+LINT=PASS
+CONTRACT_TESTS=PASS; 8/8
+SECURITY_TESTS=PASS; 22/22; live Postgres RLS optional check not executed without live credentials
+SECRET_SCAN=PASS
+DEPENDENCY_SCAN=PASS
+PRODUCTION_BUILD=PASS
+REMOTE_CI=PASS; MEF Quality Gate PASS; Vercel Preview Comments PASS; exact-head Vercel provider deployment READY; GitHub Vercel webhook pending/stale and adjudicated by direct provider evidence
+GIT_DIFF_CHECK=PASS
+
+P0_OPEN=0
+P1_OPEN=0
+P2_OPEN=0
+P3_OPEN=0
+
+HOSTED_REFERENCE_FLOW=PASS; completed during ML-108 closure with exact-head Vercel Preview, branch-scoped environment, Preview Neon, least-privilege runtime, and private Blob
+
+KNOWN_LIMITATIONS=thresholds require ML-110 corpus validation; synthetic/reference adapter only; no real vendor adapters; no phases; no filtering/resampling/interpolation; no universal force-plate claim; flight-time height excluded from core; repository currently expects Node 24 while local runner is Node 22
+
+NEXT_GATE=OWNER_REVIEW_ML109_THEN_ML110
+OWNER_ACTION=REVIEW_ML109_PR

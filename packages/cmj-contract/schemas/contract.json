@@ -1,0 +1,803 @@
+{
+  "contract_id": "ML109-CMJ-PROCESSOR-CONTRACT",
+  "contract_version": "1.0.0",
+  "protocol_version": "1.0.0",
+  "metric_pack_version": "1.0.0",
+  "numerical_policy_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "scope": {
+    "source_adapter_support": "SYNTHETIC_REFERENCE_ADAPTER_ONLY",
+    "real_vendor_adapter_count": 0,
+    "real_vendor_support_claims": 0,
+    "supported_physical_configurations": [
+      "single.total_fz",
+      "dual.independent_fz"
+    ],
+    "production_processor_implemented": false,
+    "ml110_corpus_implemented": false,
+    "measurement_agent_calculation_authority": false,
+    "machine_learning_processor": false,
+    "learned_event_detection": false,
+    "bayesian_processor_component": false,
+    "filtering": "NONE",
+    "resampling": "NO",
+    "interpolation": "NO",
+    "asymmetry_diagnosis": false,
+    "clinical_or_diagnostic_output": false
+  },
+  "protocol": {
+    "protocol_id": "CMJ-U-BI-HOH",
+    "protocol_version": "1.0.0",
+    "repository_name": "bilateral unloaded hands-on-hips countermovement jump",
+    "acronym_expansion_authority": "REPOSITORY_DEFINED_ID_ONLY",
+    "starting_position": "Participant stands upright and motionless with both feet fully supported on the qualified force acquisition, before initiating one jump.",
+    "arm_hand_condition": "Both hands remain on the hips throughout the trial; this condition is practitioner- or protocol-confirmed and is not inferred from force alone.",
+    "loading_condition": "Unloaded: no external load is carried or held. In this protocol, accepted quiet-standing vertical force is the participant body-weight force and is also the system-weight baseline for net force.",
+    "countermovement_requirement": "One deliberate downward countermovement is followed by upward propulsion and takeoff. No pause, step, preliminary jump, or second jump is allowed in the scored interval.",
+    "allowed_acquisition_configurations": [
+      "single.total_fz",
+      "dual.independent_fz"
+    ],
+    "pre_movement_behavior": "The participant remains quiet during the accepted one-second standing window, with no voluntary rocking, stepping, or unloading before movement onset.",
+    "exclusion_criteria": [
+      "hands not on hips or arm swing",
+      "external load or supported implement",
+      "step, foot repositioning, partial-foot contact, or one foot leaving before takeoff",
+      "more than one countermovement or more than one landing in the scored interval",
+      "unknown or conflicting protocol status",
+      "missing, nonfinite, irregular, or unsupported qualified input",
+      "no valid quiet-standing window or required event"
+    ],
+    "decision_class": "PROJECT_CONVENTION",
+    "limitation": "Force-time data cannot establish hands-on-hips, external load, or the absence of a preparatory movement; those conditions require upstream protocol evidence or practitioner review."
+  },
+  "eligible_input": {
+    "accepted_chain": [
+      "SourceArtifact",
+      "SourceObservation",
+      "CanonicalAcquisition",
+      "ConfigurationResolution",
+      "CMJProcessor"
+    ],
+    "input_boundary": "Only qualified CanonicalAcquisition and ConfigurationResolution products are accepted. The processor does not parse raw CSV, TSV, JSON, or vendor files.",
+    "required_acquisition_state": "QUALIFIED",
+    "required_configuration_state": "RESOLVED_QUALIFIED",
+    "required_vertical_force_unit": "N",
+    "required_vertical_axis": "vertical",
+    "required_timebase": "finite, strictly increasing, uniform timestamps with explicit qualified rate",
+    "single_total_fz_rule": "Use the one qualified total vertical-force channel as F_vertical_N.",
+    "dual_independent_fz_rule": "For each synchronized sample index i, form F_vertical_N[i] = Fz_left_N[i] + Fz_right_N[i]. Preserve both channels and their identities in the calculation trace; no asymmetry diagnosis is performed.",
+    "synchronization_requirement": "Dual channels require explicit upstream synchronization; equal length or equal sample rate is not sufficient.",
+    "unsupported_input_behavior": "Any other physical configuration, channel count, unresolved quantity, unresolved unit/axis/sign/timebase, or unqualified upstream state fails closed.",
+    "decision_class": "PROJECT_CONVENTION"
+  },
+  "sample_rate_policy": {
+    "minimum_supported_rate_hz": 1000,
+    "rate_rule": "The qualified acquisition rate must be explicitly established and at least 1000 Hz. A rate above 1000 Hz is accepted without downsampling when all other timebase requirements pass.",
+    "rate_evidence_rule": "The rate must be an upstream qualified acquisition/timebase fact; a device capability statement is not evidence of the recorded rate.",
+    "below_threshold_behavior": "Fail with SAMPLE_RATE_UNSUPPORTED.",
+    "unknown_rate_behavior": "Fail with SAMPLE_RATE_UNSUPPORTED; no default is applied.",
+    "irregular_timebase_behavior": "Fail with TIMEBASE_INVALID even when a nominal rate is declared.",
+    "missing_sample_behavior": "Fail with MISSING_SAMPLE; missing values are not synthesized.",
+    "resampling": "NO",
+    "filtering": "NONE_UNLESS_A_FUTURE_CONTRACT_AUTHORIZES_A_NAMED_FILTER",
+    "interpolation": "NO",
+    "decision_class": "ENGINEERING_POLICY",
+    "source_basis": [
+      "Street et al. 2001, DOI 10.1123/jab.17.1.43",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ],
+    "rationale": "The selected core includes impulse-derived velocity and height. Street et al. report material height error below approximately 1000 Hz for their force-platform method, while Owen et al. use a 1000 Hz criterion protocol. This is a scoped minimum for this contract, not a universal claim about every metric or device.",
+    "limitation": "Rate alone does not establish anti-aliasing, calibration, noise, or metric validity; those facts remain upstream qualification requirements."
+  },
+  "quiet_standing": {
+    "duration_s": 1.0,
+    "window_definition": "A contiguous inclusive timestamp window with elapsed duration exactly 1.000 s, immediately preceding the movement-onset search interval.",
+    "candidate_search": "Enumerate eligible one-second windows by descending end sample index. Select the latest window whose samples are finite, contiguous, uniformly timed, contain no missing sample, and pass the stability rule; the first valid movement-onset run after that window must be found before the acquisition ends.",
+    "stability_criterion": "max(abs(F_vertical_N - mean(F_vertical_N))) <= 0.05 * abs(mean(F_vertical_N)) and (max(F_vertical_N) - min(F_vertical_N)) <= 0.10 * abs(mean(F_vertical_N)).",
+    "mean_force_rule": "Arithmetic mean of all total-force samples in the accepted window, accumulated in ascending sample-index order using binary64.",
+    "missing_data_tolerance": 0,
+    "rejection_criteria": [
+      "no exact one-second window",
+      "nonfinite sample",
+      "missing sample",
+      "nonuniform timestamp",
+      "nonpositive mean force",
+      "stability criterion fails",
+      "no ordered movement onset after the window"
+    ],
+    "failure_code": "NO_QUALIFIED_QUIET_STANDING",
+    "search_tie_break": "Latest ending window wins; if end indices tie, the earliest start index is used.",
+    "decision_class": "LITERATURE_SUPPORTED_METHOD_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+      "Street et al. 2001, DOI 10.1123/jab.17.1.43"
+    ],
+    "rationale": "A one-second pre-jump mean is directly supported by the criterion protocol. The exact stability bounds, zero missing-data tolerance, descending search, and exact timestamp rule are explicit engineering choices that prevent silent heuristic changes.",
+    "limitation": "A force-stable window can still contain an unobserved technique or protocol violation; protocol evidence remains separate."
+  },
+  "body_system_weight": {
+    "public_protocol_term": "body_weight_N",
+    "calculation_baseline_term": "system_weight_N",
+    "relationship_in_unloaded_protocol": "body_weight_N == system_weight_N because CMJ-U-BI-HOH is unloaded and the participant is the only accepted load on the force acquisition.",
+    "unit": "N",
+    "formula": "body_weight_N = system_weight_N = arithmetic_mean(F_vertical_N over accepted quiet-standing window)",
+    "dual_plate_rule": "Sum left and right vertical forces sample-by-sample before calculating the mean.",
+    "mass_formula": "body_mass_kg = body_weight_N / gravity_m_per_s2",
+    "failure_behavior": "Missing, nonfinite, zero, or negative baseline fails with BODY_WEIGHT_UNAVAILABLE; derived nonfinite or nonpositive mass fails with INVALID_MASS.",
+    "precision": "Binary64 internally; no rounding before mass, net force, impulse, or integration.",
+    "external_load_behavior": "Any loaded or supported condition is protocol-ineligible; the processor does not silently relabel system weight as body weight.",
+    "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "NIST SP 811, Section 8.3",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ]
+  },
+  "gravity": {
+    "constant_m_per_s2": 9.80665,
+    "unit": "m/s^2",
+    "name": "standard gravity",
+    "configurable": false,
+    "usage": [
+      "body_mass_kg = body_weight_N / gravity_m_per_s2",
+      "jump_height_impulse_momentum_m = takeoff_velocity_m_per_s^2 / (2 * gravity_m_per_s2)"
+    ],
+    "decision_class": "STANDARDIZED_CONSTANT",
+    "source_basis": [
+      "NIST SP 811, DOI 10.6028/NIST.SP.811e2008"
+    ],
+    "limitation": "Local gravitational acceleration is not estimated; v1 uses standard gravity for reproducible reporting."
+  },
+  "events": [
+    {
+      "event_id": "MOVEMENT_ONSET",
+      "name": "Movement onset",
+      "input_signal": "F_vertical_N",
+      "baseline": "body_weight_N from the accepted quiet-standing window",
+      "threshold": "F_vertical_N <= body_weight_N * 0.95",
+      "direction": "downward force deviation",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "search_interval": "first sample after the accepted quiet-standing window through the last sample before the takeoff search result",
+      "sample_index_convention": "event index is the first sample of the persistent run; no sample is backdated or averaged",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "MOVEMENT_ONSET_NOT_FOUND",
+      "return_to_baseline_behavior": "Not required; later return through baseline does not change the first onset event.",
+      "ordering_invariant": "quiet_standing_end_index < movement_onset_index < takeoff_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+        "Pinto and Callaghan 2023, DOI 10.1123/jab.2022-0111"
+      ],
+      "limitation": "Force-time onset is a defined operational boundary, not a claim that it equals the first joint-flexion instant."
+    },
+    {
+      "event_id": "TAKEOFF",
+      "name": "Takeoff",
+      "input_signal": "F_vertical_N",
+      "baseline": "absolute force threshold; body-weight baseline is not substituted",
+      "threshold": "F_vertical_N <= 20.0 N",
+      "direction": "downward to near-zero force",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "dual_plate_behavior": "Apply the threshold to the formed total F_vertical_N; do not apply independent thresholds to left and right channels.",
+      "search_interval": "first sample after movement onset through the last sample before landing search",
+      "sample_index_convention": "event index is the first sample of the persistent run",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "TAKEOFF_NOT_FOUND",
+      "ordering_invariant": "movement_onset_index < takeoff_index < landing_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+        "Moir 2008, DOI 10.1080/10913670802349766"
+      ],
+      "limitation": "The fixed 20 N operational threshold is scoped to v1 and is not a universal force-platform takeoff standard."
+    },
+    {
+      "event_id": "LANDING",
+      "name": "Landing",
+      "input_signal": "F_vertical_N",
+      "baseline": "absolute force threshold; body-weight baseline is not substituted",
+      "threshold": "F_vertical_N >= 20.0 N",
+      "direction": "upward from near-zero force to contact force",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "dual_plate_behavior": "Apply the threshold to the formed total F_vertical_N; preserve the two source channels without diagnosing asymmetry.",
+      "search_interval": "first sample after takeoff_index through the last sample of the acquisition",
+      "sample_index_convention": "event index is the first sample of the persistent run",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "LANDING_NOT_FOUND",
+      "ordering_invariant": "takeoff_index < landing_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Moir 2008, DOI 10.1080/10913670802349766"
+      ],
+      "limitation": "A force threshold detects return to measurable plate load; it does not identify the first anatomical contact instant."
+    }
+  ],
+  "phases_included": [],
+  "equations": {
+    "vertical_force": "single.total_fz: F_vertical_N[i] = Fz_total_N[i]; dual.independent_fz: F_vertical_N[i] = Fz_left_N[i] + Fz_right_N[i]",
+    "net_force": "F_net_N[i] = F_vertical_N[i] - body_weight_N",
+    "acceleration": "a_m_per_s2[i] = F_net_N[i] / body_mass_kg",
+    "mass": "body_mass_kg = body_weight_N / gravity_m_per_s2",
+    "sign_convention": "upward vertical force, acceleration, velocity, and displacement are positive; downward is negative.",
+    "units": "force N, mass kg, acceleration m/s^2, velocity m/s, displacement m, impulse N*s",
+    "preconditions": [
+      "qualified input",
+      "finite signal",
+      "valid timebase",
+      "accepted quiet-standing baseline",
+      "positive finite mass"
+    ]
+  },
+  "integration": {
+    "method": "left-to-right cumulative trapezoidal integration",
+    "formula": "integral_y[start..end] = sum(i=start+1..end, 0.5 * (y[i-1] + y[i]) * (t[i] - t[i-1]))",
+    "timebase": "Use qualified input timestamps; require strictly increasing uniform timestamps; do not derive or repair time from array position.",
+    "initial_velocity": "v_m_per_s[movement_onset_index] = 0.0",
+    "initial_displacement": "x_m[movement_onset_index] = 0.0",
+    "reference_position": "x=0 at movement onset; pre-takeoff displacement is relative to that reference.",
+    "endpoint_inclusion": "Integrate intervals from movement-onset index through takeoff index inclusive; each interval is counted once.",
+    "accumulation_order": "strict ascending interval index; no parallel reduction or reordering",
+    "numerical_precision": "IEEE-754 binary64",
+    "irregular_timestamp_policy": "reject with TIMEBASE_INVALID",
+    "drift_policy": "NO_DRIFT_CORRECTION",
+    "filter_policy": "NO_FILTERING",
+    "resampling_policy": "NO_RESAMPLING",
+    "interpolation_policy": "NO_INTERPOLATION",
+    "fma_policy": "NO_REQUIRED_FUSED_OPERATION; use the stated operation sequence",
+    "failure_code": "INTEGRATION_PRECONDITION_FAILED",
+    "decision_class": "LITERATURE_SUPPORTED_METHOD_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+      "ISO/IEC 60559:2020, ISO 80985"
+    ]
+  },
+  "impulse": {
+    "included_variants": [
+      "net_impulse_onset_to_takeoff"
+    ],
+    "gross_impulse": "EXCLUDED",
+    "phase_impulse": "EXCLUDED",
+    "net_impulse_onset_to_takeoff": "integral of F_net_N from movement_onset_index through takeoff_index inclusive",
+    "unit": "N*s",
+    "relationship": "takeoff_velocity_m_per_s = net_impulse_onset_to_takeoff_Ns / body_mass_kg",
+    "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Linthorne 2001, DOI 10.1119/1.1397460",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ]
+  },
+  "metric_pack": {
+    "metric_pack_id": "CMJ_VERTICAL_CORE",
+    "metric_pack_version": "1.0.0",
+    "status": "CLOSED",
+    "primary_metric_count": 1,
+    "metrics": [
+      {
+        "metric_id": "jump_height_impulse_momentum_m",
+        "name": "Impulse-momentum jump height",
+        "classification": "PRIMARY",
+        "definition": "Ballistic center-of-mass rise from takeoff velocity to apex; pre-takeoff displacement is not included.",
+        "formula_source": "h = v_takeoff^2 / (2*g), with v_takeoff obtained by integrating net force from movement onset to takeoff.",
+        "unit": "m",
+        "dependencies": [
+          "body_mass_kg",
+          "gravity_m_per_s2",
+          "net_impulse_onset_to_takeoff_Ns",
+          "takeoff_velocity_m_per_s"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Available when all listed dependencies are finite and the onset-to-takeoff integration preconditions pass; landing is required for a fully included trial but is not a mathematical dependency of this metric.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m",
+        "decision_class": "LITERATURE_SUPPORTED_METHOD"
+      },
+      {
+        "metric_id": "takeoff_velocity_m_per_s",
+        "name": "Takeoff velocity",
+        "classification": "DESCRIPTIVE",
+        "definition": "Vertical center-of-mass velocity at the takeoff event from net-force integration.",
+        "formula_source": "v_takeoff = integral(a dt) from movement onset to takeoff = net_impulse / body_mass.",
+        "unit": "m/s",
+        "dependencies": [
+          "body_mass_kg",
+          "net_force_N",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite onset-to-takeoff acceleration integration.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m/s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "net_impulse_onset_to_takeoff_Ns",
+        "name": "Net impulse, onset to takeoff",
+        "classification": "DESCRIPTIVE",
+        "definition": "Integrated net vertical force over the operational propulsion interval from movement onset to takeoff.",
+        "formula_source": "sum of trapezoidal net-force intervals",
+        "unit": "N*s",
+        "dependencies": [
+          "net_force_N",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite net-force integration over a nonempty ordered interval.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.1 N*s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "body_weight_N",
+        "name": "Body-weight force",
+        "classification": "DESCRIPTIVE",
+        "definition": "Mean unloaded quiet-standing vertical ground-reaction force used as the net-force baseline.",
+        "formula_source": "mean total vertical force over accepted quiet-standing window",
+        "unit": "N",
+        "dependencies": [
+          "quiet_standing_window",
+          "F_vertical_N"
+        ],
+        "required_events": [],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_QUIET_STANDING"
+        ],
+        "availability_conditions": "Accepted finite one-second quiet-standing window.",
+        "internal_precision": "binary64, unrounded mean",
+        "display_rounding": "0.1 N",
+        "decision_class": "LITERATURE_SUPPORTED_METHOD"
+      },
+      {
+        "metric_id": "body_mass_kg",
+        "name": "Derived body mass",
+        "classification": "DESCRIPTIVE",
+        "definition": "Mass derived from unloaded body-weight force and standard gravity.",
+        "formula_source": "m = body_weight_N / 9.80665",
+        "unit": "kg",
+        "dependencies": [
+          "body_weight_N",
+          "gravity_m_per_s2"
+        ],
+        "required_events": [],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_BODY_WEIGHT",
+          "VALID_GRAVITY"
+        ],
+        "availability_conditions": "Positive finite body-weight force and positive finite fixed gravity constant.",
+        "internal_precision": "binary64, unrounded division",
+        "display_rounding": "0.001 kg",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "pre_takeoff_displacement_m",
+        "name": "Pre-takeoff displacement",
+        "classification": "DESCRIPTIVE",
+        "definition": "Integrated vertical displacement from movement onset reference to takeoff.",
+        "formula_source": "x_takeoff = integral(v dt) from movement onset to takeoff",
+        "unit": "m",
+        "dependencies": [
+          "velocity_m_per_s",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite cumulative velocity integration with x[onset]=0.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY"
+      },
+      {
+        "metric_id": "time_to_takeoff_s",
+        "name": "Movement time to takeoff",
+        "classification": "DESCRIPTIVE",
+        "definition": "Elapsed timestamp difference from movement onset to takeoff.",
+        "formula_source": "t_takeoff - t_movement_onset",
+        "unit": "s",
+        "dependencies": [
+          "event timestamps"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_TIMEBASE",
+          "EVENT_ORDER_VALID"
+        ],
+        "availability_conditions": "Ordered finite event timestamps.",
+        "internal_precision": "binary64 timestamp subtraction",
+        "display_rounding": "0.001 s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "time_in_air_s",
+        "name": "Time in air",
+        "classification": "DESCRIPTIVE",
+        "definition": "Elapsed timestamp difference from takeoff to landing; descriptive event cross-check only.",
+        "formula_source": "t_landing - t_takeoff",
+        "unit": "s",
+        "dependencies": [
+          "event timestamps"
+        ],
+        "required_events": [
+          "TAKEOFF",
+          "LANDING"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_TIMEBASE",
+          "EVENT_ORDER_VALID",
+          "VALID_LANDING"
+        ],
+        "availability_conditions": "Ordered finite takeoff and landing timestamps.",
+        "internal_precision": "binary64 timestamp subtraction",
+        "display_rounding": "0.001 s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      }
+    ]
+  },
+  "excluded_metrics": [
+    {
+      "metric_id": "flight_time_jump_height_m",
+      "name": "Flight-time jump height",
+      "reason": "Excluded from core; it is a distinct descriptive height definition and is not the primary impulse-momentum metric."
+    },
+    {
+      "metric_id": "rfd",
+      "name": "Rate of force development",
+      "reason": "Excluded in v1 because derivative/filter/window choices are not frozen and reliability is metric-specific."
+    },
+    {
+      "metric_id": "peak_force_arbitrary_window",
+      "name": "Arbitrary-window peak force",
+      "reason": "Excluded because the window and filtering policy are not part of the closed core."
+    },
+    {
+      "metric_id": "asymmetry_diagnosis",
+      "name": "Asymmetry diagnosis",
+      "reason": "Excluded; dual channels are preserved for provenance but no asymmetry conclusion is authorized."
+    },
+    {
+      "metric_id": "vendor_proprietary_metric",
+      "name": "Vendor-proprietary metric",
+      "reason": "Excluded; vendor outputs are not scientific authority for this contract."
+    },
+    {
+      "metric_id": "longitudinal_change",
+      "name": "Longitudinal change",
+      "reason": "Excluded; requires session/reference governance outside ML-109."
+    },
+    {
+      "metric_id": "readiness_or_fatigue",
+      "name": "Readiness or fatigue",
+      "reason": "Excluded by product scientific boundary."
+    },
+    {
+      "metric_id": "clinical_or_diagnostic_output",
+      "name": "Clinical or diagnostic output",
+      "reason": "Excluded by product scope and authority lock."
+    }
+  ],
+  "quality_taxonomy": {
+    "states": [
+      {
+        "state_id": "ACQUISITION_INELIGIBLE",
+        "severity": "ERROR",
+        "trigger": "Upstream acquisition or configuration is unsupported, unresolved, conflicting, or not qualified.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "No processor metrics available.",
+        "source": "MACHINE",
+        "future_override_policy": "No v1 practitioner override; new evidence requires a new contract evaluation."
+      },
+      {
+        "state_id": "PROCESSOR_FAILURE",
+        "severity": "ERROR",
+        "trigger": "A required processor precondition or deterministic execution step fails.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "No affected metrics available.",
+        "source": "MACHINE",
+        "future_override_policy": "No silent retry or override; retain failure code and contract version."
+      },
+      {
+        "state_id": "EVENT_FAILURE",
+        "severity": "ERROR",
+        "trigger": "A required event is absent or event ordering is invalid.",
+        "inclusion_effect": "EXCLUDE_COMPLETE_PACK",
+        "metric_availability_effect": "Only metrics whose dependencies are satisfied may remain available with explicit state.",
+        "source": "MACHINE",
+        "future_override_policy": "No practitioner event editing in v1."
+      },
+      {
+        "state_id": "INTEGRITY_WARNING",
+        "severity": "WARNING",
+        "trigger": "A non-blocking integrity finding is present while required calculations remain valid.",
+        "inclusion_effect": "INCLUDE_WITH_WARNING",
+        "metric_availability_effect": "Metrics remain available if their prerequisites pass.",
+        "source": "MACHINE",
+        "future_override_policy": "Practitioner may annotate but cannot delete the finding."
+      },
+      {
+        "state_id": "METRIC_UNAVAILABLE",
+        "severity": "WARNING",
+        "trigger": "A metric dependency or required event is unavailable.",
+        "inclusion_effect": "TRIAL_REVIEW",
+        "metric_availability_effect": "Only the named metric is unavailable; dependent metrics are unavailable transitively.",
+        "source": "MACHINE",
+        "future_override_policy": "No imputation or silent substitution in v1."
+      },
+      {
+        "state_id": "REVIEW_REQUIRED",
+        "severity": "WARNING",
+        "trigger": "Protocol, technique, or human-confirmed eligibility evidence is missing or contradictory.",
+        "inclusion_effect": "DO_NOT_AUTO_INCLUDE",
+        "metric_availability_effect": "Mechanically calculable values may be displayed as review-only.",
+        "source": "MACHINE_AND_PRACTITIONER",
+        "future_override_policy": "Practitioner disposition is additive and attributable; it cannot rewrite source or machine findings."
+      },
+      {
+        "state_id": "EXCLUDED",
+        "severity": "ERROR",
+        "trigger": "The trial or requested metric is outside the closed protocol or metric pack.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "Excluded metric is never produced as a core result.",
+        "source": "MACHINE",
+        "future_override_policy": "Only a future versioned contract may add scope."
+      },
+      {
+        "state_id": "VALID_INCLUDED",
+        "severity": "PASS",
+        "trigger": "Qualified input, valid timebase, valid baseline, ordered required events, protocol eligibility, and all core prerequisites pass.",
+        "inclusion_effect": "INCLUDE",
+        "metric_availability_effect": "All applicable core metrics are available.",
+        "source": "MACHINE_WITH_PRACTITIONER_PROTOCOL_EVIDENCE",
+        "future_override_policy": "Human interpretation remains separate from machine inclusion."
+      }
+    ],
+    "quality_code_uniqueness": "state_id values are unique and case-sensitive.",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "failure_codes": [
+    {
+      "code": "NO_QUALIFIED_QUIET_STANDING",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "No body-weight baseline or dependent metric is available."
+    },
+    {
+      "code": "BODY_WEIGHT_UNAVAILABLE",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Net force and mass-dependent metrics are unavailable."
+    },
+    {
+      "code": "INVALID_MASS",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Acceleration, velocity, displacement, impulse, and jump height are unavailable."
+    },
+    {
+      "code": "MOVEMENT_ONSET_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Onset-dependent metrics are unavailable."
+    },
+    {
+      "code": "TAKEOFF_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Takeoff-dependent metrics are unavailable."
+    },
+    {
+      "code": "LANDING_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Time-in-air and valid-complete-trial inclusion are unavailable."
+    },
+    {
+      "code": "EVENT_ORDER_INVALID",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "The trial is excluded and all invalid-order dependent metrics are unavailable."
+    },
+    {
+      "code": "TIMEBASE_INVALID",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "All time-dependent calculations are unavailable."
+    },
+    {
+      "code": "SAMPLE_RATE_UNSUPPORTED",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition before processing."
+    },
+    {
+      "code": "NONFINITE_SIGNAL",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition before processing."
+    },
+    {
+      "code": "MISSING_SAMPLE",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition; values are not synthesized."
+    },
+    {
+      "code": "CONFIGURATION_INELIGIBLE",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The processor does not consume the upstream product."
+    },
+    {
+      "code": "INTEGRATION_PRECONDITION_FAILED",
+      "severity": "ERROR",
+      "stage": "integration",
+      "effect": "Affected integrated metrics are unavailable."
+    },
+    {
+      "code": "UPSTREAM_NOT_QUALIFIED",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The processor rejects the input."
+    },
+    {
+      "code": "PROTOCOL_INELIGIBLE",
+      "severity": "ERROR",
+      "stage": "protocol",
+      "effect": "The trial is excluded from the core pack."
+    },
+    {
+      "code": "NONPOSITIVE_FORCE_BASELINE",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Body weight and mass are unavailable."
+    }
+  ],
+  "precision_policy": {
+    "internal_floating_point": "IEEE-754 binary64",
+    "storage_precision": "JSON numbers representing finite binary64 results; raw intermediate arrays are not serialized into metadata.",
+    "serialization": "UTF-8 canonical JSON with lexicographically sorted object keys, preserved array order, finite numbers only, and negative zero normalized to 0.",
+    "intermediate_rounding": "NO",
+    "rounding_before_downstream_calculation": "FORBIDDEN",
+    "display_rounding": {
+      "force_N": "0.1",
+      "mass_kg": "0.001",
+      "velocity_m_per_s": "0.001",
+      "displacement_m": "0.001",
+      "height_m": "0.001",
+      "impulse_Ns": "0.1",
+      "time_s": "0.001"
+    },
+    "locale": "C-style numeric serialization; locale-independent",
+    "timezone": "UTC for non-semantic display metadata; no wall-clock value enters calculation or semantic hash",
+    "decision_class": "ENGINEERING_POLICY",
+    "source_basis": [
+      "ISO/IEC 60559:2020, ISO 80985",
+      "JCGM 100:2008"
+    ]
+  },
+  "determinism": {
+    "invariant": "same CanonicalAcquisition + same ConfigurationResolution + same ProcessorContract version + same MetricPack version produces the same quiet-standing result, body weight, events, calculation trace, metrics, quality state, and result hash.",
+    "randomness": "NONE",
+    "llm_calculations": "NONE",
+    "wall_clock_semantics": "NONE",
+    "parallel_reduction": "FORBIDDEN",
+    "locale_dependence": "NONE",
+    "input_order": "canonical sample index order",
+    "replay_requirement": "replay must compare semantic values and hashes, not display-rounded strings",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "calculation_trace": {
+    "required_fields": [
+      "canonical_acquisition_hash",
+      "configuration_resolution_hash",
+      "processor_contract_version",
+      "metric_pack_version",
+      "quiet_standing_window",
+      "body_weight_N",
+      "body_mass_kg",
+      "gravity_m_per_s2",
+      "event_indices_and_times",
+      "net_force_transform",
+      "integration_policy_version",
+      "metric_dependency_graph",
+      "quality_findings"
+    ],
+    "event_record": "event_id, sample_index, timestamp_s, threshold, persistence_count, and source signal identity",
+    "net_force_transform": "Record total-force formation, baseline value, sign convention, and units; preserve dual left/right channel identities.",
+    "metric_dependency_graph": "Record metric IDs and direct dependency IDs without copying the high-rate signal.",
+    "raw_data_policy": "Do not duplicate full high-rate raw or canonical signal data into metadata.",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "result_hash": {
+    "algorithm": "SHA-256",
+    "canonicalization": "The precision-policy canonical JSON serialization.",
+    "included_inputs": [
+      "canonical_acquisition_hash",
+      "configuration_resolution_hash",
+      "processor_contract_version",
+      "metric_pack_version",
+      "numerical_policy_version",
+      "events",
+      "metric_values_internal_precision",
+      "quality_state",
+      "quality_findings"
+    ],
+    "excluded_inputs": [
+      "created_at",
+      "request_id",
+      "hostname",
+      "path",
+      "runtime_timestamp"
+    ],
+    "semantic_hash_only": true,
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "analytical_sanity_examples": [
+    {
+      "example_id": "constant_quiet_force",
+      "input": "F_vertical_N = 800 for one accepted second",
+      "expected": "body_weight_N = system_weight_N = 800 N"
+    },
+    {
+      "example_id": "known_net_impulse",
+      "input": "F_net_N = 160 N for 0.5 s and mass = 80 kg",
+      "expected": "delta_v = impulse / mass = 1.0 m/s"
+    },
+    {
+      "example_id": "ballistic_height",
+      "input": "takeoff_velocity = 2.0 m/s and g = 9.80665 m/s^2",
+      "expected": "height = 0.203943... m before display rounding"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", labelloc=t, label="Preview-First Agentic Delivery Loop", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  idea [label="Small vertical slice"];
+  branch [label="Git branch"];
+  tests [label="Deterministic tests + agent evals"];
+  deploy [label="Vercel Preview"];
+  hosted [label="Hosted browser/API/DB/agent proof"];
+  review [label="Founder review"];
+  merge [label="Merge main"];
+  idea -> branch -> tests -> deploy -> hosted -> review -> merge;
+  review -> branch [label="repair", style=dashed];
+}

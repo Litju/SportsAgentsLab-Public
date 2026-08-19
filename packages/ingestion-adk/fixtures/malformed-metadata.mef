@@ -1,0 +1,10 @@
+MEF_REFERENCE_SOURCE_V1
+schema_version=1
+producer=SportsAgentsLab.synthetic
+format=delimited
+delimiter=,
+this-is-not-key-value
+columns:
+time,force_z
+data:
+0.000,100

@@ -1,0 +1,19 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", labelloc=t, label="Vercel-First Prototype Deployment Topology", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  git [label="GitHub branch / main"];
+  preview [label="Vercel Preview / Primary Prototype"];
+  next [label="Next.js + Vercel Functions"];
+  eve [label="Eve runtime"];
+  postgres [label="Managed PostgreSQL\nNeon candidate"];
+  blob [label="Private Vercel Blob"];
+  sandbox [label="Vercel Sandbox\noptional bounded isolation", style="rounded,dashed"];
+  opencode [label="OpenCode Go"];
+  git -> preview;
+  preview -> next;
+  next -> eve;
+  next -> postgres;
+  next -> blob;
+  eve -> opencode;
+  eve -> sandbox [style=dashed];
+}

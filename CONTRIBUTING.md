@@ -1,6 +1,11 @@
-# Contributions
+# Contributing
 
-This is not an open-source development repository. Source contributions are
-not solicited; unsolicited implementation pull requests may be closed.
-Documentation and showcase feedback may be accepted at the owner's discretion.
-No contribution grants access to private code or a license to project assets.
+Contributions must preserve the SportsAgentsLab source-release boundary and
+the proprietary license. Do not add secrets, PII, machine-local state,
+non-redistributable third-party material, live operational credentials,
+held-out evaluation answers, or legal-privileged content.
+
+Before proposing a change, run the public source-integrity, security, license,
+typecheck, lint, test, and build checks that apply to the affected area. Keep
+scientific calculations deterministic and auditable; do not blur agent or
+practitioner boundaries for convenience.

@@ -1,0 +1,48 @@
+{
+  "mission": "SPORTSAGENTSLAB_MEF_UI_COMPOSITION_STACK_V1_AND_SELF_EVOLVING_UX_SKILL",
+  "issue_preflight": "ML-104",
+  "issue_ui_auxiliary": "Attached run instruction authorizes the UI stack; ML-106 remains Backlog and blocked.",
+  "branch": "work/mef-ui-composition-stack-v1",
+  "predecessor_commit": "e5ec7e37e9602e9f84ba37ad765207d2743a0689",
+  "accepted_base_commit": "0b4127104c0643397c4c0ceb9f021dd9e6d423fd",
+  "implementation_commit": "deeaaaae099f852e2aba68d81f2b7ad362cea3f1",
+  "evidence_commit": "deeaaaae099f852e2aba68d81f2b7ad362cea3f1",
+  "draft_pr": "https://github.com/Litju/sportsagentslab-mef/pull/6",
+  "preview_url": "https://sportsagentslab-lmr3mkqh0-julitocrztuga-2084s-projects.vercel.app",
+  "authority_sources": [
+    "authority/MEF_CHANGE_CONTROL.md",
+    "authority/MEF_BLOCK_DEPENDENCY_LOCK_B01_ML104.yaml",
+    "authority/MEF_B01_ML104_AUTHORITY_ACTIVATION.yaml",
+    "docs/BRANCH_POLICY.md",
+    "docs/decisions/MEF_UI_COMPOSITION_STACK_V1.md"
+  ],
+  "protected_follow_ons": ["ML-105", "ML-106"],
+  "screen_definition_count": 38,
+  "baseline_viewports": ["1728x1080", "1440x900", "1024x900", "390x844"],
+  "qualification_viewports": ["1728x1080", "1024x900", "390x844"],
+  "local_support_limitations": [
+    "/api/context returned HTTP 500 in the unauthenticated local environment",
+    "/api/status returned HTTP 500 in the unauthenticated local environment"
+  ],
+  "secrets": "No secrets stored in evidence; local .env.local is excluded.",
+  "final_evidence": {
+    "primary_routes_tested": 38,
+    "critical_states_tested": 14,
+    "axe_serious": 0,
+    "axe_critical": 0,
+    "responsive_overflow": false,
+    "final_global_chunk_files": 22,
+    "final_global_chunk_bytes": 2466187
+  },
+  "hosted_preview": {
+    "deployment_status": "Ready",
+    "route_smoke": "PASS_14_REPRESENTATIVE_ROUTES",
+    "page_markers": "PASS_5_REPRESENTATIVE_PAGES",
+    "api_context_status": "AUTHENTICATED_BOOTSTRAP_REQUIRED",
+    "api_status_status": 401,
+    "api_limitation": "Protected route without an authenticated session",
+    "interactive_browser": "HOSTED_AUTHENTICATED_UPLOAD_OBSERVATION_CANONICAL_PASS"
+  },
+  "remote_quality_gate": "PASS",
+  "status": "hosted-ui-acceptance-ready-to-merge"
+}

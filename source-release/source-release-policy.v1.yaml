@@ -1,0 +1,43 @@
+schema: sportsagentslab.source-release-policy.v1
+mission: SPORTSAGENTSLAB_FULL_PUBLIC_SOURCE_RELEASE_V1
+private_release_branch: work/public-source-release-v1
+public_release_branch: release/initial-public-source-v1
+default_classification: PUBLISH_AS_IS
+allowed_classifications:
+  - PUBLISH_AS_IS
+  - PUBLISH_REDACTED
+  - PUBLISH_GENERATED_TEMPLATE
+  - EXCLUDE_SECRET
+  - EXCLUDE_PII
+  - EXCLUDE_MACHINE_LOCAL
+  - EXCLUDE_THIRD_PARTY_RIGHTS
+  - EXCLUDE_LIVE_OPERATIONAL_SECRET
+  - EXCLUDE_HELDOUT_EVALUATION
+  - EXCLUDE_LEGAL_PRIVILEGE
+required_public_source:
+  - frontend
+  - backend
+  - agents
+  - prompts
+  - tools
+  - domain_packages
+  - schemas
+  - migrations
+  - scientific_modules
+  - tests
+  - non_heldout_evaluations
+  - ci
+  - build_configuration
+  - infrastructure_templates
+  - project_local_skills_and_docs
+transformations:
+  - tracked_files_only
+  - exact_bytes_for_publish_as_is
+  - narrow_config_redaction_only
+  - generated_root_governance_assets
+prohibitions:
+  - no_demo_only_replacement
+  - no_fake_architecture
+  - no_internal_vocabulary_sanitization
+  - no_private_receipts
+  - no_private_linear_ids_in_public_pr

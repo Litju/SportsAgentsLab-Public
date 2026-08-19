@@ -1,0 +1,44 @@
+{
+  "manifest_id": "map_ml104_reference_v01",
+  "version": "0.1.0",
+  "source_adapter_id": "mef.reference.source-v1",
+  "evidence_manifest_id": "evm_ml104_reference_mapping",
+  "canonical_modality": "declared_measurement_stream",
+  "ignored_source_fields": ["producer_jump_height", "user_note"],
+  "channels": [
+    {
+      "source_field": "time",
+      "channel_id": "channel_time",
+      "source_quantity": "time",
+      "canonical_quantity": "time",
+      "source_unit": "s",
+      "canonical_unit": "s",
+      "source_axis": null,
+      "canonical_axis": null,
+      "sign": 1,
+      "scale": 1,
+      "offset": 0,
+      "transformation_kind": "IDENTITY"
+    },
+    {
+      "source_field": "force_z",
+      "channel_id": "channel_force_z",
+      "source_quantity": "force",
+      "canonical_quantity": "force",
+      "source_unit": "N",
+      "canonical_unit": "N",
+      "source_axis": "z",
+      "canonical_axis": "vertical",
+      "sign": 1,
+      "scale": 1,
+      "offset": 0,
+      "transformation_kind": "IDENTITY"
+    }
+  ],
+  "timebase": {
+    "source_field": "time",
+    "canonical_unit": "s",
+    "expected_interval_seconds": 0.01,
+    "interval_tolerance_seconds": 0.000001
+  }
+}

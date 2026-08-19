@@ -1,0 +1,13 @@
+MEF_REFERENCE_SOURCE_V1
+schema_version=1
+producer=SportsAgentsLab.synthetic
+format=delimited
+delimiter=,
+encoding=utf-8
+meta.fixture=reference-duplicate-header
+field.time.quantity=time
+field.force_z.quantity=force
+columns:
+time,force_z,force_z
+data:
+0.000,100,100

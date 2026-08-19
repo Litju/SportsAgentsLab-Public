@@ -1,0 +1,35 @@
+name: Public Security And License Policy
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Verify license policy
+        shell: bash
+        run: |
+          grep -F "SportsAgentsLab Proprietary Source-Available License" LICENSE
+          grep -F "Copyright Julio Rodriguez 2026" LICENSE
+          ! grep -Eiq '(^|[^A-Za-z])(MIT|Apache|BSD|GPL|AGPL) License' LICENSE
+          python source-release/scripts/verify_public_tree.py --public-root .
+      - name: Dependency audit metadata
+        run: python scripts/generate_sbom.py
+      - name: Secret scan
+        run: python scripts/secret_scan.py

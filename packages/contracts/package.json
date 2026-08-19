@@ -1,0 +1,25 @@
+{
+  "name": "@mef/contracts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./schemas/domain-contracts.schema.json": "./schemas/domain-contracts.schema.json",
+    "./schemas/ingestion-adk.schema.json": "./schemas/ingestion-adk.schema.json",
+    "./contract-manifest.json": "./contract-manifest.json",
+    "./compatibility-policy.json": "./compatibility-policy.json",
+    "./openapi.json": "./openapi.json",
+    "./api/job-execution.json": "./api/job-execution.json"
+  },
+  "scripts": {
+    "test": "node ../../scripts/package_smoke.mjs"
+  },
+  "mefSmokePaths": [
+    "schemas/domain-contracts.schema.json",
+    "schemas/ingestion-adk.schema.json",
+    "contract-manifest.json",
+    "compatibility-policy.json",
+    "openapi.json",
+    "api/job-execution.json"
+  ]
+}

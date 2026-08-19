@@ -1,0 +1,453 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "ML-94",
+  "repository": "sportsagentslab-mef",
+  "default_branch": "main",
+  "topology_style": "modular_monorepo",
+  "nodes": [
+    {
+      "id": "apps/practitioner-web",
+      "kind": "typescript_application",
+      "owner": "practitioner-web",
+      "package_name": "@mef/practitioner-web",
+      "manifest": "apps/practitioner-web/package.json",
+      "source_roots": ["apps/practitioner-web"],
+      "purpose": "Own the practitioner-facing web application boundary.",
+      "public_interface": "src/index.ts exports only application identity in ML-94.",
+      "allowed_dependencies": [
+        "apps/control-api",
+        "packages/acquisition-configuration",
+        "packages/canonical-acquisition",
+        "packages/ingestion-adk",
+        "packages/generated-ts",
+        "packages/operational-state"
+      ],
+      "forbidden_dependencies": [
+        "scientific/kernel",
+        "packages/scientific-boundary",
+        "packages/generated-python",
+        "packages/agent-boundary"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/scientific-boundary",
+        "mef_scientific_kernel",
+        "scientific/kernel",
+        "@mef/agent-boundary"
+      ],
+      "why_now": "The accepted architecture requires a practitioner plane whose boundary is independently testable."
+    },
+    {
+      "id": "packages/acquisition-configuration",
+      "kind": "framework_neutral_acquisition_configuration_resolver",
+      "owner": "acquisition-configuration",
+      "package_name": "@mef/acquisition-configuration",
+      "manifest": "packages/acquisition-configuration/package.json",
+      "source_roots": ["packages/acquisition-configuration/src", "packages/acquisition-configuration/test"],
+      "purpose": "Own deterministic vendor-agnostic force-plate configuration and sample-rate resolution from accepted observation and canonical metadata.",
+      "public_interface": "ML-105 configuration resolution only; no raw reparse, signal storage, biomechanics, science, HTTP, database, Blob, credentials, or LLM access.",
+      "allowed_dependencies": ["packages/generated-ts", "packages/ingestion-adk"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "packages/operational-state",
+        "packages/scientific-boundary",
+        "packages/agent-boundary",
+        "scientific/kernel"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/operational-state",
+        "@mef/scientific-boundary",
+        "@mef/agent-boundary",
+        "@vercel/blob",
+        "pg",
+        "process.env",
+        "fetch(",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "ML-105 authorizes physical acquisition configuration resolution after the accepted ML-104 canonical acquisition boundary, while downstream scientific work remains blocked."
+    },
+    {
+      "id": "packages/canonical-acquisition",
+      "kind": "framework_neutral_canonical_acquisition",
+      "owner": "canonical-acquisition",
+      "package_name": "@mef/canonical-acquisition",
+      "manifest": "packages/canonical-acquisition/package.json",
+      "source_roots": ["packages/canonical-acquisition/src", "packages/canonical-acquisition/test"],
+      "purpose": "Own vendor-neutral canonical measurement representation, explicit mapping, deterministic integrity findings, and synthetic conformance.",
+      "public_interface": "Canonical Acquisition v0.1 pure runtime; no database, Blob, HTTP, credentials, biomechanics, or LLM access.",
+      "allowed_dependencies": ["packages/generated-ts", "packages/ingestion-adk"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "packages/operational-state",
+        "packages/scientific-boundary",
+        "packages/agent-boundary",
+        "scientific/kernel"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/operational-state",
+        "@mef/scientific-boundary",
+        "@mef/agent-boundary",
+        "@vercel/blob",
+        "pg",
+        "process.env",
+        "fetch(",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "ML-104 authorizes canonical measurement representation and synthetic integrity conformance after the accepted ML-103 observation boundary."
+    },
+    {
+      "id": "packages/ingestion-adk",
+      "kind": "framework_neutral_ingestion_adapter_development_kit",
+      "owner": "ingestion-adk",
+      "package_name": "@mef/ingestion-adk",
+      "manifest": "packages/ingestion-adk/package.json",
+      "source_roots": ["packages/ingestion-adk/src", "packages/ingestion-adk/test"],
+      "purpose": "Own the private, vendor-agnostic ADK contract, bounded source reader, reference adapter, registry, and conformance checks.",
+      "public_interface": "ADK v0.1 contracts and synthetic reference adapter only; no database, Blob, HTTP, credential, science, or LLM access.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "packages/operational-state",
+        "packages/scientific-boundary",
+        "packages/agent-boundary",
+        "scientific/kernel"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/operational-state",
+        "@vercel/blob",
+        "pg",
+        "process.env",
+        "fetch(",
+        "child_process",
+        "@mef/scientific-boundary",
+        "@mef/agent-boundary",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "ML-103 authorizes a private adapter boundary and synthetic conformance without authorizing real vendor support or canonical scientific interpretation."
+    },
+    {
+      "id": "apps/control-api",
+      "kind": "typescript_application",
+      "owner": "control-api",
+      "package_name": "@mef/control-api",
+      "manifest": "apps/control-api/package.json",
+      "source_roots": ["apps/control-api/src"],
+      "purpose": "Own TypeScript application, control, and API orchestration boundaries.",
+      "public_interface": "src/index.ts exports typed control-to-scientific, control-to-agent, and control-to-operational-state port aliases.",
+      "allowed_dependencies": [
+        "packages/agent-boundary",
+        "packages/generated-ts",
+        "packages/operational-state",
+        "packages/scientific-boundary"
+      ],
+      "forbidden_dependencies": [
+        "scientific/kernel",
+        "apps/practitioner-web",
+        "packages/generated-python"
+      ],
+      "forbidden_import_tokens": [
+        "mef_scientific_kernel",
+        "scientific/kernel",
+        "@mef/generated-python",
+        "@mef/practitioner-web"
+      ],
+      "why_now": "The accepted architecture requires TypeScript control surfaces to call science and ML-96 operational state through explicit typed boundaries."
+    },
+    {
+      "id": "packages/agent-boundary",
+      "kind": "framework_neutral_agent_port",
+      "owner": "agent-boundary",
+      "package_name": "@mef/agent-boundary",
+      "manifest": "packages/agent-boundary/package.json",
+      "source_roots": ["packages/agent-boundary/src"],
+      "purpose": "Define the framework-neutral port for the future persistent MEF Agent runtime.",
+      "public_interface": "AgentRuntimePort generic interface only; no runtime, tools, memory, or provider implementation.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "tools/evidence-replay",
+        "infra"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "mef_scientific_kernel",
+        "mef_evidence_replay"
+      ],
+      "why_now": "The frozen UX and accepted architecture require an agent boundary, while ML-94 defers all agent runtime behavior."
+    },
+    {
+      "id": "packages/contracts",
+      "kind": "framework_neutral_contracts",
+      "owner": "contracts",
+      "package_name": "@mef/contracts",
+      "manifest": "packages/contracts/package.json",
+      "source_roots": ["packages/contracts/schemas"],
+      "purpose": "Own canonical framework-neutral JSON Schema contracts.",
+      "public_interface": "JSON Schema files under schemas/.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/scientific-boundary"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "Cross-language boundaries need one contract authority before product implementations begin."
+    },
+    {
+      "id": "packages/generated-ts",
+      "kind": "generated_typescript_models",
+      "owner": "contracts",
+      "package_name": "@mef/generated-ts",
+      "manifest": "packages/generated-ts/package.json",
+      "source_roots": ["packages/generated-ts/src"],
+      "purpose": "Publish TypeScript models generated from canonical contracts.",
+      "public_interface": "Generated model exports; generated files are not hand-edited.",
+      "allowed_dependencies": ["packages/contracts"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/operational-state"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/control-api",
+        "@mef/practitioner-web",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "The TypeScript boundary must consume models derived from, not divergent from, canonical schemas."
+    },
+    {
+      "id": "packages/operational-state",
+      "kind": "typescript_operational_state",
+      "owner": "operational-state",
+      "package_name": "@mef/operational-state",
+      "manifest": "packages/operational-state/package.json",
+      "source_roots": ["packages/operational-state/src", "packages/operational-state/test", "packages/operational-state/scripts"],
+      "purpose": "Own ML-96 operational persistence, immutable content-addressed artifact storage, audit, provenance, retention hooks, and explicit database/object-store failure boundaries.",
+      "public_interface": "Framework-neutral operational state, immutable object-store, migration, audit, provenance, retention, and transaction ports; no HTTP, job, parser, scientific, or agent runtime behavior.",
+      "allowed_dependencies": ["packages/generated-ts"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "packages/contracts",
+        "packages/agent-boundary",
+        "packages/generated-python",
+        "packages/scientific-boundary",
+        "scientific/kernel",
+        "tools/evidence-replay",
+        "infra"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/contracts",
+        "@mef/agent-boundary",
+        "@mef/generated-python",
+        "@mef/scientific-boundary",
+        "mef_scientific_kernel",
+        "mef_evidence_replay"
+      ],
+      "why_now": "ML-96 is the bounded issue that now requires independently testable operational persistence and immutable artifact integrity while preserving the ML-95 contract boundary."
+    },
+    {
+      "id": "packages/generated-python",
+      "kind": "generated_python_models",
+      "owner": "contracts",
+      "package_name": "mef-generated-models",
+      "manifest": "packages/generated-python/pyproject.toml",
+      "source_roots": ["packages/generated-python/src"],
+      "purpose": "Publish Python models generated from canonical contracts.",
+      "public_interface": "mef_generated_models package exports.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/operational-state"
+      ],
+      "forbidden_import_tokens": [
+        "mef_scientific_kernel",
+        "@mef/control-api",
+        "@mef/practitioner-web"
+      ],
+      "why_now": "The Python scientific workspace needs a typed cross-language model boundary without hand-written divergence."
+    },
+    {
+      "id": "packages/cmj-contract",
+      "kind": "framework_neutral_cmj_scientific_contract",
+      "owner": "cmj-contract",
+      "package_name": "@mef/cmj-contract",
+      "manifest": "packages/cmj-contract/package.json",
+      "source_roots": ["packages/cmj-contract/src", "packages/cmj-contract/test"],
+      "purpose": "Own the versioned machine-readable ML-109 CMJ protocol, event, numerical, metric-pack, quality, trace, and result-hash contract without implementing signal processing.",
+      "public_interface": "Contract documents, stable manifest serialization, and policy-only validation helpers; no raw parser, processor, database, HTTP, Blob, credentials, LLM, or learned component.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/operational-state",
+        "packages/agent-boundary",
+        "packages/generated-python",
+        "@vercel/blob",
+        "pg",
+        "mef_scientific_kernel"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/operational-state",
+        "@mef/agent-boundary",
+        "@vercel/blob",
+        "pg",
+        "process.env",
+        "fetch(",
+        "mef_scientific_kernel",
+        "csv",
+        "raw_signal"
+      ],
+      "why_now": "B01 is accepted and B02 ML-109 is authorized only to freeze the deterministic CMJ scientific contract before production processor work.",
+      "scientific_boundary": "Contract authority only; production processor and ML-110 corpus remain forbidden."
+    },
+    {
+      "id": "packages/scientific-boundary",
+      "kind": "typescript_scientific_port",
+      "owner": "control-api",
+      "package_name": "@mef/scientific-boundary",
+      "manifest": "packages/scientific-boundary/package.json",
+      "source_roots": ["packages/scientific-boundary/src"],
+      "purpose": "Define the framework-neutral TypeScript port used to request scientific computation.",
+      "public_interface": "ScientificComputationPort generic interface.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "scientific/kernel",
+        "apps/practitioner-web",
+        "apps/control-api"
+      ],
+      "forbidden_import_tokens": [
+        "mef_scientific_kernel",
+        "@mef/control-api",
+        "@mef/practitioner-web"
+      ],
+      "why_now": "The application/API layer must not reach into Python implementation internals."
+    },
+    {
+      "id": "scientific/kernel",
+      "kind": "python_scientific_workspace",
+      "owner": "scientific-kernel",
+      "package_name": "mef-scientific-kernel",
+      "manifest": "scientific/kernel/pyproject.toml",
+      "source_roots": ["scientific/kernel/src"],
+      "purpose": "Own independently runnable and testable Python scientific computation.",
+      "public_interface": "mef_scientific_kernel package and module entry point.",
+      "allowed_dependencies": ["packages/generated-python"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "packages/scientific-boundary",
+        "tools/evidence-replay",
+        "infra",
+        "packages/operational-state"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/scientific-boundary",
+        "mef_evidence_replay",
+        "apps.practitioner_web",
+        "@mef/agent-boundary"
+      ],
+      "why_now": "The accepted architecture explicitly separates the Python scientific plane from application and agent concerns."
+    },
+    {
+      "id": "fixtures",
+      "kind": "fixtures_and_expected_outputs",
+      "owner": "test-engineering",
+      "manifest": null,
+      "source_roots": ["fixtures"],
+      "purpose": "Own non-athlete structural fixtures and fixed expected outputs.",
+      "public_interface": "JSON fixtures and evidence/replay manifests.",
+      "allowed_dependencies": ["packages/contracts"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "tools/evidence-replay",
+        "packages/operational-state"
+      ],
+      "forbidden_import_tokens": [
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "mef_scientific_kernel"
+      ],
+      "why_now": "Architecture and contract tests need independent, non-product test assets."
+    },
+    {
+      "id": "tools/evidence-replay",
+      "kind": "evidence_replay_tooling",
+      "owner": "evidence-tooling",
+      "package_name": "mef-evidence-replay",
+      "manifest": "tools/evidence-replay/pyproject.toml",
+      "source_roots": ["tools/evidence-replay/src"],
+      "purpose": "Verify declared contract/output artifacts and replay structural evidence without application internals.",
+      "public_interface": "mef_evidence_replay module entry point; future scientific replay is a versioned released-kernel process boundary, never an internal import.",
+      "allowed_dependencies": ["packages/generated-python"],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/scientific-boundary",
+        "infra",
+        "packages/operational-state"
+      ],
+      "forbidden_import_tokens": [
+        "mef_scientific_kernel",
+        "mef_scientific",
+        "@mef/practitioner-web",
+        "@mef/control-api",
+        "@mef/scientific-boundary"
+      ],
+      "why_now": "Evidence must consume declared outputs and contracts without reaching into mutable application state."
+    },
+    {
+      "id": "infra",
+      "kind": "infrastructure_boundary",
+      "owner": "infrastructure",
+      "manifest": null,
+      "source_roots": ["infra"],
+      "purpose": "Reserve the deployment boundary while withholding provider and runtime configuration.",
+      "public_interface": "Documentation and future deployment manifests only.",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": [
+        "apps/practitioner-web",
+        "apps/control-api",
+        "scientific/kernel",
+        "packages/contracts",
+        "packages/scientific-boundary"
+      ],
+      "forbidden_import_tokens": [
+        "mef_scientific_kernel",
+        "@mef/control-api",
+        "@mef/practitioner-web",
+        "@mef/contracts"
+      ],
+      "why_now": "The accepted architecture names a deployment boundary, but no ML-94 requirement justifies provider or domain manifests."
+    }
+  ]
+}

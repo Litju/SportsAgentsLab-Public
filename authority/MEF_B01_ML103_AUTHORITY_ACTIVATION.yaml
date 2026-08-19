@@ -1,0 +1,37 @@
+authority_change_id: MEF-B01-ML103-AUTHORITY-ACTIVATION
+version: 1.0.0
+status: NORMATIVE
+acceptance: FOUNDER_APPROVED
+decision: B01_GATE_TRANSITION
+owner_approval: YES
+founder_decision: ADOPTED
+predecessor_authority: authority/MEF_BLOCK_DEPENDENCY_LOCK_B01.yaml
+successor_authority: authority/MEF_BLOCK_DEPENDENCY_LOCK_B01_ML103.yaml
+previous_current_block: B01
+new_current_block: B01
+previous_gate: ML-102
+new_gate: ML-103
+ml102_status: ACCEPTED
+ml102_implementation_allowed: false
+ml103_status: AUTHORIZED
+ml103_implementation_allowed: true
+real_vendor_adapter_implementation_allowed: false
+ml104_status: DEPENDENCY_BLOCKED
+ml105_status: DEPENDENCY_BLOCKED
+ml106_status: DEPENDENCY_BLOCKED
+ml107_status: DEPENDENCY_BLOCKED
+ml108_status: DEPENDENCY_BLOCKED
+b02_status: DEFERRED
+b02_implementation_allowed: false
+ml103_scope: INGESTION_ADK_V0_1_PLUS_SYNTHETIC_REFERENCE_CONFORMANCE
+real_vendor_support_requires_source_evidence: true
+ml102_accepted_main_head: db6aed6162eb5ef5437b1ba8351f7d8ba59e59db
+ml102_evidence_commit: 115e27bc42bec34ad92e79c68208d60ff3b96f2f
+date: 2026-08-16
+historical_ml102_evidence_mutated: NO
+active_database: NEON_POSTGRESQL
+active_artifact_storage: VERCEL_PRIVATE_BLOB
+s3_runtime_dependency: NONE
+scientific_boundary: BYTES_IDENTITY_IMMUTABLE_STORAGE_PROVENANCE_ONLY
+reason: "Founder sequencing amendment narrowed ML-103 to the ingestion ADK v0.1 and synthetic reference conformance; no real vendor support is authorized without source evidence."
+

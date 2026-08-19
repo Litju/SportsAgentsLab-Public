@@ -1,0 +1,15 @@
+MEF_REFERENCE_SOURCE_V1
+schema_version=1
+producer=SportsAgentsLab.synthetic
+format=delimited
+delimiter=,
+encoding=utf-8
+meta.fixture=reference-canonical-missing-channel
+field.time.quantity=time
+field.time.unit=s
+field.time.classification=raw_sensor
+columns:
+time
+data:
+0.000
+0.010

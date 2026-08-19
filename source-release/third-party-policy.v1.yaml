@@ -1,0 +1,16 @@
+schema: sportsagentslab.third-party-policy.v1
+owner: Julio Rodriguez
+rule: do_not_publish_material_without_redistribution_rights
+owned_or_authorized_defaults:
+  - source_code_written_for_sportsagentslab
+  - project_documentation
+  - synthetic_fixtures
+  - project_generated_assets
+  - lockfiles_and_dependency_metadata
+review_required:
+  - vendor
+  - third_party
+  - third-party
+  - nonredistributable
+  - bundled_binary_without_provenance
+dependency_rule: publish_dependency_manifests_and_lockfiles; do_not_vendor_dependencies

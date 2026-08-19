@@ -1,0 +1,3101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sportsagentslab.local/mef/1.0.0/domain-contracts.schema.json",
+  "title": "Measurement Evidence Factory domain contracts",
+  "description": "Closed, framework-neutral MEF domain records. Unknown and unresolved semantics remain explicit.",
+  "$ref": "#/$defs/EntityRecord",
+  "$defs": {
+    "SchemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,9})?Z$"
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "ReasonText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "SourceArtifactId": {
+      "type": "string",
+      "pattern": "^src_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "ImportAttemptId": {
+      "type": "string",
+      "pattern": "^imp_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "CanonicalAcquisitionId": {
+      "type": "string",
+      "pattern": "^acq_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "ConfigurationContractId": {
+      "type": "string",
+      "pattern": "^cfg_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "ProtocolContractId": {
+      "type": "string",
+      "pattern": "^pro_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "TrialId": {
+      "type": "string",
+      "pattern": "^trl_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "SessionId": {
+      "type": "string",
+      "pattern": "^ses_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "MetricObservationId": {
+      "type": "string",
+      "pattern": "^met_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "ReferenceEpochId": {
+      "type": "string",
+      "pattern": "^epoch_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "InferenceResultId": {
+      "type": "string",
+      "pattern": "^inf_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "EvidenceManifestId": {
+      "type": "string",
+      "pattern": "^evm_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "PractitionerDecisionId": {
+      "type": "string",
+      "pattern": "^dec_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "AgentContextId": {
+      "type": "string",
+      "pattern": "^ctx_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "AuditEventId": {
+      "type": "string",
+      "pattern": "^aud_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "CommandId": {
+      "type": "string",
+      "pattern": "^cmd_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "JobId": {
+      "type": "string",
+      "pattern": "^job_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "JobAttemptId": {
+      "type": "string",
+      "pattern": "^jatt_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "ProgressEventId": {
+      "type": "string",
+      "pattern": "^pev_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "IdempotencyKey": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$"
+    },
+    "MetricDefinitionId": {
+      "type": "string",
+      "pattern": "^metric_[a-z0-9][a-z0-9_-]{0,127}$"
+    },
+    "ChannelId": {
+      "type": "string",
+      "pattern": "^channel_[a-z0-9][a-z0-9_-]{0,127}$"
+    },
+    "SourceObservationId": {
+      "type": "string",
+      "pattern": "^sob_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "CanonicalMappingManifestId": {
+      "type": "string",
+      "pattern": "^map_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "CanonicalIntegrityFindingId": {
+      "type": "string",
+      "pattern": "^cif_[a-z0-9][a-z0-9_-]{0,127}$",
+      "x-nominal-id": true
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "SemanticState": {
+      "type": "string",
+      "enum": [
+        "KNOWN",
+        "UNKNOWN",
+        "UNRESOLVED",
+        "UNSUPPORTED",
+        "NOT_APPLICABLE",
+        "ABSENT"
+      ]
+    },
+    "QualityState": {
+      "type": "string",
+      "enum": [
+        "QUALIFIED",
+        "UNQUALIFIED",
+        "UNKNOWN",
+        "UNRESOLVED",
+        "UNSUPPORTED",
+        "NOT_APPLICABLE",
+        "REJECTED",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "EntityType": {
+      "type": "string",
+      "enum": [
+        "SourceArtifact",
+        "ImportAttempt",
+        "CanonicalAcquisition",
+        "ConfigurationContract",
+        "ProtocolContract",
+        "Trial",
+        "Session",
+        "MetricObservation",
+        "ReferenceEpoch",
+        "InferenceResult",
+        "EvidenceManifest",
+        "PractitionerDecision",
+        "AgentContext",
+        "AuditEvent",
+        "Command",
+        "Job",
+        "JobAttempt",
+        "ProgressEvent"
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "enum": [
+        "VALIDATION_ERROR",
+        "UNKNOWN_ENTITY_TYPE",
+        "UNKNOWN_ENUM_VALUE",
+        "UNSUPPORTED_SCHEMA_VERSION",
+        "UNKNOWN_SCHEMA_VERSION",
+        "MISSING_REQUIRED_FIELD",
+        "INVALID_IDENTIFIER",
+        "INVALID_TIMESTAMP",
+        "INVALID_HASH",
+        "INVALID_STATE_TRANSITION_INPUT",
+        "UNRESOLVED_REFERENCE",
+        "CONFLICTING_METADATA",
+        "UNSUPPORTED_CONFIGURATION",
+        "INCOMPATIBLE_CONTRACT_VERSION",
+        "UNKNOWN_GOVERNED_FIELD",
+        "INVALID_EVIDENCE_REFERENCE",
+        "INVALID_UNIT",
+        "INVALID_TYPE",
+        "FORBIDDEN_FIELD",
+        "FORBIDDEN_AUTHORITY_COMBINATION"
+      ]
+    },
+    "ContractError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taxonomy_version",
+        "code",
+        "message",
+        "path"
+      ],
+      "properties": {
+        "taxonomy_version": {
+          "$ref": "#/$defs/SchemaVersion"
+        },
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "message": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "EvidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_manifest_id",
+        "component",
+        "locator"
+      ],
+      "properties": {
+        "evidence_manifest_id": {
+          "$ref": "#/$defs/EvidenceManifestId"
+        },
+        "component": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "locator": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "content_hash": {
+          "$ref": "#/$defs/Sha256"
+        }
+      }
+    },
+    "ReasonReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "description",
+        "evidence_references"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,63}$"
+        },
+        "description": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "SemanticDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence_references"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/SemanticState"
+        },
+        "value": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "reason": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {"state": {"const": "KNOWN"}}
+          },
+          "then": {
+            "type": "object",
+            "required": ["value"],
+            "not": {"type": "object", "required": ["reason"]}
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "NOT_APPLICABLE", "ABSENT"]
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "required": ["reason"],
+            "not": {"type": "object", "required": ["value"]}
+          }
+        }
+      ]
+    },
+    "Unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "symbol"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NATIVE"
+          ]
+        },
+        "symbol": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9*/^·._-]{0,31}$"
+        }
+      }
+    },
+    "UnitDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence_references"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/SemanticState"
+        },
+        "unit": {
+          "$ref": "#/$defs/Unit"
+        },
+        "reason": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {"state": {"const": "KNOWN"}}
+          },
+          "then": {
+            "type": "object",
+            "required": ["unit"]
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "NOT_APPLICABLE", "ABSENT"]
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "required": ["reason"],
+            "not": {"type": "object", "required": ["unit"]}
+          }
+        }
+      ]
+    },
+    "ConditionObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition",
+        "observation_state",
+        "authority_type",
+        "evidence_references"
+      ],
+      "properties": {
+        "condition": {
+          "type": "string",
+          "enum": [
+            "BILATERAL",
+            "UNLOADED",
+            "HANDS_ON_HIPS",
+            "COUNTERMOVEMENT_JUMP"
+          ]
+        },
+        "observation_state": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "NOT_CONFIRMED",
+            "UNKNOWN",
+            "UNRESOLVED",
+            "UNSUPPORTED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "authority_type": {
+          "type": "string",
+          "enum": [
+            "HUMAN_PRACTITIONER",
+            "MACHINE_OBSERVED"
+          ]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "condition": {
+                "const": "HANDS_ON_HIPS"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "authority_type": {
+                "const": "HUMAN_PRACTITIONER"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "observation_state": {"const": "CONFIRMED"}
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "evidence_references": {"minItems": 1}
+            }
+          }
+        }
+      ]
+    },
+    "Channel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id",
+        "physical_quantity",
+        "unit",
+        "axis",
+        "sign_convention",
+        "sample_time",
+        "quality_state"
+      ],
+      "properties": {
+        "channel_id": {
+          "$ref": "#/$defs/ChannelId"
+        },
+        "physical_quantity": {
+          "$ref": "#/$defs/SemanticDeclaration"
+        },
+        "unit": {
+          "$ref": "#/$defs/UnitDeclaration"
+        },
+        "axis": {
+          "$ref": "#/$defs/SemanticDeclaration"
+        },
+        "sign_convention": {
+          "$ref": "#/$defs/SemanticDeclaration"
+        },
+        "sample_time": {
+          "$ref": "#/$defs/SemanticDeclaration"
+        },
+        "quality_state": {
+          "$ref": "#/$defs/QualityState"
+        }
+      }
+    },
+    "SourceMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id",
+        "source_label",
+        "mapping_state",
+        "evidence_references"
+      ],
+      "properties": {
+        "channel_id": {
+          "$ref": "#/$defs/ChannelId"
+        },
+        "source_label": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "mapping_state": {
+          "$ref": "#/$defs/SemanticState"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "CanonicalTransformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scale", "offset"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["IDENTITY", "UNIT_CONVERSION", "SIGN_FLIP", "LINEAR_SCALE"]},
+        "scale": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000000},
+        "offset": {"type": "number", "minimum": -1000000, "maximum": 1000000},
+        "source_unit": {"$ref": "#/$defs/Unit"},
+        "target_unit": {"$ref": "#/$defs/Unit"},
+        "source_axis": {"$ref": "#/$defs/NonEmptyString"},
+        "target_axis": {"$ref": "#/$defs/NonEmptyString"}
+      }
+    },
+    "CanonicalChannel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id",
+        "physical_quantity",
+        "unit",
+        "axis",
+        "sign_convention",
+        "sample_time",
+        "quality_state",
+        "sample_count",
+        "transformation",
+        "evidence_references"
+      ],
+      "properties": {
+        "channel_id": {"$ref": "#/$defs/ChannelId"},
+        "physical_quantity": {"$ref": "#/$defs/SemanticDeclaration"},
+        "unit": {"$ref": "#/$defs/UnitDeclaration"},
+        "axis": {"$ref": "#/$defs/SemanticDeclaration"},
+        "sign_convention": {"$ref": "#/$defs/SemanticDeclaration"},
+        "sample_time": {"$ref": "#/$defs/SemanticDeclaration"},
+        "quality_state": {"$ref": "#/$defs/QualityState"},
+        "sample_count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "transformation": {"$ref": "#/$defs/CanonicalTransformation"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "CanonicalSourceMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channel_id", "source_label", "mapping_state", "evidence_references", "transformation"],
+      "properties": {
+        "channel_id": {"$ref": "#/$defs/ChannelId"},
+        "source_label": {"$ref": "#/$defs/NonEmptyString"},
+        "mapping_state": {"$ref": "#/$defs/SemanticState"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true},
+        "transformation": {"$ref": "#/$defs/CanonicalTransformation"}
+      }
+    },
+    "CanonicalTimebase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {"$ref": "#/$defs/SemanticState"},
+        "timestamp_channel_id": {"$ref": "#/$defs/ChannelId"},
+        "timestamp_unit": {"$ref": "#/$defs/Unit"},
+        "sample_interval_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "sample_rate_hz": {"type": "number", "exclusiveMinimum": 0},
+        "uniformity": {"type": "string", "enum": ["UNIFORM", "IRREGULAR", "UNKNOWN"]},
+        "reason": {"$ref": "#/$defs/ReasonText"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"state": {"const": "KNOWN"}}},
+          "then": {"required": ["timestamp_channel_id", "timestamp_unit", "uniformity"]}
+        },
+        {
+          "if": {"properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "NOT_APPLICABLE", "ABSENT"]}}},
+          "then": {"required": ["reason"], "not": {"required": ["timestamp_channel_id"]}}
+        }
+      ]
+    },
+    "CanonicalAcquisitionManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_observation_id",
+        "source_observation_sha256",
+        "source_artifact_sha256",
+        "canonicalizer_version",
+        "mapping_manifest_id",
+        "mapping_manifest_sha256",
+        "adapter_id",
+        "evidence_references"
+      ],
+      "properties": {
+        "source_observation_id": {"$ref": "#/$defs/SourceObservationId"},
+        "source_observation_sha256": {"$ref": "#/$defs/Sha256"},
+        "source_artifact_sha256": {"$ref": "#/$defs/Sha256"},
+        "canonicalizer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "mapping_manifest_id": {"$ref": "#/$defs/CanonicalMappingManifestId"},
+        "mapping_manifest_sha256": {"$ref": "#/$defs/Sha256"},
+        "adapter_id": {"$ref": "#/$defs/NonEmptyString"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "CanonicalIntegrityFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finding_id", "code", "severity", "message", "evidence_references"],
+      "properties": {
+        "finding_id": {"$ref": "#/$defs/CanonicalIntegrityFindingId"},
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+        "severity": {"type": "string", "enum": ["INFO", "WARNING", "ERROR"]},
+        "message": {"$ref": "#/$defs/ReasonText"},
+        "record_index": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "channel_id": {"$ref": "#/$defs/ChannelId"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "CanonicalIntegrityCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "status", "finding_ids", "evidence_references"],
+      "properties": {
+        "check_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+        "status": {"type": "string", "enum": ["PASS", "WARN", "FAIL", "NOT_EVALUATED"]},
+        "finding_ids": {"type": "array", "items": {"$ref": "#/$defs/CanonicalIntegrityFindingId"}, "uniqueItems": true},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "CanonicalIntegrityReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "record_count", "channel_count", "finite_value_count", "finding_count", "findings", "checks"],
+      "properties": {
+        "status": {"type": "string", "enum": ["QUALIFIED", "REVIEW_REQUIRED", "REJECTED"]},
+        "record_count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "channel_count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "finite_value_count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "finding_count": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "findings": {"type": "array", "items": {"$ref": "#/$defs/CanonicalIntegrityFinding"}, "uniqueItems": true},
+        "checks": {"type": "array", "items": {"$ref": "#/$defs/CanonicalIntegrityCheck"}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "CanonicalSignalArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content_hash", "storage_key", "byte_size", "media_type", "encoding", "channel_order"],
+      "properties": {
+        "content_hash": {"$ref": "#/$defs/Sha256"},
+        "storage_key": {"$ref": "#/$defs/NonEmptyString"},
+        "byte_size": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "media_type": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"},
+        "encoding": {"const": "MEF_CANONICAL_SIGNAL_NDJSON_V0_1"},
+        "channel_order": {"type": "array", "items": {"$ref": "#/$defs/ChannelId"}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "ConfigurationResolutionState": {
+      "type": "string",
+      "enum": ["NOT_EVALUATED"]
+    },
+    "CanonicalizationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "acquisition", "signal_artifact", "integrity_report", "mapping_manifest_sha256", "canonical_identity_sha256"],
+      "properties": {
+        "status": {"type": "string", "enum": ["COMPLETE", "PARTIAL", "BLOCKED", "FAILED"]},
+        "acquisition": {"$ref": "#/$defs/CanonicalAcquisition"},
+        "signal_artifact": {"$ref": "#/$defs/CanonicalSignalArtifact"},
+        "integrity_report": {"$ref": "#/$defs/CanonicalIntegrityReport"},
+        "mapping_manifest_sha256": {"$ref": "#/$defs/Sha256"},
+        "canonical_identity_sha256": {"$ref": "#/$defs/Sha256"}
+      }
+    },
+    "Actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_type",
+        "actor_id",
+        "role"
+      ],
+      "properties": {
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "PRACTITIONER",
+            "AGENT",
+            "SYSTEM",
+            "IMPORT_PROCESS",
+            "PROCESSOR"
+          ]
+        },
+        "actor_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "role": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      }
+    },
+    "PractitionerActor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_type",
+        "actor_id",
+        "role"
+      ],
+      "properties": {
+        "actor_type": {
+          "const": "PRACTITIONER"
+        },
+        "actor_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "QUALIFIED_PRACTITIONER",
+            "REVIEWER",
+            "SUPERVISOR"
+          ]
+        }
+      }
+    },
+    "ProcessorReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "processor_id",
+        "component_version"
+      ],
+      "properties": {
+        "processor_id": {
+          "type": "string",
+          "pattern": "^processor_[a-z0-9][a-z0-9_-]{0,127}$"
+        },
+        "component_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "MetricDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_id",
+        "definition_version"
+      ],
+      "properties": {
+        "definition_id": {
+          "$ref": "#/$defs/MetricDefinitionId"
+        },
+        "definition_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "Precision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation"
+      ],
+      "properties": {
+        "representation": {
+          "type": "string",
+          "enum": [
+            "EXACT",
+            "DECIMAL",
+            "INTERVAL",
+            "SIGNIFICANT_DIGITS",
+            "UNKNOWN"
+          ]
+        },
+        "digits": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "NumericValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit",
+        "precision"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "unit": {
+          "$ref": "#/$defs/Unit"
+        },
+        "precision": {
+          "$ref": "#/$defs/Precision"
+        }
+      }
+    },
+    "TrialOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "reason_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "INCLUDED",
+            "EXCLUDED",
+            "REVIEW_REQUIRED",
+            "UNKNOWN",
+            "UNRESOLVED",
+            "UNSUPPORTED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "reason_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReasonReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "PractitionerOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_type",
+        "actor_id",
+        "attributed_at",
+        "original_state",
+        "new_state",
+        "reason",
+        "evidence_references"
+      ],
+      "properties": {
+        "authority_type": {
+          "const": "HUMAN_PRACTITIONER"
+        },
+        "actor_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "attributed_at": {
+          "$ref": "#/$defs/Timestamp"
+        },
+        "original_state": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "new_state": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "reason": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "authority_type",
+        "reason_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "PROPOSED_INCLUDE",
+            "PROPOSED_EXCLUDE",
+            "REVIEW_REQUIRED",
+            "FINAL_INCLUDE",
+            "FINAL_EXCLUDE",
+            "UNKNOWN",
+            "UNRESOLVED"
+          ]
+        },
+        "authority_type": {
+          "type": "string",
+          "enum": [
+            "MACHINE",
+            "HUMAN_PRACTITIONER"
+          ]
+        },
+        "reason_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReasonReference"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "authority_type": {
+                "const": "MACHINE"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "enum": [
+                  "PROPOSED_INCLUDE",
+                  "PROPOSED_EXCLUDE",
+                  "REVIEW_REQUIRED",
+                  "UNKNOWN",
+                  "UNRESOLVED"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "enum": [
+                  "FINAL_INCLUDE",
+                  "FINAL_EXCLUDE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "authority_type": {
+                "const": "HUMAN_PRACTITIONER"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PractitionerDisposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "authority_type",
+        "actor_id",
+        "reason_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "FINAL_INCLUDE",
+            "FINAL_EXCLUDE",
+            "REVIEW_REQUIRED"
+          ]
+        },
+        "authority_type": {
+          "const": "HUMAN_PRACTITIONER"
+        },
+        "actor_id": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "reason_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReasonReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "KNOWN",
+            "UNKNOWN",
+            "UNRESOLVED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "standard_error": {
+          "$ref": "#/$defs/NumericValue"
+        },
+        "lower": {
+          "type": "number",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "upper": {
+          "type": "number",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "DirectionalProbability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "direction",
+        "evidence_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "KNOWN",
+            "UNKNOWN",
+            "UNRESOLVED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "INCREASED",
+            "DECREASED",
+            "NO_DIRECTION",
+            "UNKNOWN"
+          ]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "PracticalThresholdInterpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence_references"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "INELIGIBLE",
+            "UNKNOWN",
+            "UNRESOLVED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "interpretation": {
+          "type": "string",
+          "enum": [
+            "ABOVE",
+            "BELOW",
+            "WITHIN",
+            "INDETERMINATE",
+            "NOT_REGISTERED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "threshold_reference": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "description",
+        "evidence_references"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "INSUFFICIENT_EVIDENCE",
+            "REFERENCE_NOT_MATURE",
+            "MEASUREMENT_INELIGIBLE",
+            "UNCERTAINTY_UNRESOLVED",
+            "CONFLICTING_METADATA",
+            "LIMITATION_PRESENT"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/ReasonText"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Limitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "description"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "MISSING_ACQUISITION_SEMANTICS",
+            "MISSING_PROTOCOL_EVIDENCE",
+            "REFERENCE_IMMATURITY",
+            "UNCERTAINTY",
+            "PROCESSOR_LIMITATION",
+            "SCOPE_LIMITATION"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/ReasonText"
+        }
+      }
+    },
+    "Integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "digest",
+        "integrity_state",
+        "component_version",
+        "signed"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "SHA-256"
+        },
+        "digest": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "integrity_state": {
+          "type": "string",
+          "enum": [
+            "DECLARED",
+            "VERIFIED",
+            "FAILED",
+            "UNKNOWN"
+          ]
+        },
+        "component_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "signed": {
+          "type": "boolean"
+        },
+        "verification_evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "integrity_state": {
+                "const": "VERIFIED"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "required": [
+              "verification_evidence_references"
+            ],
+            "properties": {
+              "verification_evidence_references": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ObjectReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "object_id"
+      ],
+      "properties": {
+        "entity_type": {
+          "$ref": "#/$defs/EntityType"
+        },
+        "object_id": {
+          "type": "string",
+          "pattern": "^(src|imp|acq|cfg|pro|trl|ses|met|epoch|inf|evm|dec|ctx|aud|cmd|job|jatt|pev)_[a-z0-9][a-z0-9_-]{0,127}$"
+        }
+      },
+      "oneOf": [
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "SourceArtifact"}, "object_id": {"$ref": "#/$defs/SourceArtifactId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "ImportAttempt"}, "object_id": {"$ref": "#/$defs/ImportAttemptId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "CanonicalAcquisition"}, "object_id": {"$ref": "#/$defs/CanonicalAcquisitionId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "ConfigurationContract"}, "object_id": {"$ref": "#/$defs/ConfigurationContractId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "ProtocolContract"}, "object_id": {"$ref": "#/$defs/ProtocolContractId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "Trial"}, "object_id": {"$ref": "#/$defs/TrialId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "Session"}, "object_id": {"$ref": "#/$defs/SessionId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "MetricObservation"}, "object_id": {"$ref": "#/$defs/MetricObservationId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "ReferenceEpoch"}, "object_id": {"$ref": "#/$defs/ReferenceEpochId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "InferenceResult"}, "object_id": {"$ref": "#/$defs/InferenceResultId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "EvidenceManifest"}, "object_id": {"$ref": "#/$defs/EvidenceManifestId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "PractitionerDecision"}, "object_id": {"$ref": "#/$defs/PractitionerDecisionId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "AgentContext"}, "object_id": {"$ref": "#/$defs/AgentContextId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "AuditEvent"}, "object_id": {"$ref": "#/$defs/AuditEventId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "Command"}, "object_id": {"$ref": "#/$defs/CommandId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "Job"}, "object_id": {"$ref": "#/$defs/JobId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "JobAttempt"}, "object_id": {"$ref": "#/$defs/JobAttemptId"}}},
+        {"type": "object", "required": ["entity_type", "object_id"], "properties": {"entity_type": {"const": "ProgressEvent"}, "object_id": {"$ref": "#/$defs/ProgressEventId"}}}
+      ]
+    },
+    "Membership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_ids",
+        "metric_observation_ids",
+        "membership_digest"
+      ],
+      "properties": {
+        "session_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SessionId"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "metric_observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MetricObservationId"
+          },
+          "uniqueItems": true
+        },
+        "membership_digest": {
+          "$ref": "#/$defs/Sha256"
+        }
+      }
+    },
+    "ContextScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspace",
+        "athlete",
+        "measurement_case"
+      ],
+      "properties": {
+        "workspace": {
+          "$ref": "#/$defs/ScopeSlot"
+        },
+        "athlete": {
+          "$ref": "#/$defs/ScopeSlot"
+        },
+        "measurement_case": {
+          "$ref": "#/$defs/ScopeSlot"
+        }
+      }
+    },
+    "ScopeSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/SemanticState"
+        },
+        "value": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "reason": {
+          "$ref": "#/$defs/ReasonText"
+        }
+      }
+    },
+    "MachineRecommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "recommendation",
+        "evidence_references"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "SYSTEM_PROCESSOR",
+            "AGENT_DRAFT"
+          ]
+        },
+        "recommendation": {
+          "type": "string",
+          "enum": [
+            "ACCEPT",
+            "REJECT",
+            "REVIEW_REQUIRED"
+          ]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "SourceArtifactLifecycleState": {
+      "type": "string",
+      "enum": [
+        "REGISTERED",
+        "VERIFIED",
+        "INVALID"
+      ]
+    },
+    "ImportAttemptState": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "VALIDATING",
+        "ACCEPTED",
+        "REJECTED",
+        "UNSUPPORTED",
+        "FAILED"
+      ]
+    },
+    "AcquisitionState": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "PARTIALLY_RESOLVED",
+        "QUALIFIED",
+        "UNQUALIFIED",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "ConfigurationState": {
+      "type": "string",
+      "enum": [
+        "RESOLVED_QUALIFIED",
+        "RESOLVED_UNQUALIFIED",
+        "PARTIALLY_RESOLVED",
+        "CONFLICTING_METADATA",
+        "UNRESOLVED"
+      ]
+    },
+    "ProtocolState": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "ELIGIBLE",
+        "INELIGIBLE",
+        "UNRESOLVED",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "TrialState": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "PENDING_REVIEW",
+        "ELIGIBLE",
+        "INELIGIBLE",
+        "REJECTED",
+        "PRACTITIONER_OVERRIDDEN"
+      ]
+    },
+    "SessionState": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "MACHINE_PROPOSED",
+        "REVIEW_REQUIRED",
+        "HUMAN_FINAL",
+        "REJECTED",
+        "PRACTITIONER_OVERRIDDEN"
+      ]
+    },
+    "ObservationState": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "UNRESOLVED",
+        "INELIGIBLE",
+        "UNSUPPORTED"
+      ]
+    },
+    "EpochMaturityState": {
+      "type": "string",
+      "enum": [
+        "IMMATURE",
+        "MATURE",
+        "UNKNOWN",
+        "UNRESOLVED"
+      ]
+    },
+    "EpochApprovalState": {
+      "type": "string",
+      "enum": [
+        "NOT_REQUESTED",
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "InferenceState": {
+      "type": "string",
+      "enum": [
+        "PRODUCED",
+        "INELIGIBLE",
+        "UNRESOLVED",
+        "FAILED",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "ManifestState": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "INTEGRITY_VERIFIED",
+        "INTEGRITY_FAILED",
+        "SCOPE_INCOMPLETE",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "DecisionState": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "RECORDED",
+        "REVIEW_REQUIRED",
+        "SUPERSEDES_PRIOR"
+      ]
+    },
+    "DecisionValue": {
+      "type": "string",
+      "enum": [
+        "ACCEPT",
+        "REJECT",
+        "REVIEW_REQUIRED",
+        "OVERRIDE",
+        "ACKNOWLEDGE",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "ContextState": {
+      "type": "string",
+      "enum": [
+        "BOUNDED",
+        "PARTIALLY_BOUNDED",
+        "UNKNOWN",
+        "UNRESOLVED"
+      ]
+    },
+    "AuditAction": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "VALIDATED",
+        "STATE_CHANGED",
+        "OVERRIDDEN",
+        "APPROVED",
+        "REJECTED",
+        "LINKED",
+        "UNLINKED",
+        "COMMAND_ACCEPTED",
+        "COMMAND_IDEMPOTENT_REUSED",
+        "JOB_CLAIMED",
+        "ATTEMPT_STARTED",
+        "PROGRESS_RECORDED",
+        "RETRY_SCHEDULED",
+        "CANCELLATION_REQUESTED",
+        "CANCELLATION_ACKNOWLEDGED",
+        "ATTEMPT_COMPLETED",
+        "JOB_SUCCEEDED",
+        "JOB_FAILED",
+        "JOB_CANCELED",
+        "UNKNOWN_OUTCOME",
+        "RECONCILIATION_ACTION"
+      ]
+    },
+    "CommandType": {
+      "type": "string",
+      "enum": [
+        "FIXTURE_EXECUTION",
+        "IMPORT",
+        "SCIENTIFIC_PROCESSING",
+        "INFERENCE",
+        "EVIDENCE_ASSEMBLY",
+        "AUTHORIZED_ACTION"
+      ]
+    },
+    "RequestedOperation": {
+      "type": "string",
+      "enum": ["EXECUTE"]
+    },
+    "FixtureScenario": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "RETRY_THEN_SUCCESS",
+        "NON_RETRYABLE_FAILURE",
+        "CANCELLABLE",
+        "UNKNOWN_OUTCOME",
+        "PROGRESS"
+      ]
+    },
+    "FailureCategory": {
+      "type": "string",
+      "enum": ["RETRYABLE", "NON_RETRYABLE", "UNKNOWN_OUTCOME"]
+    },
+    "RetryDecision": {
+      "type": "string",
+      "enum": [
+        "NOT_APPLICABLE",
+        "RETRY_SCHEDULED",
+        "RETRY_EXHAUSTED",
+        "MANUAL_RECONCILIATION_REQUIRED",
+        "CANCELED"
+      ]
+    },
+    "JobState": {
+      "type": "string",
+      "enum": [
+        "QUEUED",
+        "RUNNING",
+        "RETRY_WAIT",
+        "CANCEL_REQUESTED",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELED",
+        "UNKNOWN_OUTCOME"
+      ]
+    },
+    "JobAttemptOutcome": {
+      "type": "string",
+      "enum": [
+        "STARTED",
+        "SUCCEEDED",
+        "FAILED_RETRYABLE",
+        "FAILED_NON_RETRYABLE",
+        "UNKNOWN_OUTCOME",
+        "CANCELED"
+      ]
+    },
+    "WorkerType": {
+      "type": "string",
+      "enum": ["FIXTURE"]
+    },
+    "ProgressPhase": {
+      "type": "string",
+      "enum": [
+        "QUEUED",
+        "STARTING",
+        "RUNNING",
+        "RETRYING",
+        "CANCELLATION_REQUESTED",
+        "CANCELLATION_ACKNOWLEDGED",
+        "COMPLETED",
+        "RECONCILING"
+      ]
+    },
+    "ProgressCode": {
+      "type": "string",
+      "enum": [
+        "COMMAND_ACCEPTED",
+        "ATTEMPT_STARTED",
+        "STEP_COMPLETED",
+        "RETRY_SCHEDULED",
+        "CANCELLATION_REQUESTED",
+        "CANCELLATION_ACKNOWLEDGED",
+        "ATTEMPT_COMPLETED",
+        "JOB_COMPLETED",
+        "OUTCOME_UNKNOWN",
+        "RECONCILIATION_REQUIRED"
+      ]
+    },
+    "ExecutionErrorCode": {
+      "type": "string",
+      "enum": [
+        "IDEMPOTENCY_CONFLICT",
+        "JOB_NOT_FOUND",
+        "JOB_NOT_CLAIMABLE",
+        "INVALID_JOB_TRANSITION",
+        "JOB_ALREADY_TERMINAL",
+        "CANCELLATION_NOT_ALLOWED",
+        "ATTEMPT_LIMIT_EXCEEDED",
+        "WORKER_FAILURE_RETRYABLE",
+        "WORKER_FAILURE_NON_RETRYABLE",
+        "EXECUTION_OUTCOME_UNKNOWN",
+        "JOB_PERSISTENCE_FAILED",
+        "UNKNOWN_COMMAND_TYPE",
+        "UNKNOWN_WORKER_TYPE",
+        "PROGRESS_SEQUENCE_CONFLICT",
+        "RECONCILIATION_REQUIRED",
+        "INVALID_COMMAND_PAYLOAD",
+        "INVALID_PROGRESS_EVENT"
+      ]
+    },
+    "ReconciliationState": {
+      "type": "string",
+      "enum": ["NONE", "RECONCILIATION_REQUIRED", "RECONCILED"]
+    },
+    "CommandPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payload_kind", "input_label", "input_value"],
+      "properties": {
+        "payload_kind": {"const": "STRUCTURAL"},
+        "input_label": {"$ref": "#/$defs/NonEmptyString"},
+        "input_value": {"$ref": "#/$defs/ReasonText"},
+        "fixture_scenario": {"$ref": "#/$defs/FixtureScenario"}
+      }
+    },
+    "CorrelationMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["correlation_id", "request_id"],
+      "properties": {
+        "correlation_id": {"$ref": "#/$defs/NonEmptyString"},
+        "request_id": {"$ref": "#/$defs/NonEmptyString"},
+        "causation_id": {"$ref": "#/$defs/NonEmptyString"}
+      }
+    },
+    "RetryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_attempts", "backoff_milliseconds", "backoff_strategy"],
+      "properties": {
+        "max_attempts": {"type": "integer", "minimum": 1, "maximum": 100},
+        "backoff_milliseconds": {"type": "integer", "minimum": 0, "maximum": 86400000},
+        "backoff_strategy": {"const": "FIXED"}
+      }
+    },
+    "JobResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result_code", "summary_code"],
+      "properties": {
+        "result_code": {"type": "string", "enum": ["COMPLETED", "CANCELED"]},
+        "summary_code": {"$ref": "#/$defs/NonEmptyString"},
+        "result_reference": {"$ref": "#/$defs/ObjectReference"}
+      }
+    },
+    "ExecutionError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "category"],
+      "properties": {
+        "code": {"$ref": "#/$defs/ExecutionErrorCode"},
+        "category": {"$ref": "#/$defs/FailureCategory"}
+      }
+    },
+    "JobCancellation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_at", "reason_code"],
+      "properties": {
+        "requested_at": {"$ref": "#/$defs/Timestamp"},
+        "acknowledged_at": {"$ref": "#/$defs/Timestamp"},
+        "canceled_at": {"$ref": "#/$defs/Timestamp"},
+        "reason_code": {"type": "string", "enum": ["USER_REQUESTED", "SAFE_BOUNDARY"]}
+      }
+    },
+    "SourceArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "source_artifact_id",
+        "record_version",
+        "created_at",
+        "lifecycle_state",
+        "content_hash",
+        "byte_size",
+        "media_type",
+        "original_filename",
+        "ingested_at",
+        "source_declaration",
+        "immutable_source"
+      ],
+      "properties": {
+        "entity_type": {"const": "SourceArtifact"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/source-artifact.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "source_artifact_id": {"$ref": "#/$defs/SourceArtifactId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "lifecycle_state": {"$ref": "#/$defs/SourceArtifactLifecycleState"},
+        "content_hash": {"$ref": "#/$defs/Sha256"},
+        "byte_size": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+        "media_type": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"},
+        "original_filename": {"$ref": "#/$defs/NonEmptyString"},
+        "ingested_at": {"$ref": "#/$defs/Timestamp"},
+        "source_declaration": {"$ref": "#/$defs/SemanticDeclaration"},
+        "immutable_source": {"const": true}
+      }
+    },
+    "ImportAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "import_attempt_id",
+        "record_version",
+        "source_artifact_id",
+        "attempt_number",
+        "attempted_at",
+        "attempt_state",
+        "errors"
+      ],
+      "properties": {
+        "entity_type": {"const": "ImportAttempt"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/import-attempt.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "import_attempt_id": {"$ref": "#/$defs/ImportAttemptId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "source_artifact_id": {"$ref": "#/$defs/SourceArtifactId"},
+        "attempt_number": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "attempted_at": {"$ref": "#/$defs/Timestamp"},
+        "attempt_state": {"$ref": "#/$defs/ImportAttemptState"},
+        "errors": {"type": "array", "items": {"$ref": "#/$defs/ContractError"}, "uniqueItems": true}
+      }
+    },
+    "CanonicalAcquisition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "canonical_acquisition_id",
+        "record_version",
+        "created_at",
+        "source_artifact_id",
+        "source_observation_id",
+        "source_observation_sha256",
+        "canonicalizer_version",
+        "mapping_manifest_sha256",
+        "signal_artifact_sha256",
+        "integrity_report_sha256",
+        "canonical_identity_sha256",
+        "acquisition_state",
+        "modality",
+        "channels",
+        "source_mappings",
+        "sample_semantics",
+        "timebase",
+        "synchronization",
+        "calibration",
+        "preprocessing",
+        "missingness_quality",
+        "configuration_resolution",
+        "manifest",
+        "signal_artifact",
+        "integrity_report",
+        "quality_state",
+        "blocking_reasons"
+      ],
+      "properties": {
+        "entity_type": {"const": "CanonicalAcquisition"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/canonical-acquisition.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "canonical_acquisition_id": {"$ref": "#/$defs/CanonicalAcquisitionId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "source_artifact_id": {"$ref": "#/$defs/SourceArtifactId"},
+        "source_observation_id": {"$ref": "#/$defs/SourceObservationId"},
+        "source_observation_sha256": {"$ref": "#/$defs/Sha256"},
+        "canonicalizer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "mapping_manifest_sha256": {"$ref": "#/$defs/Sha256"},
+        "signal_artifact_sha256": {"$ref": "#/$defs/Sha256"},
+        "integrity_report_sha256": {"$ref": "#/$defs/Sha256"},
+        "canonical_identity_sha256": {"$ref": "#/$defs/Sha256"},
+        "acquisition_state": {"$ref": "#/$defs/AcquisitionState"},
+        "modality": {"$ref": "#/$defs/SemanticDeclaration"},
+        "channels": {"type": "array", "items": {"$ref": "#/$defs/CanonicalChannel"}, "uniqueItems": true},
+        "source_mappings": {"type": "array", "items": {"$ref": "#/$defs/CanonicalSourceMapping"}, "uniqueItems": true},
+        "sample_semantics": {"$ref": "#/$defs/SemanticDeclaration"},
+        "timebase": {"$ref": "#/$defs/CanonicalTimebase"},
+        "synchronization": {"$ref": "#/$defs/SemanticDeclaration"},
+        "calibration": {"$ref": "#/$defs/SemanticDeclaration"},
+        "preprocessing": {"$ref": "#/$defs/SemanticDeclaration"},
+        "missingness_quality": {"$ref": "#/$defs/SemanticDeclaration"},
+        "configuration_resolution": {"$ref": "#/$defs/ConfigurationResolutionState"},
+        "manifest": {"$ref": "#/$defs/CanonicalAcquisitionManifest"},
+        "signal_artifact": {"$ref": "#/$defs/CanonicalSignalArtifact"},
+        "integrity_report": {"$ref": "#/$defs/CanonicalIntegrityReport"},
+        "quality_state": {"$ref": "#/$defs/QualityState"},
+        "blocking_reasons": {"type": "array", "items": {"$ref": "#/$defs/ReasonReference"}, "uniqueItems": true}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "modality": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "sample_semantics": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "timebase": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "synchronization": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "calibration": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "preprocessing": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "missingness_quality": {
+                "properties": {
+                  "state": {
+                    "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "channels": {
+                "contains": {
+                  "anyOf": [
+                    {"type": "object", "required": ["physical_quantity"], "properties": {"physical_quantity": {"required": ["state"], "properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]}}}}},
+                    {"type": "object", "required": ["unit"], "properties": {"unit": {"required": ["state"], "properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]}}}}},
+                    {"type": "object", "required": ["axis"], "properties": {"axis": {"required": ["state"], "properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]}}}}},
+                    {"type": "object", "required": ["sign_convention"], "properties": {"sign_convention": {"required": ["state"], "properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]}}}}},
+                    {"type": "object", "required": ["sample_time"], "properties": {"sample_time": {"required": ["state"], "properties": {"state": {"enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "ABSENT"]}}}}}
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"const": "QUALIFIED"}
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "channels": {"minItems": 1},
+              "source_mappings": {"minItems": 1}
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "source_mappings": {
+                "contains": {
+                  "type": "object",
+                  "required": ["mapping_state"],
+                  "properties": {
+                    "mapping_state": {
+                      "enum": ["UNKNOWN", "UNRESOLVED", "UNSUPPORTED", "NOT_APPLICABLE", "ABSENT"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "acquisition_state": {"not": {"const": "QUALIFIED"}},
+              "quality_state": {"not": {"const": "QUALIFIED"}},
+              "blocking_reasons": {"minItems": 1}
+            }
+          }
+        }
+      ]
+    },
+    "AcquisitionConfigurationContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "state", "evidence_references"],
+      "properties": {
+        "contract": {
+          "enum": ["single.total_fz", "dual.independent_fz", "UNKNOWN", "UNSUPPORTED"]
+        },
+        "state": {
+          "enum": ["RESOLVED", "UNKNOWN", "UNSUPPORTED", "CONFLICTING"]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "ChannelCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id",
+        "physical_quantity",
+        "axis",
+        "sign",
+        "plate_identity",
+        "sample_count",
+        "evidence_references"
+      ],
+      "properties": {
+        "channel_id": {"$ref": "#/$defs/ChannelId"},
+        "physical_quantity": {"$ref": "#/$defs/SemanticDeclaration"},
+        "axis": {"$ref": "#/$defs/SemanticDeclaration"},
+        "sign": {"$ref": "#/$defs/SemanticDeclaration"},
+        "plate_identity": {"$ref": "#/$defs/SemanticDeclaration"},
+        "sample_count": {"type": "integer", "minimum": 0},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "SampleRateResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "source", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["RESOLVED", "UNKNOWN", "CONFLICTING"]},
+        "sample_rate_hz": {"type": "number", "exclusiveMinimum": 0},
+        "interval_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "source": {
+          "enum": [
+            "EXPLICIT_SOURCE_DECLARATION",
+            "CANONICAL_TIMEBASE",
+            "EXACT_TIMESTAMP_INTERVAL",
+            "UNKNOWN"
+          ]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "SynchronizationResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {
+          "enum": ["SYNCHRONIZED", "UNSYNCHRONIZED", "UNKNOWN", "CONFLICTING", "NOT_APPLICABLE"]
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "AxisSignResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["RESOLVED", "UNKNOWN", "CONFLICTING"]},
+        "axis": {"$ref": "#/$defs/NonEmptyString"},
+        "sign": {"$ref": "#/$defs/NonEmptyString"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "PreprocessingResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["NONE_DECLARED", "DECLARED", "UNKNOWN", "CONFLICTING"]},
+        "description": {"$ref": "#/$defs/ReasonText"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "CalibrationResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["CONFIRMED", "DECLARED", "UNKNOWN", "CONFLICTING", "NOT_APPLICABLE"]},
+        "description": {"$ref": "#/$defs/ReasonText"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "ZeroingResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["CONFIRMED", "DECLARED", "UNKNOWN", "CONFLICTING", "NOT_APPLICABLE"]},
+        "description": {"$ref": "#/$defs/ReasonText"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "ProtocolEligibilityResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "authority_version", "evidence_references"],
+      "properties": {
+        "state": {"enum": ["ELIGIBLE", "INELIGIBLE", "UNRESOLVED", "NOT_EVALUATED"]},
+        "authority_version": {"$ref": "#/$defs/NonEmptyString"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "ConfigurationFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "evidence_references"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,63}$"},
+        "severity": {"enum": ["INFO", "WARNING", "ERROR"]},
+        "message": {"$ref": "#/$defs/ReasonText"},
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "ConfigurationEvidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_artifact_id",
+        "source_observation_id",
+        "canonical_acquisition_id",
+        "locator",
+        "content_hash"
+      ],
+      "properties": {
+        "source_artifact_id": {"$ref": "#/$defs/SourceArtifactId"},
+        "source_observation_id": {"$ref": "#/$defs/SourceObservationId"},
+        "canonical_acquisition_id": {"$ref": "#/$defs/CanonicalAcquisitionId"},
+        "channel_id": {"$ref": "#/$defs/ChannelId"},
+        "locator": {"$ref": "#/$defs/NonEmptyString"},
+        "content_hash": {"$ref": "#/$defs/Sha256"}
+      }
+    },
+    "AcquisitionConfigurationResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolver_version",
+        "authority_version",
+        "source_artifact_id",
+        "source_observation_id",
+        "canonical_acquisition_id",
+        "canonical_identity_sha256",
+        "configuration_state",
+        "physical_contract",
+        "channel_capabilities",
+        "sample_rate",
+        "synchronization",
+        "axis_sign",
+        "preprocessing",
+        "calibration",
+        "zeroing",
+        "protocol_eligibility",
+        "findings",
+        "evidence_references",
+        "resolution_sha256"
+      ],
+      "properties": {
+        "resolver_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "authority_version": {"$ref": "#/$defs/NonEmptyString"},
+        "source_artifact_id": {"$ref": "#/$defs/SourceArtifactId"},
+        "source_observation_id": {"$ref": "#/$defs/SourceObservationId"},
+        "canonical_acquisition_id": {"$ref": "#/$defs/CanonicalAcquisitionId"},
+        "canonical_identity_sha256": {"$ref": "#/$defs/Sha256"},
+        "evidence_manifest_sha256": {"$ref": "#/$defs/Sha256"},
+        "configuration_state": {"$ref": "#/$defs/ConfigurationState"},
+        "physical_contract": {"$ref": "#/$defs/AcquisitionConfigurationContract"},
+        "channel_capabilities": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ChannelCapability"},
+          "uniqueItems": true
+        },
+        "sample_rate": {"$ref": "#/$defs/SampleRateResolution"},
+        "synchronization": {"$ref": "#/$defs/SynchronizationResolution"},
+        "axis_sign": {"$ref": "#/$defs/AxisSignResolution"},
+        "preprocessing": {"$ref": "#/$defs/PreprocessingResolution"},
+        "calibration": {"$ref": "#/$defs/CalibrationResolution"},
+        "zeroing": {"$ref": "#/$defs/ZeroingResolution"},
+        "protocol_eligibility": {"$ref": "#/$defs/ProtocolEligibilityResolution"},
+        "findings": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationFinding"},
+          "uniqueItems": true
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/ConfigurationEvidenceReference"},
+          "uniqueItems": true
+        },
+        "resolution_sha256": {"$ref": "#/$defs/Sha256"}
+      }
+    },
+    "ConfigurationContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "configuration_contract_id",
+        "record_version",
+        "created_at",
+        "canonical_acquisition_id",
+        "configuration_state",
+        "configuration_name",
+        "qualification_evidence_references",
+        "reason_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "ConfigurationContract"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/configuration-contract.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "configuration_contract_id": {"$ref": "#/$defs/ConfigurationContractId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "canonical_acquisition_id": {"$ref": "#/$defs/CanonicalAcquisitionId"},
+        "configuration_state": {"$ref": "#/$defs/ConfigurationState"},
+        "configuration_name": {"$ref": "#/$defs/SemanticDeclaration"},
+        "qualification_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true},
+        "reason_references": {"type": "array", "items": {"$ref": "#/$defs/ReasonReference"}, "uniqueItems": true},
+        "resolution": {"$ref": "#/$defs/AcquisitionConfigurationResolution"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "configuration_state": {"const": "RESOLVED_QUALIFIED"}
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "configuration_name": {
+                "properties": {"state": {"const": "KNOWN"}}
+              },
+              "qualification_evidence_references": {"minItems": 1}
+            }
+          }
+        }
+      ]
+    },
+    "ProtocolContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "protocol_contract_id",
+        "record_version",
+        "created_at",
+        "protocol_key",
+        "protocol_version",
+        "protocol_state",
+        "bilateral",
+        "unloaded",
+        "hands_on_hips",
+        "countermovement_jump",
+        "eligibility_evidence_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "ProtocolContract"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/protocol-contract.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "protocol_contract_id": {"$ref": "#/$defs/ProtocolContractId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "protocol_key": {"const": "bilateral-unloaded-hands-on-hips-countermovement-jump"},
+        "protocol_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "protocol_state": {"$ref": "#/$defs/ProtocolState"},
+        "bilateral": {"$ref": "#/$defs/ConditionObservation"},
+        "unloaded": {"$ref": "#/$defs/ConditionObservation"},
+        "hands_on_hips": {"$ref": "#/$defs/ConditionObservation"},
+        "countermovement_jump": {"$ref": "#/$defs/ConditionObservation"},
+        "eligibility_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "protocol_state": {"const": "ELIGIBLE"}
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "eligibility_evidence_references": {"minItems": 1}
+            }
+          }
+        }
+      ]
+    },
+    "Trial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "trial_id",
+        "record_version",
+        "created_at",
+        "trial_state",
+        "canonical_acquisition_id",
+        "protocol_contract_id",
+        "quality_state",
+        "original_outcome",
+        "event_evidence_references",
+        "eligibility_evidence_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "Trial"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/trial.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "trial_id": {"$ref": "#/$defs/TrialId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "trial_state": {"$ref": "#/$defs/TrialState"},
+        "canonical_acquisition_id": {"$ref": "#/$defs/CanonicalAcquisitionId"},
+        "protocol_contract_id": {"$ref": "#/$defs/ProtocolContractId"},
+        "session_id": {"$ref": "#/$defs/SessionId"},
+        "quality_state": {"$ref": "#/$defs/QualityState"},
+        "original_outcome": {"$ref": "#/$defs/TrialOutcome"},
+        "practitioner_override": {"$ref": "#/$defs/PractitionerOverride"},
+        "event_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true},
+        "eligibility_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "Session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "session_id",
+        "record_version",
+        "created_at",
+        "session_state",
+        "contributing_trial_ids",
+        "machine_proposed_disposition",
+        "review_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "Session"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/session.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "session_id": {"$ref": "#/$defs/SessionId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "session_state": {"$ref": "#/$defs/SessionState"},
+        "contributing_trial_ids": {"type": "array", "items": {"$ref": "#/$defs/TrialId"}, "minItems": 1, "uniqueItems": true},
+        "machine_proposed_disposition": {"$ref": "#/$defs/Disposition"},
+        "human_final_disposition": {"$ref": "#/$defs/PractitionerDisposition"},
+        "review_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "MetricObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "metric_observation_id",
+        "record_version",
+        "created_at",
+        "metric_definition",
+        "value",
+        "processor",
+        "contributing_trial_ids",
+        "observation_state",
+        "eligibility_state",
+        "evidence_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "MetricObservation"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/metric-observation.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "metric_observation_id": {"$ref": "#/$defs/MetricObservationId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "metric_definition": {"$ref": "#/$defs/MetricDefinition"},
+        "value": {"$ref": "#/$defs/NumericValue"},
+        "processor": {"$ref": "#/$defs/ProcessorReference"},
+        "contributing_trial_ids": {"type": "array", "items": {"$ref": "#/$defs/TrialId"}, "minItems": 1, "uniqueItems": true},
+        "contributing_session_id": {"$ref": "#/$defs/SessionId"},
+        "observation_state": {"$ref": "#/$defs/ObservationState"},
+        "eligibility_state": {"$ref": "#/$defs/QualityState"},
+        "evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      }
+    },
+    "ReferenceEpoch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "reference_epoch_id",
+        "record_version",
+        "created_at",
+        "reference_policy_id",
+        "reference_policy_version",
+        "membership",
+        "maturity_state",
+        "approval_state",
+        "membership_evidence_references"
+      ],
+      "properties": {
+        "entity_type": {"const": "ReferenceEpoch"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/reference-epoch.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "reference_epoch_id": {"$ref": "#/$defs/ReferenceEpochId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "reference_policy_id": {"type": "string", "pattern": "^policy_[a-z0-9][a-z0-9_-]{0,127}$"},
+        "reference_policy_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "membership": {"$ref": "#/$defs/Membership"},
+        "maturity_state": {"$ref": "#/$defs/EpochMaturityState"},
+        "approval_state": {"$ref": "#/$defs/EpochApprovalState"},
+        "membership_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true},
+        "approval_decision_id": {"$ref": "#/$defs/PractitionerDecisionId"},
+        "approval_evidence_references": {"type": "array", "items": {"$ref": "#/$defs/EvidenceReference"}, "uniqueItems": true}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "approval_state": {"const": "APPROVED"}
+            }
+          },
+          "then": {
+            "type": "object",
+            "required": ["approval_decision_id", "approval_evidence_references"],
+            "properties": {
+              "approval_evidence_references": {"minItems": 1}
+            }
+          }
+        }
+      ]
+    },
+    "InferenceResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "inference_result_id",
+        "record_version",
+        "created_at",
+        "metric_observation_id",
+        "reference_epoch_id",
+        "inference_state",
+        "measurement_estimate",
+        "uncertainty",
+        "directional_probability",
+        "practical_threshold_interpretation",
+        "diagnostics",
+        "eligibility_state",
+        "limitations"
+      ],
+      "properties": {
+        "entity_type": {"const": "InferenceResult"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/inference-result.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "inference_result_id": {"$ref": "#/$defs/InferenceResultId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "metric_observation_id": {"$ref": "#/$defs/MetricObservationId"},
+        "reference_epoch_id": {"$ref": "#/$defs/ReferenceEpochId"},
+        "inference_state": {"$ref": "#/$defs/InferenceState"},
+        "measurement_estimate": {"$ref": "#/$defs/NumericValue"},
+        "uncertainty": {"$ref": "#/$defs/Uncertainty"},
+        "directional_probability": {"$ref": "#/$defs/DirectionalProbability"},
+        "practical_threshold_interpretation": {"$ref": "#/$defs/PracticalThresholdInterpretation"},
+        "diagnostics": {"type": "array", "items": {"$ref": "#/$defs/Diagnostic"}, "uniqueItems": true},
+        "eligibility_state": {"$ref": "#/$defs/QualityState"},
+        "limitations": {"type": "array", "items": {"$ref": "#/$defs/Limitation"}, "uniqueItems": true}
+      }
+    },
+    "EvidenceManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "evidence_manifest_id",
+        "record_version",
+        "created_at",
+        "manifest_version",
+        "manifest_state",
+        "source_artifact_ids",
+        "configuration_contract_ids",
+        "protocol_contract_ids",
+        "processors",
+        "metric_observation_ids",
+        "session_ids",
+        "reference_epoch_ids",
+        "inference_result_ids",
+        "practitioner_decision_ids",
+        "integrity",
+        "component_version"
+      ],
+      "properties": {
+        "entity_type": {"const": "EvidenceManifest"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/evidence-manifest.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "evidence_manifest_id": {"$ref": "#/$defs/EvidenceManifestId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "manifest_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "manifest_state": {"$ref": "#/$defs/ManifestState"},
+        "source_artifact_ids": {"type": "array", "items": {"$ref": "#/$defs/SourceArtifactId"}, "uniqueItems": true},
+        "configuration_contract_ids": {"type": "array", "items": {"$ref": "#/$defs/ConfigurationContractId"}, "uniqueItems": true},
+        "protocol_contract_ids": {"type": "array", "items": {"$ref": "#/$defs/ProtocolContractId"}, "uniqueItems": true},
+        "processors": {"type": "array", "items": {"$ref": "#/$defs/ProcessorReference"}, "uniqueItems": true},
+        "metric_observation_ids": {"type": "array", "items": {"$ref": "#/$defs/MetricObservationId"}, "uniqueItems": true},
+        "session_ids": {"type": "array", "items": {"$ref": "#/$defs/SessionId"}, "uniqueItems": true},
+        "reference_epoch_ids": {"type": "array", "items": {"$ref": "#/$defs/ReferenceEpochId"}, "uniqueItems": true},
+        "inference_result_ids": {"type": "array", "items": {"$ref": "#/$defs/InferenceResultId"}, "uniqueItems": true},
+        "practitioner_decision_ids": {"type": "array", "items": {"$ref": "#/$defs/PractitionerDecisionId"}, "uniqueItems": true},
+        "integrity": {"$ref": "#/$defs/Integrity"},
+        "component_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {"manifest_state": {"const": "INTEGRITY_VERIFIED"}}
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "integrity": {
+                "properties": {"integrity_state": {"const": "VERIFIED"}}
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "integrity": {
+                "properties": {"integrity_state": {"const": "VERIFIED"}}
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {"manifest_state": {"const": "INTEGRITY_VERIFIED"}}
+          }
+        }
+      ]
+    },
+    "PractitionerDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "practitioner_decision_id",
+        "record_version",
+        "created_at",
+        "decision_state",
+        "authority_type",
+        "actor",
+        "decided_at",
+        "decision",
+        "rationale",
+        "target",
+        "evidence_manifest_ids"
+      ],
+      "properties": {
+        "entity_type": {"const": "PractitionerDecision"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/practitioner-decision.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "practitioner_decision_id": {"$ref": "#/$defs/PractitionerDecisionId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "decision_state": {"$ref": "#/$defs/DecisionState"},
+        "authority_type": {"const": "HUMAN_PRACTITIONER"},
+        "actor": {"$ref": "#/$defs/PractitionerActor"},
+        "decided_at": {"$ref": "#/$defs/Timestamp"},
+        "decision": {"$ref": "#/$defs/DecisionValue"},
+        "rationale": {"$ref": "#/$defs/ReasonText"},
+        "target": {"$ref": "#/$defs/ObjectReference"},
+        "evidence_manifest_ids": {"type": "array", "items": {"$ref": "#/$defs/EvidenceManifestId"}, "minItems": 1, "uniqueItems": true},
+        "machine_recommendation": {"$ref": "#/$defs/MachineRecommendation"}
+      }
+    },
+    "AgentContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "agent_context_id",
+        "record_version",
+        "created_at",
+        "context_state",
+        "scope",
+        "screen_object_context",
+        "selected_evidence_manifest_ids",
+        "unresolved_warnings"
+      ],
+      "properties": {
+        "entity_type": {"const": "AgentContext"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/agent-context.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "agent_context_id": {"$ref": "#/$defs/AgentContextId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "context_state": {"$ref": "#/$defs/ContextState"},
+        "scope": {"$ref": "#/$defs/ContextScope"},
+        "screen_object_context": {"$ref": "#/$defs/ScopeSlot"},
+        "selected_evidence_manifest_ids": {"type": "array", "items": {"$ref": "#/$defs/EvidenceManifestId"}, "uniqueItems": true},
+        "unresolved_warnings": {"type": "array", "items": {"$ref": "#/$defs/ReasonText"}, "uniqueItems": true}
+      }
+    },
+    "Command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "command_id",
+        "record_version",
+        "command_type",
+        "idempotency_key",
+        "semantic_input_digest",
+        "submitted_at",
+        "request_payload",
+        "requested_operation",
+        "authority_context_reference",
+        "correlation_metadata"
+      ],
+      "properties": {
+        "entity_type": {"const": "Command"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/command.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "command_id": {"$ref": "#/$defs/CommandId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "command_type": {"$ref": "#/$defs/CommandType"},
+        "idempotency_key": {"$ref": "#/$defs/IdempotencyKey"},
+        "semantic_input_digest": {"$ref": "#/$defs/Sha256"},
+        "submitted_at": {"$ref": "#/$defs/Timestamp"},
+        "request_payload": {"$ref": "#/$defs/CommandPayload"},
+        "requested_operation": {"$ref": "#/$defs/RequestedOperation"},
+        "request_reference": {"$ref": "#/$defs/ObjectReference"},
+        "authority_context_reference": {"$ref": "#/$defs/ObjectReference"},
+        "correlation_metadata": {"$ref": "#/$defs/CorrelationMetadata"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {"command_type": {"const": "FIXTURE_EXECUTION"}}
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "request_payload": {
+                "required": ["fixture_scenario"]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "job_id",
+        "record_version",
+        "command_id",
+        "created_at",
+        "queued_at",
+        "updated_at",
+        "state",
+        "retry_policy",
+        "current_attempt_number",
+        "reconciliation_state"
+      ],
+      "properties": {
+        "entity_type": {"const": "Job"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/job.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "job_id": {"$ref": "#/$defs/JobId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "command_id": {"$ref": "#/$defs/CommandId"},
+        "created_at": {"$ref": "#/$defs/Timestamp"},
+        "queued_at": {"$ref": "#/$defs/Timestamp"},
+        "started_at": {"$ref": "#/$defs/Timestamp"},
+        "updated_at": {"$ref": "#/$defs/Timestamp"},
+        "finished_at": {"$ref": "#/$defs/Timestamp"},
+        "state": {"$ref": "#/$defs/JobState"},
+        "retry_policy": {"$ref": "#/$defs/RetryPolicy"},
+        "current_attempt_number": {"type": "integer", "minimum": 0, "maximum": 100},
+        "next_eligible_attempt_at": {"$ref": "#/$defs/Timestamp"},
+        "last_attempt_id": {"$ref": "#/$defs/JobAttemptId"},
+        "cancellation": {"$ref": "#/$defs/JobCancellation"},
+        "reconciliation_state": {"$ref": "#/$defs/ReconciliationState"},
+        "result": {"$ref": "#/$defs/JobResult"},
+        "error": {"$ref": "#/$defs/ExecutionError"}
+      },
+      "allOf": [
+        {
+          "if": {"type": "object", "properties": {"state": {"const": "SUCCEEDED"}}},
+          "then": {"type": "object", "required": ["finished_at", "result"]}
+        },
+        {
+          "if": {"type": "object", "properties": {"state": {"const": "FAILED"}}},
+          "then": {"type": "object", "required": ["finished_at", "error"]}
+        },
+        {
+          "if": {"type": "object", "properties": {"state": {"const": "CANCELED"}}},
+          "then": {"type": "object", "required": ["finished_at", "cancellation"]}
+        },
+        {
+          "if": {"type": "object", "properties": {"state": {"const": "UNKNOWN_OUTCOME"}}},
+          "then": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {"reconciliation_state": {"const": "RECONCILIATION_REQUIRED"}}
+          }
+        }
+      ]
+    },
+    "JobAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "job_attempt_id",
+        "record_version",
+        "job_id",
+        "attempt_number",
+        "worker_identity",
+        "worker_type",
+        "claimed_at",
+        "outcome",
+        "retry_decision"
+      ],
+      "properties": {
+        "entity_type": {"const": "JobAttempt"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/job-attempt.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "job_attempt_id": {"$ref": "#/$defs/JobAttemptId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "job_id": {"$ref": "#/$defs/JobId"},
+        "attempt_number": {"type": "integer", "minimum": 1, "maximum": 100},
+        "worker_identity": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,127}$"},
+        "worker_type": {"$ref": "#/$defs/WorkerType"},
+        "claimed_at": {"$ref": "#/$defs/Timestamp"},
+        "started_at": {"$ref": "#/$defs/Timestamp"},
+        "ended_at": {"$ref": "#/$defs/Timestamp"},
+        "lease_expires_at": {"$ref": "#/$defs/Timestamp"},
+        "outcome": {"$ref": "#/$defs/JobAttemptOutcome"},
+        "failure_category": {"$ref": "#/$defs/FailureCategory"},
+        "retry_decision": {"$ref": "#/$defs/RetryDecision"},
+        "cancellation_acknowledged_at": {"$ref": "#/$defs/Timestamp"},
+        "result": {"$ref": "#/$defs/JobResult"},
+        "error": {"$ref": "#/$defs/ExecutionError"}
+      },
+      "allOf": [
+        {
+          "if": {"type": "object", "properties": {"outcome": {"const": "STARTED"}}},
+          "then": {"type": "object", "not": {"required": ["ended_at"]}}
+        },
+        {
+          "if": {"type": "object", "properties": {"outcome": {"const": "SUCCEEDED"}}},
+          "then": {"type": "object", "required": ["ended_at", "result"]}
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {"outcome": {"enum": ["FAILED_RETRYABLE", "FAILED_NON_RETRYABLE", "UNKNOWN_OUTCOME"]}}
+          },
+          "then": {"type": "object", "required": ["ended_at", "failure_category", "error"]}
+        },
+        {
+          "if": {"type": "object", "properties": {"outcome": {"const": "CANCELED"}}},
+          "then": {"type": "object", "required": ["ended_at", "cancellation_acknowledged_at"]}
+        }
+      ]
+    },
+    "ProgressEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "progress_event_id",
+        "record_version",
+        "job_id",
+        "sequence",
+        "occurred_at",
+        "phase",
+        "message_code"
+      ],
+      "properties": {
+        "entity_type": {"const": "ProgressEvent"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/progress-event.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "progress_event_id": {"$ref": "#/$defs/ProgressEventId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "job_id": {"$ref": "#/$defs/JobId"},
+        "job_attempt_id": {"$ref": "#/$defs/JobAttemptId"},
+        "sequence": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "occurred_at": {"$ref": "#/$defs/Timestamp"},
+        "phase": {"$ref": "#/$defs/ProgressPhase"},
+        "message_code": {"$ref": "#/$defs/ProgressCode"},
+        "progress_value": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "AuditEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "schema_id",
+        "schema_version",
+        "audit_event_id",
+        "record_version",
+        "occurred_at",
+        "actor",
+        "audit_action",
+        "object",
+        "authority_type",
+        "reason",
+        "immutable_history"
+      ],
+      "properties": {
+        "entity_type": {"const": "AuditEvent"},
+        "schema_id": {"const": "https://schemas.sportsagentslab.local/mef/1.0.0/audit-event.schema.json"},
+        "schema_version": {"$ref": "#/$defs/SchemaVersion"},
+        "audit_event_id": {"$ref": "#/$defs/AuditEventId"},
+        "record_version": {"type": "integer", "minimum": 1, "maximum": 9007199254740991},
+        "occurred_at": {"$ref": "#/$defs/Timestamp"},
+        "actor": {"$ref": "#/$defs/Actor"},
+        "audit_action": {"$ref": "#/$defs/AuditAction"},
+        "object": {"$ref": "#/$defs/ObjectReference"},
+        "authority_type": {
+          "type": "string",
+          "enum": [
+            "SYSTEM",
+            "MACHINE",
+            "HUMAN_PRACTITIONER",
+            "AGENT_DRAFT"
+          ]
+        },
+        "reason": {"$ref": "#/$defs/ReasonText"},
+        "prior_reference": {"$ref": "#/$defs/ObjectReference"},
+        "new_reference": {"$ref": "#/$defs/ObjectReference"},
+        "immutable_history": {"const": true}
+      }
+    },
+    "EntityRecord": {
+      "oneOf": [
+        {"$ref": "#/$defs/SourceArtifact"},
+        {"$ref": "#/$defs/ImportAttempt"},
+        {"$ref": "#/$defs/CanonicalAcquisition"},
+        {"$ref": "#/$defs/ConfigurationContract"},
+        {"$ref": "#/$defs/ProtocolContract"},
+        {"$ref": "#/$defs/Trial"},
+        {"$ref": "#/$defs/Session"},
+        {"$ref": "#/$defs/MetricObservation"},
+        {"$ref": "#/$defs/ReferenceEpoch"},
+        {"$ref": "#/$defs/InferenceResult"},
+        {"$ref": "#/$defs/EvidenceManifest"},
+        {"$ref": "#/$defs/PractitionerDecision"},
+        {"$ref": "#/$defs/AgentContext"},
+        {"$ref": "#/$defs/AuditEvent"},
+        {"$ref": "#/$defs/Command"},
+        {"$ref": "#/$defs/Job"},
+        {"$ref": "#/$defs/JobAttempt"},
+        {"$ref": "#/$defs/ProgressEvent"}
+      ]
+    }
+  }
+}

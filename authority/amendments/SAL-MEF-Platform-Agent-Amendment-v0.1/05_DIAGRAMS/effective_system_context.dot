@@ -1,0 +1,27 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", labelloc=t, label="MEF Effective System Context — Platform + Agent Amendment v0.1", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  edge [fontname="Arial"];
+  practitioner [label="Qualified Practitioner\nDesktop Browser"];
+  web [label="MEF Practitioner Web\nNext.js / React\nVercel"];
+  eve [label="MEF Agent\nEve runtime\nframework-neutral adapter"];
+  opencode [label="OpenCode Go\nPrimary model access"];
+  api [label="Typed Control/Application Boundary\nOpenAPI + generated contracts"];
+  jobs [label="ML-97 Command / Job System\nIdempotency • retry • cancel • progress"];
+  db [label="PostgreSQL\nHosted candidate: Neon"];
+  blob [label="ImmutableArtifactStore\nVercel Blob primary adapter\nS3 portable adapter"];
+  science [label="Python Scientific Kernel\nIndependent governed compute"];
+  evidence [label="Evidence + Practitioner Authority\nProvenance • audit • decisions"];
+  practitioner -> web;
+  web -> api;
+  web -> eve [label="persistent session"];
+  eve -> opencode [label="model calls"];
+  eve -> api [label="typed governed tools"];
+  api -> jobs;
+  jobs -> db;
+  jobs -> blob;
+  jobs -> science;
+  api -> evidence;
+  science -> evidence [label="typed outputs"];
+  evidence -> web [label="verified evidence"];
+}

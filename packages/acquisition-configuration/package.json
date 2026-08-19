@@ -1,0 +1,14 @@
+{
+  "name": "@mef/acquisition-configuration",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@mef/generated-ts": "workspace:*",
+    "@mef/ingestion-adk": "workspace:*"
+  },
+  "scripts": {
+    "test": "node --experimental-loader ../operational-state/test/ts-loader.mjs --test test/resolver.test.ts"
+  },
+  "mefSmokePaths": ["src/index.ts"]
+}

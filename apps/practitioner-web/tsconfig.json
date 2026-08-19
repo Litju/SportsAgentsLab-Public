@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "incremental": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "es2022"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "plugins": [{ "name": "next" }],
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@mef/agent-boundary": ["../../packages/agent-boundary/src/index.ts"],
+      "@mef/acquisition-configuration": ["../../packages/acquisition-configuration/src/index.ts"],
+      "@mef/canonical-acquisition": ["../../packages/canonical-acquisition/src/index.ts"],
+      "@mef/control-api": ["../../apps/control-api/src/index.ts"],
+      "@mef/contracts": ["../../packages/contracts/src/index.ts"],
+      "@mef/generated-ts": ["../../packages/generated-ts/src/index.ts"],
+      "@mef/ingestion-adk": ["../../packages/ingestion-adk/src/index.ts"],
+      "@mef/operational-state": ["../../packages/operational-state/src/index.ts"],
+      "@mef/scientific-boundary": ["../../packages/scientific-boundary/src/index.ts"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

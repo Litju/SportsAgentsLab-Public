@@ -1,0 +1,29 @@
+# ML-96/ML-97 operational-state boundary
+
+ML-96 preserves original bytes before any parsing or normalization. The SHA-256 digest of those bytes is the immutable content identity and determines the Vercel Private Blob pathname `originals/sha256/<sha256>`. The generated ML-95 `SourceArtifactId` remains a domain identifier supplied by the caller; it is not redefined as a hash. Neon PostgreSQL keeps immutable source-artifact registrations by their canonical source ID; multiple source records may safely reference the same content-addressed object while each distinct `ImportAttempt` remains durable.
+
+Neon PostgreSQL and Vercel Private Blob do not share an ACID transaction. The registration boundary is therefore:
+
+1. Clone the input bytes and compute SHA-256.
+2. Validate all ML-95 records, provenance references, and explicit retention input.
+3. Ensure the immutable object exists with a race-safe conditional create and byte-level verification.
+4. In one PostgreSQL transaction, register the source artifact, import attempt, audit events, provenance references, and retention hook.
+5. Commit; audit replay uses the database identity sequence, not timestamp uniqueness.
+
+If object persistence fails, no database registration is accepted. If database work fails after object persistence, the object is retained and the bounded reconciliation hint identifies its hash and key; compensation never deletes an immutable original. A lost COMMIT acknowledgement is reported as `UNKNOWN`, because the database may already have committed. The caller must reconcile by the stable domain identifiers and content hash before retrying.
+
+The artifact API has no delete, overwrite, or arbitrary-key operation. Source-artifact, import-attempt, audit, provenance, and migration-history rows are append-only at the normal database surface. Vercel Private Blob writes use private access, content-addressed paths, conditional creation, and byte/media-type verification before accepting or reusing an object. Retention exposes status, policy reference, hold state, assessment revision, and reconciliation hooks only. Retention updates use an optimistic revision check; unresolved or contradictory states fail closed. Retention updates do not synthesize audit events because the ML-95 retention hook has no actor/reason fields; a caller that changes policy state must append its own canonical AuditEvent in the surrounding workflow.
+
+Founder decision: `ImportAttempt` is an immutable historical/domain record identifying one distinct logical import attempt associated with a `SourceArtifact`. The canonical ML-95 enum is exactly `RECEIVED`, `VALIDATING`, `ACCEPTED`, `REJECTED`, `UNSUPPORTED`, and `FAILED`. Under this decision, those values are immutable admission/outcome classifications: `RECEIVED` records that the attempt was received, `VALIDATING` records that domain validation was the applicable admission classification, `ACCEPTED` records admission acceptance, `REJECTED` records rejection, `UNSUPPORTED` records unsupported input, and `FAILED` records an immutable attempt outcome. None is a queued, running, progress, retry, cancellation, recovery, or mutable job-execution state. In particular, `RECEIVED` and `VALIDATING` are historical classifications, not worker lifecycle transitions, and `FAILED` is not a Job failure/recovery state.
+
+The append-only PostgreSQL rule for ImportAttempt is therefore intentional and contract-aligned. ML-96 exposes no update or transition API for ImportAttempt identity/history. The downstream ML-97 Job model owns queued, running, progress, retries, cancellation, failure, completion, and recovery behavior. ML-97 persists that mutable lifecycle in the same operational substrate through its separate job-execution boundary; it never changes ImportAttempt semantics.
+
+Founder placement decision for ML-97 B00: `packages/operational-state` is the accepted owner of the job-execution implementation. Its public execution interfaces remain framework-neutral; `apps/control-api` consumes only public exports; scientific kernel, UI, authentication, B01, inference, and agent-runtime behavior remain outside this boundary.
+
+ML-97 does not claim distributed exactly-once execution. Its qualified guarantee is at most one active claim per JobAttempt, an idempotent logical Command identity, durable append-oriented attempt history, and explicit safe reconciliation for unknown outcomes. A worker lease expiry or lost acknowledgement therefore cannot by itself authorize a duplicate authoritative operation; retry requires a proven safe idempotency or reconciliation path.
+
+Provenance references use the canonical ML-95 entity/identifier union. Migration `001` materializes and existence-checks the ML-96 operational entities (`SourceArtifact`, `ImportAttempt`, and `AuditEvent`). Migration `002_job_execution` declares the ML-97 execution entities (`Command`, `Job`, `JobAttempt`, and `ProgressEvent`) and extends the same reference checks.
+
+Migration files are ordered and SHA-256 checked. The production path loads the source-controlled manifest, requires a complete plan beginning at migration `001`, and checks all applied checksums before executing pending SQL under a PostgreSQL transaction advisory lock. Applied history is append-only and protected by an always-enabled database trigger. Runtime database credentials must use a dedicated least-privilege role; migration ownership is an administrative boundary, not a practitioner-facing API. Applied checksums and unexpected applied versions are rejected as drift.
+
+Active storage authority is `VERCEL_PRIVATE_BLOB`; `S3_RUNTIME_DEPENDENCY=NONE`, `S3_REQUIRED_CI_CHECKS=0`, and `S3_REQUIRED_ENV_VARS=0`. The Vercel Blob adapter is qualified by deterministic private, content-addressed, immutable, byte-preserving tests. Docker and WSL are not required by ML-96.

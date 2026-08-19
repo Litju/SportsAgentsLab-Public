@@ -1,0 +1,31 @@
+{
+  "name": "@mef/root",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": "24.14.0",
+    "pnpm": "9.15.4"
+  },
+  "scripts": {
+    "generate": "python scripts/generate_models.py",
+    "generate:check": "python scripts/generate_models.py --check && python scripts/generate_cmj_contract.py --check",
+    "python:validate": "python scripts/python_validation.py",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:architecture": "python scripts/check_architecture.py",
+    "test:contracts": "python scripts/test_contracts.py",
+    "test:compatibility": "python scripts/test_compatibility.py",
+    "test:typescript": "node scripts/test_typescript.mjs",
+    "test:smoke": "python scripts/smoke_tests.py",
+    "test:packages": "pnpm --filter \"@mef/*\" run test",
+    "test:security": "node scripts/run_security_tests.mjs",
+    "test:secrets": "python scripts/secret_scan.py",
+    "test:vulnerabilities": "node scripts/dependency_scan.mjs",
+    "sbom": "python scripts/generate_sbom.py",
+    "ci:validate": "node scripts/ci_validate.mjs",
+    "validate": "pnpm run generate:check && pnpm run typecheck && pnpm run test:architecture && pnpm run test:contracts && pnpm run test:compatibility && pnpm run test:typescript && pnpm run test:smoke && pnpm run test:packages"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

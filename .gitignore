@@ -1,0 +1,51 @@
+﻿# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.*
+!.env.example
+artifacts/ci/
+
+# Engineering QA output
+.sal-qa/
+
+# JavaScript dependencies and build output
+node_modules/
+.vercel/
+dist/
+coverage/
+pnpm-debug.log*
+.next/
+.eve/
+.output/
+*.tsbuildinfo
+
+# Python environments, caches, and build output
+.venv/
+.venv-ml100/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Local generated evidence and replay output
+evidence-output/
+.playwright-cli/
+
+# Local credentials and key material
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+secrets/
+.vercel

@@ -1,0 +1,20 @@
+{
+  "id": "mef-ui-stack-v1-cycle-2-hosted-final",
+  "cycle": "CYCLE_2",
+  "surface": "Authenticated hosted Preview acceptance",
+  "problem": "The final hosted candidate required truthful runtime/authentication evidence without weakening the local accessibility, responsive, scientific-boundary or protected-contract gates.",
+  "proposal": "Promote the qualified local composition candidate with authenticated hosted bootstrap/API evidence and a documented browser-relay limitation where direct Vercel SSO is unavailable.",
+  "rollback": "Revert the UI-stack candidate and evidence commits; no authority or scientific processor change is required to roll back.",
+  "evidence": {
+    "routes": 38,
+    "critical_states": 14,
+    "axe_serious_or_critical": 0,
+    "responsive_overflow": false,
+    "bundle_heavy_surfaces_lazy": true,
+    "local_api_degraded_honestly": true,
+    "hosted_preview_ready": true,
+    "hosted_bootstrap_status": 200,
+    "hosted_browser_route_rendered": true,
+    "hosted_upload_interaction": "relay_hydration_limitation_documented"
+  }
+}

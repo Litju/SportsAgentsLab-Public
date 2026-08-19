@@ -1,0 +1,87 @@
+lock_id: MEF-BLOCK-DEPENDENCY-LOCK
+version: 1.2.0
+status: NORMATIVE
+acceptance: FOUNDER_APPROVED
+supersedes: authority/MEF_BLOCK_DEPENDENCY_LOCK_B01.yaml
+current_block: B01
+current_issue: ML-103
+milestone: B01_NATIVE_FORCE_PLATE_INGESTION_AND_CONFIGURATION
+topology_gate: ML-94
+topology_decision_in_this_lock: FORBIDDEN
+roadmap_order: [B00, B01, B02, B03, B04, B05, B06, B07, B08, B09]
+ml102_status: ACCEPTED
+ml102_implementation_allowed: false
+current_gate: ML-103
+ml103_status: AUTHORIZED
+ml103_implementation_allowed: true
+real_vendor_adapter_implementation_allowed: false
+ml103_scope: INGESTION_ADK_V0_1_PLUS_SYNTHETIC_REFERENCE_CONFORMANCE
+real_vendor_support_requires_source_evidence: true
+ml104_status: DEPENDENCY_BLOCKED
+ml105_status: DEPENDENCY_BLOCKED
+ml106_status: DEPENDENCY_BLOCKED
+ml107_status: DEPENDENCY_BLOCKED
+ml108_status: DEPENDENCY_BLOCKED
+blocks:
+  - id: B00
+    name: Program Authority & Engineering Foundation
+    dependencies: []
+    status: CLOSED
+    implementation_allowed: false
+  - id: B01
+    name: Native Force-Plate Ingestion & Configuration
+    dependencies: [B00]
+    status: ACTIVE
+    implementation_allowed: true
+    authorized_issue: ML-103
+  - id: B02
+    name: Deterministic CMJ Processor & Trial QA
+    dependencies: [B01]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B03
+    name: Session Adjudication
+    dependencies: [B02]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B04
+    name: Athlete History & Reference Management
+    dependencies: [B03]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B05
+    name: Overview Dashboard & Metric Explorer
+    dependencies: [B04]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B06
+    name: Measurement Uncertainty & Meaningful Change
+    dependencies: [B05]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B07
+    name: Evidence Authority & Reporting
+    dependencies: [B06]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B08
+    name: Durable MEF Agent Runtime & Memory
+    dependencies: [B07]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B09
+    name: Qualification Factory, Hardening & Pilot Readiness
+    dependencies: [B08]
+    status: DEFERRED
+    implementation_allowed: false
+gates:
+  - B00 is closed by the accepted B00 foundation commit.
+  - ML-102 is accepted and remains historical; it is no longer the implementation gate.
+  - ML-103 is the only authorized implementation gate under active B01.
+  - Real vendor adapter implementation remains forbidden without reliable source evidence.
+  - ML-104 through ML-108 remain dependency-blocked.
+  - B02 and all later blocks remain deferred and implementation_allowed=false.
+  - B01 does not authorize canonical acquisition, event detection, scientific metrics, trial qualification, inference, readiness, fatigue, or injury-risk claims.
+  - The active infrastructure authority remains ACTIVE_DATABASE=NEON_POSTGRESQL, ACTIVE_ARTIFACT_STORAGE=VERCEL_PRIVATE_BLOB, S3_RUNTIME_DEPENDENCY=NONE.
+  - The engineering control plane remains development infrastructure and is not a product block.
+

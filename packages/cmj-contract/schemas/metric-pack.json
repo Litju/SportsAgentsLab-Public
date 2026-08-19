@@ -1,0 +1,220 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "metric_pack": {
+    "metric_pack_id": "CMJ_VERTICAL_CORE",
+    "metric_pack_version": "1.0.0",
+    "status": "CLOSED",
+    "primary_metric_count": 1,
+    "metrics": [
+      {
+        "metric_id": "jump_height_impulse_momentum_m",
+        "name": "Impulse-momentum jump height",
+        "classification": "PRIMARY",
+        "definition": "Ballistic center-of-mass rise from takeoff velocity to apex; pre-takeoff displacement is not included.",
+        "formula_source": "h = v_takeoff^2 / (2*g), with v_takeoff obtained by integrating net force from movement onset to takeoff.",
+        "unit": "m",
+        "dependencies": [
+          "body_mass_kg",
+          "gravity_m_per_s2",
+          "net_impulse_onset_to_takeoff_Ns",
+          "takeoff_velocity_m_per_s"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Available when all listed dependencies are finite and the onset-to-takeoff integration preconditions pass; landing is required for a fully included trial but is not a mathematical dependency of this metric.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m",
+        "decision_class": "LITERATURE_SUPPORTED_METHOD"
+      },
+      {
+        "metric_id": "takeoff_velocity_m_per_s",
+        "name": "Takeoff velocity",
+        "classification": "DESCRIPTIVE",
+        "definition": "Vertical center-of-mass velocity at the takeoff event from net-force integration.",
+        "formula_source": "v_takeoff = integral(a dt) from movement onset to takeoff = net_impulse / body_mass.",
+        "unit": "m/s",
+        "dependencies": [
+          "body_mass_kg",
+          "net_force_N",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite onset-to-takeoff acceleration integration.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m/s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "net_impulse_onset_to_takeoff_Ns",
+        "name": "Net impulse, onset to takeoff",
+        "classification": "DESCRIPTIVE",
+        "definition": "Integrated net vertical force over the operational propulsion interval from movement onset to takeoff.",
+        "formula_source": "sum of trapezoidal net-force intervals",
+        "unit": "N*s",
+        "dependencies": [
+          "net_force_N",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite net-force integration over a nonempty ordered interval.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.1 N*s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "body_weight_N",
+        "name": "Body-weight force",
+        "classification": "DESCRIPTIVE",
+        "definition": "Mean unloaded quiet-standing vertical ground-reaction force used as the net-force baseline.",
+        "formula_source": "mean total vertical force over accepted quiet-standing window",
+        "unit": "N",
+        "dependencies": [
+          "quiet_standing_window",
+          "F_vertical_N"
+        ],
+        "required_events": [],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_QUIET_STANDING"
+        ],
+        "availability_conditions": "Accepted finite one-second quiet-standing window.",
+        "internal_precision": "binary64, unrounded mean",
+        "display_rounding": "0.1 N",
+        "decision_class": "LITERATURE_SUPPORTED_METHOD"
+      },
+      {
+        "metric_id": "body_mass_kg",
+        "name": "Derived body mass",
+        "classification": "DESCRIPTIVE",
+        "definition": "Mass derived from unloaded body-weight force and standard gravity.",
+        "formula_source": "m = body_weight_N / 9.80665",
+        "unit": "kg",
+        "dependencies": [
+          "body_weight_N",
+          "gravity_m_per_s2"
+        ],
+        "required_events": [],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_BODY_WEIGHT",
+          "VALID_GRAVITY"
+        ],
+        "availability_conditions": "Positive finite body-weight force and positive finite fixed gravity constant.",
+        "internal_precision": "binary64, unrounded division",
+        "display_rounding": "0.001 kg",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "pre_takeoff_displacement_m",
+        "name": "Pre-takeoff displacement",
+        "classification": "DESCRIPTIVE",
+        "definition": "Integrated vertical displacement from movement onset reference to takeoff.",
+        "formula_source": "x_takeoff = integral(v dt) from movement onset to takeoff",
+        "unit": "m",
+        "dependencies": [
+          "velocity_m_per_s",
+          "integration_policy"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_INPUT",
+          "VALID_TIMEBASE",
+          "VALID_BODY_WEIGHT",
+          "VALID_MOVEMENT_ONSET",
+          "VALID_TAKEOFF"
+        ],
+        "availability_conditions": "Finite cumulative velocity integration with x[onset]=0.",
+        "internal_precision": "binary64, unrounded intermediate values",
+        "display_rounding": "0.001 m",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY"
+      },
+      {
+        "metric_id": "time_to_takeoff_s",
+        "name": "Movement time to takeoff",
+        "classification": "DESCRIPTIVE",
+        "definition": "Elapsed timestamp difference from movement onset to takeoff.",
+        "formula_source": "t_takeoff - t_movement_onset",
+        "unit": "s",
+        "dependencies": [
+          "event timestamps"
+        ],
+        "required_events": [
+          "MOVEMENT_ONSET",
+          "TAKEOFF"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_TIMEBASE",
+          "EVENT_ORDER_VALID"
+        ],
+        "availability_conditions": "Ordered finite event timestamps.",
+        "internal_precision": "binary64 timestamp subtraction",
+        "display_rounding": "0.001 s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      },
+      {
+        "metric_id": "time_in_air_s",
+        "name": "Time in air",
+        "classification": "DESCRIPTIVE",
+        "definition": "Elapsed timestamp difference from takeoff to landing; descriptive event cross-check only.",
+        "formula_source": "t_landing - t_takeoff",
+        "unit": "s",
+        "dependencies": [
+          "event timestamps"
+        ],
+        "required_events": [
+          "TAKEOFF",
+          "LANDING"
+        ],
+        "required_phases": [],
+        "quality_prerequisites": [
+          "VALID_TIMEBASE",
+          "EVENT_ORDER_VALID",
+          "VALID_LANDING"
+        ],
+        "availability_conditions": "Ordered finite takeoff and landing timestamps.",
+        "internal_precision": "binary64 timestamp subtraction",
+        "display_rounding": "0.001 s",
+        "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY"
+      }
+    ]
+  }
+}

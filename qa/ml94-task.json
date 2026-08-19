@@ -1,0 +1,163 @@
+{
+  "task_id": "sportsagentslab-mef-ml94-topology",
+  "title": "B00-02 - Establish canonical repository and monorepo topology",
+  "instructions": "Validate the ML-94 structural topology candidate. Product features, scientific CMJ behavior, agent runtime, persistence, and deployment implementation are forbidden.",
+  "expected_repository": "sportsagentslab-mef",
+  "base_sha": "59b41c91b57011165eb7487f55648625f35edca2",
+  "branch": "work/ml94-monorepo-topology",
+  "risk": "high",
+  "scope_allowlist": [
+    ".gitignore",
+    "AGENTS.md",
+    "README.md",
+    ".python-version",
+    ".github/**",
+    "CONTRIBUTING.md",
+    "architecture/**",
+    "apps/**",
+    "docs/**",
+    "fixtures/**",
+    "infra/**",
+    "package.json",
+    "packages/**",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "pyproject.toml",
+    "qa/**",
+    "scientific/**",
+    "scripts/**",
+    "tools/**",
+    "tsconfig.json",
+    "uv.lock"
+  ],
+  "forbidden_paths": [
+    "authority/**",
+    ".sal-qa/**",
+    ".venv/**",
+    "node_modules/**",
+    "**/secrets/**",
+    ".env*",
+    "services/**",
+    "registry/**",
+    "database/**",
+    "agent-runtime/**"
+  ],
+  "commands": [
+    {
+      "name": "definitions",
+      "argv": ["python", "scripts/check_architecture.py"],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "authority_hashes",
+      "argv": ["python", "scripts/verify_authority_hashes.py"],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "bindings",
+      "argv": ["pnpm.cmd", "run", "typecheck"],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "tests",
+      "argv": ["pnpm.cmd", "run", "validate"],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "scientific_fixtures",
+      "argv": ["python", "scripts/smoke_tests.py"],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "lint",
+      "argv": [
+        "ruff",
+        "check",
+        "scripts",
+        "packages/generated-python/src",
+        "scientific/kernel/src",
+        "tools/evidence-replay/src"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "formatting",
+      "argv": [
+        "ruff",
+        "format",
+        "--check",
+        "scripts",
+        "packages/generated-python/src",
+        "scientific/kernel/src",
+        "tools/evidence-replay/src"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "types",
+      "argv": [
+        "mypy",
+        "scripts",
+        "packages/generated-python/src",
+        "scientific/kernel/src",
+        "tools/evidence-replay/src",
+        "--ignore-missing-imports"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "package",
+      "argv": ["pnpm.cmd", "install", "--frozen-lockfile", "--ignore-scripts"],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "dependency_audit",
+      "argv": ["uv", "lock", "--check"],
+      "timeout_seconds": 120
+    },
+    {
+      "name": "deterministic_replay",
+      "argv": [
+        "uv",
+        "run",
+        "--package",
+        "mef-evidence-replay",
+        "python",
+        "-m",
+        "mef_evidence_replay",
+        "--manifest",
+        "fixtures/evidence/replay-manifest.json",
+        "--repository-root",
+        "."
+      ],
+      "timeout_seconds": 120
+    }
+  ],
+  "reviewers": [
+    "sal-code-reviewer",
+    "sal-security-reviewer"
+  ],
+  "selected_skills": [
+    "sal-authority-relock",
+    "sal-scope-control",
+    "sal-schema-contracts",
+    "sal-test-design",
+    "sal-ci-quality",
+    "sal-security-review",
+    "sal-project-handoff",
+    "97-dev",
+    "dev-experts",
+    "bug-hunters"
+  ],
+  "relevant_contracts": [
+    "ML-93 authority precedence and conflict closure",
+    "ML-94 owns final topology decision",
+    "builder cannot be final reviewer or judge",
+    "Windows-native execution",
+    "no product or scientific implementation"
+  ],
+  "known_limitations": [
+    "The offline SAL reviewer contracts do not replace fresh-context SOTA code, security, bug-hunter, and final-judge review.",
+    "GitHub main protection is documented but unavailable on the current private-repository plan."
+  ]
+}

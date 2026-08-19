@@ -1,0 +1,180 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "quality_taxonomy": {
+    "states": [
+      {
+        "state_id": "ACQUISITION_INELIGIBLE",
+        "severity": "ERROR",
+        "trigger": "Upstream acquisition or configuration is unsupported, unresolved, conflicting, or not qualified.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "No processor metrics available.",
+        "source": "MACHINE",
+        "future_override_policy": "No v1 practitioner override; new evidence requires a new contract evaluation."
+      },
+      {
+        "state_id": "PROCESSOR_FAILURE",
+        "severity": "ERROR",
+        "trigger": "A required processor precondition or deterministic execution step fails.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "No affected metrics available.",
+        "source": "MACHINE",
+        "future_override_policy": "No silent retry or override; retain failure code and contract version."
+      },
+      {
+        "state_id": "EVENT_FAILURE",
+        "severity": "ERROR",
+        "trigger": "A required event is absent or event ordering is invalid.",
+        "inclusion_effect": "EXCLUDE_COMPLETE_PACK",
+        "metric_availability_effect": "Only metrics whose dependencies are satisfied may remain available with explicit state.",
+        "source": "MACHINE",
+        "future_override_policy": "No practitioner event editing in v1."
+      },
+      {
+        "state_id": "INTEGRITY_WARNING",
+        "severity": "WARNING",
+        "trigger": "A non-blocking integrity finding is present while required calculations remain valid.",
+        "inclusion_effect": "INCLUDE_WITH_WARNING",
+        "metric_availability_effect": "Metrics remain available if their prerequisites pass.",
+        "source": "MACHINE",
+        "future_override_policy": "Practitioner may annotate but cannot delete the finding."
+      },
+      {
+        "state_id": "METRIC_UNAVAILABLE",
+        "severity": "WARNING",
+        "trigger": "A metric dependency or required event is unavailable.",
+        "inclusion_effect": "TRIAL_REVIEW",
+        "metric_availability_effect": "Only the named metric is unavailable; dependent metrics are unavailable transitively.",
+        "source": "MACHINE",
+        "future_override_policy": "No imputation or silent substitution in v1."
+      },
+      {
+        "state_id": "REVIEW_REQUIRED",
+        "severity": "WARNING",
+        "trigger": "Protocol, technique, or human-confirmed eligibility evidence is missing or contradictory.",
+        "inclusion_effect": "DO_NOT_AUTO_INCLUDE",
+        "metric_availability_effect": "Mechanically calculable values may be displayed as review-only.",
+        "source": "MACHINE_AND_PRACTITIONER",
+        "future_override_policy": "Practitioner disposition is additive and attributable; it cannot rewrite source or machine findings."
+      },
+      {
+        "state_id": "EXCLUDED",
+        "severity": "ERROR",
+        "trigger": "The trial or requested metric is outside the closed protocol or metric pack.",
+        "inclusion_effect": "EXCLUDE",
+        "metric_availability_effect": "Excluded metric is never produced as a core result.",
+        "source": "MACHINE",
+        "future_override_policy": "Only a future versioned contract may add scope."
+      },
+      {
+        "state_id": "VALID_INCLUDED",
+        "severity": "PASS",
+        "trigger": "Qualified input, valid timebase, valid baseline, ordered required events, protocol eligibility, and all core prerequisites pass.",
+        "inclusion_effect": "INCLUDE",
+        "metric_availability_effect": "All applicable core metrics are available.",
+        "source": "MACHINE_WITH_PRACTITIONER_PROTOCOL_EVIDENCE",
+        "future_override_policy": "Human interpretation remains separate from machine inclusion."
+      }
+    ],
+    "quality_code_uniqueness": "state_id values are unique and case-sensitive.",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "failure_codes": [
+    {
+      "code": "NO_QUALIFIED_QUIET_STANDING",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "No body-weight baseline or dependent metric is available."
+    },
+    {
+      "code": "BODY_WEIGHT_UNAVAILABLE",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Net force and mass-dependent metrics are unavailable."
+    },
+    {
+      "code": "INVALID_MASS",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Acceleration, velocity, displacement, impulse, and jump height are unavailable."
+    },
+    {
+      "code": "MOVEMENT_ONSET_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Onset-dependent metrics are unavailable."
+    },
+    {
+      "code": "TAKEOFF_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Takeoff-dependent metrics are unavailable."
+    },
+    {
+      "code": "LANDING_NOT_FOUND",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "Time-in-air and valid-complete-trial inclusion are unavailable."
+    },
+    {
+      "code": "EVENT_ORDER_INVALID",
+      "severity": "ERROR",
+      "stage": "events",
+      "effect": "The trial is excluded and all invalid-order dependent metrics are unavailable."
+    },
+    {
+      "code": "TIMEBASE_INVALID",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "All time-dependent calculations are unavailable."
+    },
+    {
+      "code": "SAMPLE_RATE_UNSUPPORTED",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition before processing."
+    },
+    {
+      "code": "NONFINITE_SIGNAL",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition before processing."
+    },
+    {
+      "code": "MISSING_SAMPLE",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The contract rejects the acquisition; values are not synthesized."
+    },
+    {
+      "code": "CONFIGURATION_INELIGIBLE",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The processor does not consume the upstream product."
+    },
+    {
+      "code": "INTEGRATION_PRECONDITION_FAILED",
+      "severity": "ERROR",
+      "stage": "integration",
+      "effect": "Affected integrated metrics are unavailable."
+    },
+    {
+      "code": "UPSTREAM_NOT_QUALIFIED",
+      "severity": "ERROR",
+      "stage": "input",
+      "effect": "The processor rejects the input."
+    },
+    {
+      "code": "PROTOCOL_INELIGIBLE",
+      "severity": "ERROR",
+      "stage": "protocol",
+      "effect": "The trial is excluded from the core pack."
+    },
+    {
+      "code": "NONPOSITIVE_FORCE_BASELINE",
+      "severity": "ERROR",
+      "stage": "baseline",
+      "effect": "Body weight and mass are unavailable."
+    }
+  ]
+}

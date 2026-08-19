@@ -1,0 +1,70 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "protocol": {
+    "protocol_id": "CMJ-U-BI-HOH",
+    "protocol_version": "1.0.0",
+    "repository_name": "bilateral unloaded hands-on-hips countermovement jump",
+    "acronym_expansion_authority": "REPOSITORY_DEFINED_ID_ONLY",
+    "starting_position": "Participant stands upright and motionless with both feet fully supported on the qualified force acquisition, before initiating one jump.",
+    "arm_hand_condition": "Both hands remain on the hips throughout the trial; this condition is practitioner- or protocol-confirmed and is not inferred from force alone.",
+    "loading_condition": "Unloaded: no external load is carried or held. In this protocol, accepted quiet-standing vertical force is the participant body-weight force and is also the system-weight baseline for net force.",
+    "countermovement_requirement": "One deliberate downward countermovement is followed by upward propulsion and takeoff. No pause, step, preliminary jump, or second jump is allowed in the scored interval.",
+    "allowed_acquisition_configurations": [
+      "single.total_fz",
+      "dual.independent_fz"
+    ],
+    "pre_movement_behavior": "The participant remains quiet during the accepted one-second standing window, with no voluntary rocking, stepping, or unloading before movement onset.",
+    "exclusion_criteria": [
+      "hands not on hips or arm swing",
+      "external load or supported implement",
+      "step, foot repositioning, partial-foot contact, or one foot leaving before takeoff",
+      "more than one countermovement or more than one landing in the scored interval",
+      "unknown or conflicting protocol status",
+      "missing, nonfinite, irregular, or unsupported qualified input",
+      "no valid quiet-standing window or required event"
+    ],
+    "decision_class": "PROJECT_CONVENTION",
+    "limitation": "Force-time data cannot establish hands-on-hips, external load, or the absence of a preparatory movement; those conditions require upstream protocol evidence or practitioner review."
+  },
+  "eligible_input": {
+    "accepted_chain": [
+      "SourceArtifact",
+      "SourceObservation",
+      "CanonicalAcquisition",
+      "ConfigurationResolution",
+      "CMJProcessor"
+    ],
+    "input_boundary": "Only qualified CanonicalAcquisition and ConfigurationResolution products are accepted. The processor does not parse raw CSV, TSV, JSON, or vendor files.",
+    "required_acquisition_state": "QUALIFIED",
+    "required_configuration_state": "RESOLVED_QUALIFIED",
+    "required_vertical_force_unit": "N",
+    "required_vertical_axis": "vertical",
+    "required_timebase": "finite, strictly increasing, uniform timestamps with explicit qualified rate",
+    "single_total_fz_rule": "Use the one qualified total vertical-force channel as F_vertical_N.",
+    "dual_independent_fz_rule": "For each synchronized sample index i, form F_vertical_N[i] = Fz_left_N[i] + Fz_right_N[i]. Preserve both channels and their identities in the calculation trace; no asymmetry diagnosis is performed.",
+    "synchronization_requirement": "Dual channels require explicit upstream synchronization; equal length or equal sample rate is not sufficient.",
+    "unsupported_input_behavior": "Any other physical configuration, channel count, unresolved quantity, unresolved unit/axis/sign/timebase, or unqualified upstream state fails closed.",
+    "decision_class": "PROJECT_CONVENTION"
+  },
+  "scope": {
+    "source_adapter_support": "SYNTHETIC_REFERENCE_ADAPTER_ONLY",
+    "real_vendor_adapter_count": 0,
+    "real_vendor_support_claims": 0,
+    "supported_physical_configurations": [
+      "single.total_fz",
+      "dual.independent_fz"
+    ],
+    "production_processor_implemented": false,
+    "ml110_corpus_implemented": false,
+    "measurement_agent_calculation_authority": false,
+    "machine_learning_processor": false,
+    "learned_event_detection": false,
+    "bayesian_processor_component": false,
+    "filtering": "NONE",
+    "resampling": "NO",
+    "interpolation": "NO",
+    "asymmetry_diagnosis": false,
+    "clinical_or_diagnostic_output": false
+  }
+}

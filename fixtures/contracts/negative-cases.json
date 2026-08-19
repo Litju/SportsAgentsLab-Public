@@ -1,0 +1,222 @@
+[
+  {
+    "name": "unknown_entity_type",
+    "base_entity": "SourceArtifact",
+    "path": "entity_type",
+    "operation": "replace",
+    "value": "UnknownEntity",
+    "expected_code": "UNKNOWN_ENTITY_TYPE"
+  },
+  {
+    "name": "unknown_schema_version",
+    "base_entity": "SourceArtifact",
+    "path": "schema_version",
+    "operation": "replace",
+    "value": "9.9.9",
+    "expected_code": "UNSUPPORTED_SCHEMA_VERSION"
+  },
+  {
+    "name": "unknown_governed_enum",
+    "base_entity": "SourceArtifact",
+    "path": "lifecycle_state",
+    "operation": "replace",
+    "value": "MYSTERY_STATE",
+    "expected_code": "UNKNOWN_ENUM_VALUE"
+  },
+  {
+    "name": "missing_required_id",
+    "base_entity": "SourceArtifact",
+    "path": "source_artifact_id",
+    "operation": "delete",
+    "expected_code": "MISSING_REQUIRED_FIELD"
+  },
+  {
+    "name": "wrong_id_field_type",
+    "base_entity": "SourceArtifact",
+    "path": "source_artifact_id",
+    "operation": "replace",
+    "value": 42,
+    "expected_code": "INVALID_TYPE"
+  },
+  {
+    "name": "invalid_hash",
+    "base_entity": "SourceArtifact",
+    "path": "content_hash",
+    "operation": "replace",
+    "value": "not-a-sha256",
+    "expected_code": "INVALID_HASH"
+  },
+  {
+    "name": "invalid_timestamp",
+    "base_entity": "SourceArtifact",
+    "path": "created_at",
+    "operation": "replace",
+    "value": "not-a-timestamp",
+    "expected_code": "INVALID_TIMESTAMP"
+  },
+  {
+    "name": "overlong_governed_string",
+    "base_entity": "SourceArtifact",
+    "path": "original_filename",
+    "operation": "replace",
+    "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "expected_code": "VALIDATION_ERROR"
+  },
+  {
+    "name": "unknown_extra_governed_field",
+    "base_entity": "SourceArtifact",
+    "path": "unexpected_governed_field",
+    "operation": "add",
+    "value": true,
+    "expected_code": "UNKNOWN_GOVERNED_FIELD"
+  },
+  {
+    "name": "cross_entity_id_misuse",
+    "base_entity": "SourceArtifact",
+    "path": "source_artifact_id",
+    "operation": "replace",
+    "value": "trl_fixture-trial",
+    "expected_code": "INVALID_IDENTIFIER"
+  },
+  {
+    "name": "cross_entity_object_reference_misuse",
+    "base_entity": "PractitionerDecision",
+    "path": "target.object_id",
+    "operation": "replace",
+    "value": "trl_fixture-trial",
+    "expected_code": "UNRESOLVED_REFERENCE"
+  },
+  {
+    "name": "invalid_lifecycle_state",
+    "base_entity": "Trial",
+    "path": "trial_state",
+    "operation": "replace",
+    "value": "ILLEGAL_TRANSITION_STATE",
+    "expected_code": "UNKNOWN_ENUM_VALUE"
+  },
+  {
+    "name": "malformed_evidence_reference",
+    "base_entity": "SourceArtifact",
+    "path": "source_declaration.evidence_references[0].evidence_manifest_id",
+    "operation": "replace",
+    "value": "not-an-evidence-id",
+    "expected_code": "INVALID_EVIDENCE_REFERENCE"
+  },
+  {
+    "name": "forbidden_practitioner_agent_combination",
+    "base_entity": "PractitionerDecision",
+    "path": "actor.actor_type",
+    "operation": "replace",
+    "value": "AGENT",
+    "expected_code": "FORBIDDEN_AUTHORITY_COMBINATION"
+  },
+  {
+    "name": "forbidden_generic_claim_field",
+    "base_entity": "SourceArtifact",
+    "path": "readiness",
+    "operation": "add",
+    "value": "unknown",
+    "expected_code": "FORBIDDEN_FIELD"
+  },
+  {
+    "name": "illegal_null_explicit_state",
+    "base_entity": "SourceArtifact",
+    "path": "source_declaration.state",
+    "operation": "replace",
+    "value": null,
+    "expected_code": "INVALID_TYPE"
+  },
+  {
+    "name": "invalid_unit_representation",
+    "base_entity": "CanonicalAcquisition",
+    "path": "channels[0].unit.unit",
+    "operation": "replace",
+    "value": [],
+    "expected_code": "INVALID_TYPE"
+  },
+  {
+    "name": "approved_reference_without_practitioner_evidence",
+    "base_entity": "ReferenceEpoch",
+    "path": "approval_state",
+    "operation": "replace",
+    "value": "APPROVED",
+    "expected_code": "MISSING_REQUIRED_FIELD"
+  },
+  {
+    "name": "verified_integrity_without_verification_evidence",
+    "base_entity": "EvidenceManifest",
+    "path": "integrity.integrity_state",
+    "operation": "replace",
+    "value": "VERIFIED",
+    "expected_code": "UNKNOWN_ENUM_VALUE"
+  },
+  {
+    "name": "incompatible_schema_reference",
+    "base_entity": "SourceArtifact",
+    "path": "schema_id",
+    "operation": "replace",
+    "value": "https://schemas.sportsagentslab.local/mef/9.9.9/source-artifact.schema.json",
+    "expected_code": "INCOMPATIBLE_CONTRACT_VERSION"
+  },
+  {
+    "name": "malformed_calendar_timestamp",
+    "base_entity": "SourceArtifact",
+    "path": "created_at",
+    "operation": "replace",
+    "value": "2024-02-30T12:00:00Z",
+    "schema_rejects": false,
+    "expected_code": "INVALID_TIMESTAMP"
+  },
+  {
+    "name": "missing_object_reference_id",
+    "base_entity": "PractitionerDecision",
+    "path": "target.object_id",
+    "operation": "delete",
+    "expected_code": "MISSING_REQUIRED_FIELD"
+  },
+  {
+    "name": "extra_object_reference_field",
+    "base_entity": "PractitionerDecision",
+    "path": "target.unexpected",
+    "operation": "add",
+    "value": true,
+    "expected_code": "UNKNOWN_GOVERNED_FIELD"
+  },
+  {
+    "name": "unsafe_numeric_integer",
+    "base_entity": "MetricObservation",
+    "path": "value.value",
+    "operation": "replace",
+    "value": 9007199254740993,
+    "expected_code": "VALIDATION_ERROR"
+  },
+  {
+    "name": "qualified_unknown_source_mapping",
+    "base_entity": "CanonicalAcquisition",
+    "operation": "replace_many",
+    "changes": [
+      {"path": "acquisition_state", "value": "QUALIFIED"},
+      {"path": "quality_state", "value": "QUALIFIED"},
+      {"path": "synchronization", "value": {"state": "KNOWN", "value": "external-sync", "evidence_references": []}},
+      {"path": "preprocessing", "value": {"state": "KNOWN", "value": "none-declared", "evidence_references": []}},
+      {"path": "source_mappings[0].mapping_state", "value": "UNKNOWN"}
+    ],
+    "expected_code": "VALIDATION_ERROR"
+  },
+  {
+    "name": "eligible_protocol_without_evidence",
+    "base_entity": "ProtocolContract",
+    "path": "eligibility_evidence_references",
+    "operation": "replace",
+    "value": [],
+    "expected_code": "VALIDATION_ERROR"
+  },
+  {
+    "name": "confirmed_condition_without_evidence",
+    "base_entity": "ProtocolContract",
+    "path": "hands_on_hips.evidence_references",
+    "operation": "replace",
+    "value": [],
+    "expected_code": "VALIDATION_ERROR"
+  }
+]

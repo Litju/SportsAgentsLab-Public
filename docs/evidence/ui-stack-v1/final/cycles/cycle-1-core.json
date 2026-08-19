@@ -1,0 +1,16 @@
+{
+  "id": "mef-ui-stack-v1-cycle-1-core",
+  "cycle": "CYCLE_1",
+  "surface": "MEF composition seams",
+  "problem": "The shared shell needed governed interaction seams for dense operational state, provenance navigation, empty scientific rendering and session-only practitioner preferences.",
+  "proposal": "Promote bounded source-owned Beautiful UI adaptations, Radix mobile dialog, shadcn-style ownership, TanStack table/virtualization, Motion continuity, read-only React Flow, lazy ECharts rendering, Lucide controls and RHF/Zod validation.",
+  "rollback": "Revert the UI-stack candidate commit; no authority or scientific processor change is required to roll back.",
+  "evidence": {
+    "routes": 38,
+    "critical_states": 14,
+    "axe_serious_or_critical": 0,
+    "responsive_overflow": false,
+    "bundle_heavy_surfaces_lazy": true,
+    "local_api_degraded_honestly": true
+  }
+}

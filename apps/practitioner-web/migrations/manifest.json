@@ -1,0 +1,10 @@
+{
+  "manifest_version": "1",
+  "migrations": [
+    {
+      "version": "001_better_auth",
+      "file_name": "001_better_auth.sql",
+      "sha256": "c3f70ff65a95065a419cdc58cad013e8631c8270c6b93316b3373b468adf3ad6"
+    }
+  ]
+}

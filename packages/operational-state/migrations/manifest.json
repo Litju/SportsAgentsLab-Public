@@ -1,0 +1,45 @@
+{
+  "manifest_version": "1",
+  "migrations": [
+    {
+      "version": "001_operational_state",
+      "file_name": "001_operational_state.sql",
+      "sha256": "bba91ad2de08bce0a73ea802f7be120e22e252c4cc80ca52b35a5f6a664f3a6c"
+    },
+    {
+      "version": "002_job_execution",
+      "file_name": "002_job_execution.sql",
+      "sha256": "c22583aad4e62e2f51b61da0e738bfa8daa33cb82b3f899cc14ed7ae0d081599"
+    },
+    {
+      "version": "003_auth_tenancy_security",
+      "file_name": "003_auth_tenancy_security.sql",
+      "sha256": "e44ab7eeb00f68737358412d1b345dde6d06eb8747dd0d45f623cc32f791288d"
+    },
+    {
+      "version": "004_ml102_source_import",
+      "file_name": "004_ml102_source_import.sql",
+      "sha256": "98f230c82f0d583aff88744855634b7d75ca6d985b4d25ab9d48b93af1bfb440"
+    },
+    {
+      "version": "005_ml102_identity_constraint_hardening",
+      "file_name": "005_ml102_identity_constraint_hardening.sql",
+      "sha256": "38537e37f41265d76b7e1d1196999ed0fed8ffb5262962c4a75075f6bd24ceb0"
+    },
+    {
+      "version": "006_ml103_source_observation",
+      "file_name": "006_ml103_source_observation.sql",
+      "sha256": "d07ffd53243272f0fced69647046b7645be27b2849707352e66ef19d27b6578b"
+    },
+    {
+      "version": "007_ml104_canonical_acquisition",
+      "file_name": "007_ml104_canonical_acquisition.sql",
+      "sha256": "8196306c8717cf3272bc88ce806a9bf9992a21934b7394b550bf93800a7c9212"
+    },
+    {
+      "version": "008_ml105_configuration_resolution",
+      "file_name": "008_ml105_configuration_resolution.sql",
+      "sha256": "73ce1d6791ba6dc11b071678e3845564de6c08861b106de56d58e6281e2bf641"
+    }
+  ]
+}

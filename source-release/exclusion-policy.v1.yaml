@@ -1,0 +1,16 @@
+schema: sportsagentslab.exclusion-policy.v1
+policy: exclude_only_explicit_categories
+categories:
+  EXCLUDE_SECRET: tracked environment secret files and private credential material
+  EXCLUDE_PII: customer, production, or personally identifying records
+  EXCLUDE_MACHINE_LOCAL: generated caches, local state, machine metadata, and private receipts
+  EXCLUDE_THIRD_PARTY_RIGHTS: files without redistribution rights or owner audit
+  EXCLUDE_LIVE_OPERATIONAL_SECRET: live tokens, keys, certificates, and deployment credentials
+  EXCLUDE_HELDOUT_EVALUATION: intentionally withheld oracle, answer-key, or blind evaluation material
+  EXCLUDE_LEGAL_PRIVILEGE: attorney-client, counsel, or work-product material
+default: publish_source_owned_tracked_files
+fail_closed:
+  - unclassified_path
+  - ambiguous_rights
+  - live_secret_found_in_publishable_file
+  - public_receipt_present

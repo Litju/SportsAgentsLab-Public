@@ -1,0 +1,128 @@
+matrix_id: SAL-MEF-PLATFORM-AGENT-SUPERSESSION-v0.1
+rule: >-
+  Only listed clauses are superseded or amended. All unlisted scientific, evidence,
+  safety, practitioner-authority, and UX semantics remain unchanged.
+
+entries:
+  - subject: product_client_form
+    baseline: practitioner web app existed but deployment/client form was not frozen as the primary product platform
+    status: SUPERSEDED_BY_EXPLICIT_DECISION
+    effective: desktop-first web application; native desktop v1 is not selected
+    source: ADR-031
+
+  - subject: initial_deployment_shape
+    baseline: small number of containerized services / managed container production MVP
+    status: SUPERSEDED_FOR_PROTOTYPE_AND_V1_APPLICATION_PLANE
+    effective: one primary Next.js Vercel application plus Vercel Functions and managed adapters; isolated workers only when justified
+    source: ADR-032, ADR-039
+
+  - subject: exact_hosting_provider
+    baseline: intentionally unresolved
+    status: RESOLVED_FOR_PROTOTYPE_AND_V1_DEVELOPMENT
+    effective: Vercel-first
+    qualification: provider lock-in forbidden in core; commercial production plan remains a later decision
+    source: ADR-032, ADR-042
+
+  - subject: hobby_plan_usage
+    baseline: not defined
+    status: NEW
+    effective: non-commercial development/prototype only; quota exhaustion may block service; no commercial production authorization
+    source: ADR-032
+
+  - subject: eve_runtime
+    baseline: ADR-023 accepted for spike, not production commitment
+    status: SUPERSEDED
+    effective: Eve is the canonical MEF agent runtime behind the existing framework-neutral port
+    qualification: public-preview version must be pinned and upgrades separately qualified
+    source: ADR-033
+
+  - subject: model_provider
+    baseline: unspecified / generic
+    status: RESOLVED_FOR_PRIMARY_V1_ACCESS
+    effective: OpenCode Go primary; model ID configurable; provider adapter isolated
+    source: ADR-034
+
+  - subject: vercel_ai_gateway
+    baseline: not selected
+    status: EXPLICITLY_NOT_REQUIRED
+    effective: disabled by default; may be evaluated later only by explicit ADR
+    source: ADR-034
+
+  - subject: ai_sdk
+    baseline: indirect ecosystem dependency
+    status: CLARIFIED
+    effective: implementation/provider-compatibility detail only; not a SportsAgentsLab architectural layer
+    source: ADR-035
+
+  - subject: temporal
+    baseline: ADR-022 accepted with staged adoption after workflow gate
+    status: SUPERSEDED_FOR_V1_SYSTEM_ORCHESTRATION
+    effective: accepted ML-97 Command/Job state machine is the v1 system orchestration baseline; Temporal is deferred
+    qualification: applies after ML-97 founder acceptance; revisit only on measured workflow pressure
+    source: ADR-036
+
+  - subject: object_storage
+    baseline: immutable S3-compatible object storage
+    status: PARTIALLY_SUPERSEDED
+    effective: ImmutableArtifactStore remains authority; Vercel Blob private is primary Vercel adapter; S3-compatible adapter remains portable fallback
+    source: ADR-037
+
+  - subject: postgresql
+    baseline: managed PostgreSQL
+    status: PRESERVED_AND_DEPLOYMENT_PROFILE_RESOLVED
+    effective: provider-neutral PostgreSQL via DATABASE_URL; Neon is initial Vercel Marketplace candidate
+    source: ADR-038
+
+  - subject: control_api_deployment
+    baseline: standalone Fastify control API service
+    status: AMENDED_FOR_V1
+    effective: typed control/application boundary remains; initial hosted surface is mounted through same-origin Next.js/Vercel route handlers instead of requiring a separately deployed service
+    source: ADR-039
+
+  - subject: scientific_worker_deployment
+    baseline: isolated containerized workers / FastAPI boundary
+    status: AMENDED_NOT_REPLACED
+    effective: Python scientific kernel remains provider-neutral; Vercel Python Functions are an eligible first hosted adapter after qualification; dedicated compute remains available behind worker port
+    source: ADR-043
+
+  - subject: sandbox
+    baseline: parser/sandbox isolation concept without provider decision
+    status: RESOLVED_FOR_VERCEL_PROFILE
+    effective: Vercel Sandbox for special isolated/untrusted/agent-eval workloads only
+    source: ADR-041
+
+  - subject: delivery_workflow
+    baseline: progressive deployment / ephemeral test environment
+    status: STRENGTHENED
+    effective: branch-to-Vercel-preview is the default product/agent qualification loop
+    source: ADR-040
+
+  - subject: broad_platform_work
+    baseline: marketplace/broad SportsAgentsLab platform work out of MVP scope
+    status: PRESERVED_WITH_CLARIFICATION
+    effective: MEF may establish reusable conventions proven by the first agent; generic platformization before repeated need remains forbidden
+    source: ADR-040
+
+unchanged_explicitly:
+  - ADR-002 vendor/configuration scientific boundary
+  - ADR-003 native-export-first ingestion
+  - ADR-004 immutable source preservation
+  - ADR-005 JSON Schema authority
+  - ADR-006 OpenAPI direction
+  - ADR-007 Python scientific kernel
+  - ADR-008 TypeScript control/practitioner plane
+  - ADR-012 deterministic processor authority
+  - ADR-013 closed metric packs
+  - ADR-014 sample-rate/preprocessing eligibility
+  - ADR-015 framework-neutral inference
+  - ADR-016 fixed practitioner-approved references
+  - ADR-017 measurement error versus practical importance
+  - ADR-018 provenance/RO-Crate
+  - ADR-019 evidence authority
+  - ADR-020 separated authority classes
+  - ADR-024 raw signals out of LLM context by default
+  - ADR-025 OIDC/RBAC/ABAC/RLS direction
+  - ADR-026 OTel/OTLP
+  - ADR-028 transactional outbox principle
+  - ADR-029 forbidden readiness/causality
+  - ADR-030 versioned architecture/scientific artifacts

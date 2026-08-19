@@ -1,0 +1,231 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "sample_rate_policy": {
+    "minimum_supported_rate_hz": 1000,
+    "rate_rule": "The qualified acquisition rate must be explicitly established and at least 1000 Hz. A rate above 1000 Hz is accepted without downsampling when all other timebase requirements pass.",
+    "rate_evidence_rule": "The rate must be an upstream qualified acquisition/timebase fact; a device capability statement is not evidence of the recorded rate.",
+    "below_threshold_behavior": "Fail with SAMPLE_RATE_UNSUPPORTED.",
+    "unknown_rate_behavior": "Fail with SAMPLE_RATE_UNSUPPORTED; no default is applied.",
+    "irregular_timebase_behavior": "Fail with TIMEBASE_INVALID even when a nominal rate is declared.",
+    "missing_sample_behavior": "Fail with MISSING_SAMPLE; missing values are not synthesized.",
+    "resampling": "NO",
+    "filtering": "NONE_UNLESS_A_FUTURE_CONTRACT_AUTHORIZES_A_NAMED_FILTER",
+    "interpolation": "NO",
+    "decision_class": "ENGINEERING_POLICY",
+    "source_basis": [
+      "Street et al. 2001, DOI 10.1123/jab.17.1.43",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ],
+    "rationale": "The selected core includes impulse-derived velocity and height. Street et al. report material height error below approximately 1000 Hz for their force-platform method, while Owen et al. use a 1000 Hz criterion protocol. This is a scoped minimum for this contract, not a universal claim about every metric or device.",
+    "limitation": "Rate alone does not establish anti-aliasing, calibration, noise, or metric validity; those facts remain upstream qualification requirements."
+  },
+  "quiet_standing": {
+    "duration_s": 1.0,
+    "window_definition": "A contiguous inclusive timestamp window with elapsed duration exactly 1.000 s, immediately preceding the movement-onset search interval.",
+    "candidate_search": "Enumerate eligible one-second windows by descending end sample index. Select the latest window whose samples are finite, contiguous, uniformly timed, contain no missing sample, and pass the stability rule; the first valid movement-onset run after that window must be found before the acquisition ends.",
+    "stability_criterion": "max(abs(F_vertical_N - mean(F_vertical_N))) <= 0.05 * abs(mean(F_vertical_N)) and (max(F_vertical_N) - min(F_vertical_N)) <= 0.10 * abs(mean(F_vertical_N)).",
+    "mean_force_rule": "Arithmetic mean of all total-force samples in the accepted window, accumulated in ascending sample-index order using binary64.",
+    "missing_data_tolerance": 0,
+    "rejection_criteria": [
+      "no exact one-second window",
+      "nonfinite sample",
+      "missing sample",
+      "nonuniform timestamp",
+      "nonpositive mean force",
+      "stability criterion fails",
+      "no ordered movement onset after the window"
+    ],
+    "failure_code": "NO_QUALIFIED_QUIET_STANDING",
+    "search_tie_break": "Latest ending window wins; if end indices tie, the earliest start index is used.",
+    "decision_class": "LITERATURE_SUPPORTED_METHOD_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+      "Street et al. 2001, DOI 10.1123/jab.17.1.43"
+    ],
+    "rationale": "A one-second pre-jump mean is directly supported by the criterion protocol. The exact stability bounds, zero missing-data tolerance, descending search, and exact timestamp rule are explicit engineering choices that prevent silent heuristic changes.",
+    "limitation": "A force-stable window can still contain an unobserved technique or protocol violation; protocol evidence remains separate."
+  },
+  "body_system_weight": {
+    "public_protocol_term": "body_weight_N",
+    "calculation_baseline_term": "system_weight_N",
+    "relationship_in_unloaded_protocol": "body_weight_N == system_weight_N because CMJ-U-BI-HOH is unloaded and the participant is the only accepted load on the force acquisition.",
+    "unit": "N",
+    "formula": "body_weight_N = system_weight_N = arithmetic_mean(F_vertical_N over accepted quiet-standing window)",
+    "dual_plate_rule": "Sum left and right vertical forces sample-by-sample before calculating the mean.",
+    "mass_formula": "body_mass_kg = body_weight_N / gravity_m_per_s2",
+    "failure_behavior": "Missing, nonfinite, zero, or negative baseline fails with BODY_WEIGHT_UNAVAILABLE; derived nonfinite or nonpositive mass fails with INVALID_MASS.",
+    "precision": "Binary64 internally; no rounding before mass, net force, impulse, or integration.",
+    "external_load_behavior": "Any loaded or supported condition is protocol-ineligible; the processor does not silently relabel system weight as body weight.",
+    "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "NIST SP 811, Section 8.3",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ]
+  },
+  "gravity": {
+    "constant_m_per_s2": 9.80665,
+    "unit": "m/s^2",
+    "name": "standard gravity",
+    "configurable": false,
+    "usage": [
+      "body_mass_kg = body_weight_N / gravity_m_per_s2",
+      "jump_height_impulse_momentum_m = takeoff_velocity_m_per_s^2 / (2 * gravity_m_per_s2)"
+    ],
+    "decision_class": "STANDARDIZED_CONSTANT",
+    "source_basis": [
+      "NIST SP 811, DOI 10.6028/NIST.SP.811e2008"
+    ],
+    "limitation": "Local gravitational acceleration is not estimated; v1 uses standard gravity for reproducible reporting."
+  },
+  "equations": {
+    "vertical_force": "single.total_fz: F_vertical_N[i] = Fz_total_N[i]; dual.independent_fz: F_vertical_N[i] = Fz_left_N[i] + Fz_right_N[i]",
+    "net_force": "F_net_N[i] = F_vertical_N[i] - body_weight_N",
+    "acceleration": "a_m_per_s2[i] = F_net_N[i] / body_mass_kg",
+    "mass": "body_mass_kg = body_weight_N / gravity_m_per_s2",
+    "sign_convention": "upward vertical force, acceleration, velocity, and displacement are positive; downward is negative.",
+    "units": "force N, mass kg, acceleration m/s^2, velocity m/s, displacement m, impulse N*s",
+    "preconditions": [
+      "qualified input",
+      "finite signal",
+      "valid timebase",
+      "accepted quiet-standing baseline",
+      "positive finite mass"
+    ]
+  },
+  "integration": {
+    "method": "left-to-right cumulative trapezoidal integration",
+    "formula": "integral_y[start..end] = sum(i=start+1..end, 0.5 * (y[i-1] + y[i]) * (t[i] - t[i-1]))",
+    "timebase": "Use qualified input timestamps; require strictly increasing uniform timestamps; do not derive or repair time from array position.",
+    "initial_velocity": "v_m_per_s[movement_onset_index] = 0.0",
+    "initial_displacement": "x_m[movement_onset_index] = 0.0",
+    "reference_position": "x=0 at movement onset; pre-takeoff displacement is relative to that reference.",
+    "endpoint_inclusion": "Integrate intervals from movement-onset index through takeoff index inclusive; each interval is counted once.",
+    "accumulation_order": "strict ascending interval index; no parallel reduction or reordering",
+    "numerical_precision": "IEEE-754 binary64",
+    "irregular_timestamp_policy": "reject with TIMEBASE_INVALID",
+    "drift_policy": "NO_DRIFT_CORRECTION",
+    "filter_policy": "NO_FILTERING",
+    "resampling_policy": "NO_RESAMPLING",
+    "interpolation_policy": "NO_INTERPOLATION",
+    "fma_policy": "NO_REQUIRED_FUSED_OPERATION; use the stated operation sequence",
+    "failure_code": "INTEGRATION_PRECONDITION_FAILED",
+    "decision_class": "LITERATURE_SUPPORTED_METHOD_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+      "ISO/IEC 60559:2020, ISO 80985"
+    ]
+  },
+  "impulse": {
+    "included_variants": [
+      "net_impulse_onset_to_takeoff"
+    ],
+    "gross_impulse": "EXCLUDED",
+    "phase_impulse": "EXCLUDED",
+    "net_impulse_onset_to_takeoff": "integral of F_net_N from movement_onset_index through takeoff_index inclusive",
+    "unit": "N*s",
+    "relationship": "takeoff_velocity_m_per_s = net_impulse_onset_to_takeoff_Ns / body_mass_kg",
+    "decision_class": "ESTABLISHED_MECHANICAL_IDENTITY_PLUS_ENGINEERING_POLICY",
+    "source_basis": [
+      "Linthorne 2001, DOI 10.1119/1.1397460",
+      "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311"
+    ]
+  },
+  "precision_policy": {
+    "internal_floating_point": "IEEE-754 binary64",
+    "storage_precision": "JSON numbers representing finite binary64 results; raw intermediate arrays are not serialized into metadata.",
+    "serialization": "UTF-8 canonical JSON with lexicographically sorted object keys, preserved array order, finite numbers only, and negative zero normalized to 0.",
+    "intermediate_rounding": "NO",
+    "rounding_before_downstream_calculation": "FORBIDDEN",
+    "display_rounding": {
+      "force_N": "0.1",
+      "mass_kg": "0.001",
+      "velocity_m_per_s": "0.001",
+      "displacement_m": "0.001",
+      "height_m": "0.001",
+      "impulse_Ns": "0.1",
+      "time_s": "0.001"
+    },
+    "locale": "C-style numeric serialization; locale-independent",
+    "timezone": "UTC for non-semantic display metadata; no wall-clock value enters calculation or semantic hash",
+    "decision_class": "ENGINEERING_POLICY",
+    "source_basis": [
+      "ISO/IEC 60559:2020, ISO 80985",
+      "JCGM 100:2008"
+    ]
+  },
+  "determinism": {
+    "invariant": "same CanonicalAcquisition + same ConfigurationResolution + same ProcessorContract version + same MetricPack version produces the same quiet-standing result, body weight, events, calculation trace, metrics, quality state, and result hash.",
+    "randomness": "NONE",
+    "llm_calculations": "NONE",
+    "wall_clock_semantics": "NONE",
+    "parallel_reduction": "FORBIDDEN",
+    "locale_dependence": "NONE",
+    "input_order": "canonical sample index order",
+    "replay_requirement": "replay must compare semantic values and hashes, not display-rounded strings",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "calculation_trace": {
+    "required_fields": [
+      "canonical_acquisition_hash",
+      "configuration_resolution_hash",
+      "processor_contract_version",
+      "metric_pack_version",
+      "quiet_standing_window",
+      "body_weight_N",
+      "body_mass_kg",
+      "gravity_m_per_s2",
+      "event_indices_and_times",
+      "net_force_transform",
+      "integration_policy_version",
+      "metric_dependency_graph",
+      "quality_findings"
+    ],
+    "event_record": "event_id, sample_index, timestamp_s, threshold, persistence_count, and source signal identity",
+    "net_force_transform": "Record total-force formation, baseline value, sign convention, and units; preserve dual left/right channel identities.",
+    "metric_dependency_graph": "Record metric IDs and direct dependency IDs without copying the high-rate signal.",
+    "raw_data_policy": "Do not duplicate full high-rate raw or canonical signal data into metadata.",
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "result_hash": {
+    "algorithm": "SHA-256",
+    "canonicalization": "The precision-policy canonical JSON serialization.",
+    "included_inputs": [
+      "canonical_acquisition_hash",
+      "configuration_resolution_hash",
+      "processor_contract_version",
+      "metric_pack_version",
+      "numerical_policy_version",
+      "events",
+      "metric_values_internal_precision",
+      "quality_state",
+      "quality_findings"
+    ],
+    "excluded_inputs": [
+      "created_at",
+      "request_id",
+      "hostname",
+      "path",
+      "runtime_timestamp"
+    ],
+    "semantic_hash_only": true,
+    "decision_class": "ENGINEERING_POLICY"
+  },
+  "analytical_sanity_examples": [
+    {
+      "example_id": "constant_quiet_force",
+      "input": "F_vertical_N = 800 for one accepted second",
+      "expected": "body_weight_N = system_weight_N = 800 N"
+    },
+    {
+      "example_id": "known_net_impulse",
+      "input": "F_net_N = 160 N for 0.5 s and mass = 80 kg",
+      "expected": "delta_v = impulse / mass = 1.0 m/s"
+    },
+    {
+      "example_id": "ballistic_height",
+      "input": "takeoff_velocity = 2.0 m/s and g = 9.80665 m/s^2",
+      "expected": "height = 0.203943... m before display rounding"
+    }
+  ]
+}
