@@ -1,0 +1,68 @@
+lock_id: MEF-BLOCK-DEPENDENCY-LOCK
+version: 1.0.0
+status: NORMATIVE
+acceptance: FOUNDER_REVIEW_REQUIRED
+current_block: B00
+current_issue: ML-93
+milestone: B00_PROGRAM_AUTHORITY_AND_ENGINEERING_FOUNDATION
+topology_gate: ML-94
+topology_decision_in_this_lock: FORBIDDEN
+roadmap_order: [B00, B01, B02, B03, B04, B05, B06, B07, B08, B09]
+blocks:
+  - id: B00
+    name: Program Authority & Engineering Foundation
+    dependencies: []
+    status: ACTIVE_ML93
+    deliverable: Freeze product identity, initial scope, forbidden claims, UX/architecture authority, evidence register, change control, and dependency order.
+    implementation_allowed: false
+  - id: B01
+    name: Native Force-Plate Ingestion & Configuration
+    dependencies: [B00]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B02
+    name: Deterministic CMJ Processor & Trial QA
+    dependencies: [B01]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B03
+    name: Session Adjudication
+    dependencies: [B02]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B04
+    name: Athlete History & Reference Management
+    dependencies: [B03]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B05
+    name: Overview Dashboard & Metric Explorer
+    dependencies: [B04]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B06
+    name: Measurement Uncertainty & Meaningful Change
+    dependencies: [B05]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B07
+    name: Evidence Authority & Reporting
+    dependencies: [B06]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B08
+    name: Durable MEF Agent Runtime & Memory
+    dependencies: [B07]
+    status: DEFERRED
+    implementation_allowed: false
+  - id: B09
+    name: Qualification Factory, Hardening & Pilot Readiness
+    dependencies: [B08]
+    status: DEFERRED
+    implementation_allowed: false
+gates:
+  - B00 must close before ML-94 topology work begins.
+  - B01 through B09 require the preceding dependency chain and an accepted authority change record for any material contract change.
+  - No block in this lock authorizes product implementation during ML-93.
+  - The engineering control plane remains development infrastructure and is not a product block.
+

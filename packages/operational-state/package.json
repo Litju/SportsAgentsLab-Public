@@ -1,0 +1,24 @@
+{
+  "name": "@mef/operational-state",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@mef/generated-ts": "workspace:*",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/pg": "8.21.0"
+  },
+  "scripts": {
+    "test": "node --experimental-loader ./test/ts-loader.mjs --test test/operational-state.test.ts test/job-execution.test.ts test/postgres.integration.test.ts test/source-import.test.ts",
+    "ci:migrate": "node --experimental-loader ./test/ts-loader.mjs scripts/ci-migrate.mjs",
+    "ci:prepare-db": "node scripts/ci-prepare-db.mjs",
+    "ci:grant-runtime": "node scripts/ci-grant-runtime.mjs",
+    "ci:rls": "node scripts/ci-rls.mjs"
+  },
+  "mefSmokePaths": [
+    "src/index.ts"
+  ]
+}

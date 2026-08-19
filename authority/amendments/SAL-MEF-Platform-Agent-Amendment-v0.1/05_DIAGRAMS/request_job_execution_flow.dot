@@ -1,0 +1,24 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", labelloc=t, label="Request → Agent Tool → ML-97 Job Flow", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  browser [label="Desktop browser"];
+  eve [label="Eve"];
+  tool [label="Typed tool"];
+  api [label="Control/Application API"];
+  command [label="Command\nsemantic idempotency"];
+  job [label="Job\nmutable lifecycle"];
+  attempt [label="JobAttempt\nappend-oriented history"];
+  worker [label="Replaceable worker"];
+  result [label="Typed result/evidence ref"];
+  browser -> eve;
+  eve -> tool;
+  tool -> api;
+  api -> command;
+  command -> job;
+  job -> attempt;
+  attempt -> worker;
+  worker -> result;
+  result -> api;
+  api -> eve;
+  eve -> browser;
+}

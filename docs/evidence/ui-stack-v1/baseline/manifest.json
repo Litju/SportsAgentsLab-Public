@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-08-16",
+  "server": "http://localhost:3001",
+  "route": "/",
+  "viewports": {
+    "1728x1080": "baseline-wide-1728x1080.png",
+    "1440x900": "baseline-desktop-1440x900.png",
+    "1024x900": "baseline-tablet-1024x900.png",
+    "390x844": "baseline-mobile-390x844.png"
+  },
+  "geometry": {
+    "1728x1080": {"scrollWidth": 1728, "bodyScrollHeight": 1080, "railWidth": 84, "dockWidth": 356},
+    "1440x900": {"scrollWidth": 1440, "bodyScrollHeight": 1116, "railWidth": 84, "dockWidth": 356},
+    "1024x900": {"scrollWidth": 1024},
+    "390x844": {"scrollWidth": 390}
+  },
+  "support_errors": ["/api/context HTTP 500", "/api/status HTTP 500"]
+}

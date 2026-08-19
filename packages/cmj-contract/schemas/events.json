@@ -1,0 +1,72 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "events": [
+    {
+      "event_id": "MOVEMENT_ONSET",
+      "name": "Movement onset",
+      "input_signal": "F_vertical_N",
+      "baseline": "body_weight_N from the accepted quiet-standing window",
+      "threshold": "F_vertical_N <= body_weight_N * 0.95",
+      "direction": "downward force deviation",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "search_interval": "first sample after the accepted quiet-standing window through the last sample before the takeoff search result",
+      "sample_index_convention": "event index is the first sample of the persistent run; no sample is backdated or averaged",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "MOVEMENT_ONSET_NOT_FOUND",
+      "return_to_baseline_behavior": "Not required; later return through baseline does not change the first onset event.",
+      "ordering_invariant": "quiet_standing_end_index < movement_onset_index < takeoff_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+        "Pinto and Callaghan 2023, DOI 10.1123/jab.2022-0111"
+      ],
+      "limitation": "Force-time onset is a defined operational boundary, not a claim that it equals the first joint-flexion instant."
+    },
+    {
+      "event_id": "TAKEOFF",
+      "name": "Takeoff",
+      "input_signal": "F_vertical_N",
+      "baseline": "absolute force threshold; body-weight baseline is not substituted",
+      "threshold": "F_vertical_N <= 20.0 N",
+      "direction": "downward to near-zero force",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "dual_plate_behavior": "Apply the threshold to the formed total F_vertical_N; do not apply independent thresholds to left and right channels.",
+      "search_interval": "first sample after movement onset through the last sample before landing search",
+      "sample_index_convention": "event index is the first sample of the persistent run",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "TAKEOFF_NOT_FOUND",
+      "ordering_invariant": "movement_onset_index < takeoff_index < landing_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Owen et al. 2014, DOI 10.1519/JSC.0000000000000311",
+        "Moir 2008, DOI 10.1080/10913670802349766"
+      ],
+      "limitation": "The fixed 20 N operational threshold is scoped to v1 and is not a universal force-platform takeoff standard."
+    },
+    {
+      "event_id": "LANDING",
+      "name": "Landing",
+      "input_signal": "F_vertical_N",
+      "baseline": "absolute force threshold; body-weight baseline is not substituted",
+      "threshold": "F_vertical_N >= 20.0 N",
+      "direction": "upward from near-zero force to contact force",
+      "persistence": "ceil(sample_rate_hz * 0.020) consecutive samples meeting the threshold",
+      "dual_plate_behavior": "Apply the threshold to the formed total F_vertical_N; preserve the two source channels without diagnosing asymmetry.",
+      "search_interval": "first sample after takeoff_index through the last sample of the acquisition",
+      "sample_index_convention": "event index is the first sample of the persistent run",
+      "time_convention": "event time is the input timestamp at event index",
+      "interpolation": "NO",
+      "failure_code": "LANDING_NOT_FOUND",
+      "ordering_invariant": "takeoff_index < landing_index",
+      "decision_class": "ENGINEERING_POLICY",
+      "source_basis": [
+        "Moir 2008, DOI 10.1080/10913670802349766"
+      ],
+      "limitation": "A force threshold detects return to measurable plate load; it does not identify the first anatomical contact instant."
+    }
+  ],
+  "phases_included": []
+}

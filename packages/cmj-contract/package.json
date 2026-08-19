@@ -1,0 +1,22 @@
+{
+  "name": "@mef/cmj-contract",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-loader ../operational-state/test/ts-loader.mjs --test test/contract.test.ts"
+  },
+  "mefSmokePaths": [
+    "src/index.ts",
+    "schemas/contract.source.json",
+    "schemas/contract.json",
+    "schemas/contract.schema.json",
+    "schemas/protocol.json",
+    "schemas/events.json",
+    "schemas/metric-pack.json",
+    "schemas/excluded-metrics.json",
+    "schemas/quality-taxonomy.json",
+    "schemas/numerical-policy.json",
+    "schemas/manifest.json"
+  ]
+}

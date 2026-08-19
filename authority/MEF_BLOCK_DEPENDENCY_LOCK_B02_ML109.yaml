@@ -1,0 +1,88 @@
+lock_id: MEF-BLOCK-DEPENDENCY-LOCK
+version: 2.0.0
+status: NORMATIVE
+acceptance: FOUNDER_APPROVED
+supersedes: authority/MEF_BLOCK_DEPENDENCY_LOCK_B01_ML108.yaml
+current_block: B02
+current_issue: ML-109
+milestone: B02_DETERMINISTIC_CMJ_PROCESSOR_AND_TRIAL_QA
+topology_gate: ML-94
+topology_decision_in_this_lock: FORBIDDEN
+roadmap_order: [B00, B01, B02, B03, B04, B05, B06, B07, B08, B09]
+b00_status: CLOSED
+b01_status: CLOSED
+ml102_status: ACCEPTED
+ml102_implementation_allowed: false
+ml103_status: ACCEPTED
+ml103_implementation_allowed: false
+ml104_status: ACCEPTED
+ml104_implementation_allowed: false
+ml105_status: ACCEPTED
+ml105_implementation_allowed: false
+ml106_status: ACCEPTED
+ml106_implementation_allowed: false
+ml107_status: ACCEPTED
+ml107_implementation_allowed: false
+ml108_status: ACCEPTED
+ml108_implementation_allowed: false
+b01_replay: PASS
+b01_conformance: PASS
+b01_supported_scope_recorded: YES
+b01_limitations_recorded: YES
+current_gate: ML-109
+ml109_status: AUTHORIZED
+ml109_implementation_allowed: true
+ml109_scope: B02-01_FREEZE_CMJ_PROCESSOR_PROTOCOL_EVENT_METRIC_PACK_CONTRACT_V1
+production_processor_implementation_allowed: false
+ml110_status: DEPENDENCY_BLOCKED
+ml110_implementation_allowed: false
+b03_status: DEFERRED
+b03_implementation_allowed: false
+real_vendor_adapter_implementation_allowed: false
+real_vendor_adapter_count: 0
+real_vendor_support_claims: 0
+real_vendor_support_requires_source_evidence: true
+source_adapter_support: SYNTHETIC_REFERENCE_ADAPTER_ONLY
+supported_physical_configurations: [single.total_fz, dual.independent_fz]
+exact_record_provenance_required: true
+human_authority_required_for_mutation: true
+raw_source_bytes_to_llm_default: false
+raw_signal_to_llm_default: false
+llm_biomechanics: false
+llm_configuration_inference_authority: false
+machine_learning_processor: false
+learned_event_detection: false
+bayesian_processor_component: false
+blocks:
+  - id: B00
+    name: Program Authority & Engineering Foundation
+    dependencies: []
+    status: CLOSED
+    implementation_allowed: false
+  - id: B01
+    name: Native Force-Plate Ingestion & Configuration
+    dependencies: [B00]
+    status: CLOSED
+    implementation_allowed: false
+  - id: B02
+    name: Deterministic CMJ Processor & Trial QA
+    dependencies: [B01]
+    status: ACTIVE
+    implementation_allowed: true
+    authorized_issue: ML-109
+  - id: B03
+    name: Session Adjudication
+    dependencies: [B02]
+    status: DEFERRED
+    implementation_allowed: false
+gates:
+  - B00 is closed by the accepted B00 foundation commit.
+  - B01 is closed by accepted ML-108 replay/conformance evidence and PR #10 merge commit 7c5c39e21cdef14147ab86e829a0d4fd942ec6a3.
+  - B01 supported scope remains synthetic/reference adapter only; no real vendor adapter or support claim is authorized.
+  - ML-109 is the only authorized implementation gate under active B02.
+  - ML-109 freezes the deterministic CMJ protocol, event, numerical, metric-pack, quality, trace, and result-hash contract; it does not authorize the production processor or validation corpus.
+  - The Measurement Agent/LLM may not calculate body weight, events, velocity, displacement, impulse, or jump height.
+  - ML-110 remains dependency-blocked until owner review and acceptance of the ML-109 contract.
+  - B03 and all later blocks remain deferred.
+  - The active infrastructure authority remains ACTIVE_DATABASE=NEON_POSTGRESQL, ACTIVE_ARTIFACT_STORAGE=VERCEL_PRIVATE_BLOB, S3_RUNTIME_DEPENDENCY=NONE.
+  - The engineering control plane remains development infrastructure and is not a MEF product block.

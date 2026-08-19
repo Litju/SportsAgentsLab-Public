@@ -1,0 +1,15 @@
+surface,source,library,role,states,authority_boundary
+global shell,apps/practitioner-web/src/components/mef-patterns.tsx + app/globals.css,shadcn convention + Lucide + Motion,shared MEF composition,wide tablet mobile reduced-motion,existing screen definitions remain authoritative
+Eve desktop,apps/practitioner-web/src/components/eve-agent-dock.tsx,Beautiful UI + Motion,observable agent dock and continuity,idle degraded running streaming failed,no hidden reasoning or silent mutation
+Eve mobile,apps/practitioner-web/src/components/eve-agent-dock.tsx,@radix-ui/react-dialog,accessible drawer,open close escape focus return,dialog is navigation/explanation only
+agent activity,apps/practitioner-web/src/components/mef/agent/mef-beautiful-ui.tsx,Beautiful UI adaptation,activity trace task row tool chip streaming text,loading tool streaming error,never exposes private chain of thought
+agent context,apps/practitioner-web/src/components/mef/agent/mef-beautiful-ui.tsx,Beautiful UI adaptation,context card and bounded message,configured degraded offline,visible records only
+approval seam,apps/practitioner-web/src/components/mef/agent/mef-beautiful-ui.tsx,Beautiful UI adaptation,guarded approval card,available only when a safe approval part exists,no generic accept becomes scientific authority
+governed records,apps/practitioner-web/src/components/mef/data/mef-data-table.tsx,@tanstack/react-table,sorting filtering selection column visibility row actions,empty filtered selected error-ready,source-linked records only
+long record lists,apps/practitioner-web/src/components/mef/data/mef-data-table.tsx,@tanstack/react-virtual,bounded virtualization,more than 12 rows only,no virtualization for small tables
+common table controls,apps/practitioner-web/src/components/mef/data/mef-data-table.tsx,lucide-react,search sort columns selection,keyboard operable,no duplicate icon pack
+source comparison,apps/practitioner-web/src/components/mef/agent/mef-beautiful-ui.tsx,shadcn convention,source observed canonical diff,blocked unavailable not mapped,never upgrades source to canonical
+provenance,apps/practitioner-web/src/components/mef/provenance/mef-provenance-graph.tsx,@xyflow/react,read-only graph,source observation canonical decision,graph navigation only; no mutation
+scientific chart,apps/practitioner-web/src/components/mef/charts/mef-echarts-frame.tsx,echarts,rendering-only SVG shell,empty unavailable responsive,zero fabricated scientific values
+session preference,apps/practitioner-web/src/components/mef/forms/mef-session-preference-form.tsx,react-hook-form + zod,validated visible local draft,invalid valid cancel,session-only and no evidence write
+all governed routes,apps/practitioner-web/src/components/mef-patterns.tsx,MEF pattern system,shared composition coverage,38 routes and 14 critical states,route semantics preserved

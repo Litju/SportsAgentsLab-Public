@@ -1,0 +1,49 @@
+{
+  "mission": "MEASUREMENT_AGENT_ML106_START",
+  "issue": "ML-106",
+  "branch": "work/ml106-b01-force-plate-imports-config-ux-v1",
+  "authority_successor_commit": "e939074b4f04a401c3f29aa22aeaf232e3a0b550",
+  "accepted_predecessor_main_head": "a6907852bea841bd3f94279115e978e341982d00",
+  "implementation_commit": "314f194",
+  "authority_sources": [
+    "authority/MEF_B01_ML106_AUTHORITY_ACTIVATION.yaml",
+    "authority/MEF_BLOCK_DEPENDENCY_LOCK_B01_ML106.yaml",
+    "authority/MEF_B01_ML105_AUTHORITY_ACTIVATION.yaml",
+    "authority/MEF_BLOCK_DEPENDENCY_LOCK_B01_ML105.yaml",
+    "docs/BRANCH_POLICY.md"
+  ],
+  "routes": [
+    "/imports",
+    "/imports/[import_attempt_id]",
+    "/api/imports/[import_attempt_id]/observation",
+    "/api/imports/[import_attempt_id]/canonical-acquisition",
+    "/api/imports/[import_attempt_id]/configuration-resolution"
+  ],
+  "viewports": ["1440x900", "1024x900", "390x844"],
+  "browser_evidence": {
+    "intake_surface": "OBSERVED",
+    "responsive_layout": "PASS",
+    "local_detail_data": "NOT_OBSERVED_AUTHENTICATION_UNAVAILABLE",
+    "local_api_error": "AUTHENTICATION_UNAVAILABLE"
+  },
+  "checks": {
+    "authority_verifier": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "package_tests": "PASS",
+    "build": "PASS",
+    "git_diff_check": "PASS",
+    "fixed_skill_evaluation": "PASS"
+  },
+  "hosted_preview": {
+    "status": "NOT_REQUALIFIED_PLATFORM_LIMIT",
+    "note": "No hosted ML-106 campaign was rerun; the known Vercel deployment quota limitation remains in force."
+  },
+  "boundaries": [
+    "No CMJ biomechanics or scientific metric calculation",
+    "No ML-107 agent tools",
+    "No B02 implementation",
+    "No vendor catalog or marketplace",
+    "Unknown values remain UNKNOWN and are not fabricated"
+  ]
+}

@@ -1,0 +1,21 @@
+schema: sportsagentslab.config-redaction-policy.v1
+rule: preserve_structure_and_redact_values_only
+generated_templates:
+  - tracked_env_examples
+redacted_config:
+  - .github/workflows/quality.yml
+transformations:
+  database_urls: replace_credential_component_with_CHANGE_ME
+  secret_named_values: replace_literal_value_with_CHANGE_ME
+  private_key_bodies: replace_body_with_REDACTED
+preserve:
+  - variable_names
+  - ports
+  - hosts
+  - service_names
+  - workflow_steps
+  - public_model_and_endpoint_defaults
+prohibit:
+  - broad_source_rewrite
+  - architecture_replacement
+  - secret_value_logging

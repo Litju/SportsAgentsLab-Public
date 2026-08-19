@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mef/agent-boundary": ["packages/agent-boundary/src/index.ts"],
+      "@mef/control-api": ["apps/control-api/src/index.ts"],
+      "@mef/canonical-acquisition": ["packages/canonical-acquisition/src/index.ts"],
+      "@mef/acquisition-configuration": ["packages/acquisition-configuration/src/index.ts"],
+      "@mef/generated-ts": ["packages/generated-ts/src/index.ts"],
+      "@mef/ingestion-adk": ["packages/ingestion-adk/src/index.ts"],
+      "@mef/operational-state": ["packages/operational-state/src/index.ts"],
+      "@mef/scientific-boundary": ["packages/scientific-boundary/src/index.ts"]
+    }
+  },
+  "include": [
+    "apps/**/*.ts",
+    "packages/**/*.ts"
+  ]
+}

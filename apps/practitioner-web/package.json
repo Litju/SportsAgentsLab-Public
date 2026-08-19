@@ -1,0 +1,59 @@
+{
+  "name": "@mef/practitioner-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "4.0.40",
+    "@hookform/resolvers": "^5.9.0",
+    "@mef/acquisition-configuration": "workspace:*",
+    "@mef/canonical-acquisition": "workspace:*",
+    "@mef/acquisition-configuration": "workspace:*",
+    "@mef/control-api": "workspace:*",
+    "@mef/generated-ts": "workspace:*",
+    "@mef/ingestion-adk": "workspace:*",
+    "@mef/operational-state": "workspace:*",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@tanstack/react-table": "^9.1.2",
+    "@tanstack/react-virtual": "^3.14.9",
+    "@vercel/blob": "2.8.0",
+    "@xyflow/react": "^12.11.3",
+    "ai": "7.0.58",
+    "better-auth": "1.6.27",
+    "echarts": "^6.1.0",
+    "eve": "0.33.0",
+    "lucide-react": "^1.31.0",
+    "motion": "12.43.0",
+    "next": "16.3.0",
+    "pg": "8.23.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "^7.85.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/pg": "8.21.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.0",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint .",
+    "migrate:auth": "node scripts/migrate-auth.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:evals": "node --experimental-loader ../../packages/operational-state/test/ts-loader.mjs scripts/run-evals.mjs",
+    "test": "node ../../scripts/package_smoke.mjs && node --experimental-loader ../../packages/operational-state/test/ts-loader.mjs --test test/eve-auth.test.ts test/job-runtime.test.ts test/provider-adapters.test.ts test/source-import.test.ts test/measurement-agent-tools.test.ts"
+  },
+  "mefSmokePaths": [
+    "src/index.ts"
+  ]
+}

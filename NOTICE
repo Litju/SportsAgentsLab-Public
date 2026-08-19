@@ -1,2 +1,8 @@
-SportsAgentsLab is a proprietary source-available technical snapshot.
-All rights reserved. No open-source license is granted. See LICENSE.
+SportsAgentsLab is proprietary source-available software authored and owned by
+Julio Rodriguez. Copyright Julio Rodriguez 2026.
+
+This repository intentionally publishes the complete project-owned source
+tree, subject to the SportsAgentsLab Proprietary Source-Available License. It
+is not an open-source release. Third-party dependencies remain governed by
+their own licenses; dependencies are referenced through manifests and lockfiles
+and are not vendored here.

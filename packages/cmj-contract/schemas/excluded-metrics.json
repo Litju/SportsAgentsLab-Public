@@ -1,0 +1,46 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_version": "1.0.0",
+  "excluded_metrics": [
+    {
+      "metric_id": "flight_time_jump_height_m",
+      "name": "Flight-time jump height",
+      "reason": "Excluded from core; it is a distinct descriptive height definition and is not the primary impulse-momentum metric."
+    },
+    {
+      "metric_id": "rfd",
+      "name": "Rate of force development",
+      "reason": "Excluded in v1 because derivative/filter/window choices are not frozen and reliability is metric-specific."
+    },
+    {
+      "metric_id": "peak_force_arbitrary_window",
+      "name": "Arbitrary-window peak force",
+      "reason": "Excluded because the window and filtering policy are not part of the closed core."
+    },
+    {
+      "metric_id": "asymmetry_diagnosis",
+      "name": "Asymmetry diagnosis",
+      "reason": "Excluded; dual channels are preserved for provenance but no asymmetry conclusion is authorized."
+    },
+    {
+      "metric_id": "vendor_proprietary_metric",
+      "name": "Vendor-proprietary metric",
+      "reason": "Excluded; vendor outputs are not scientific authority for this contract."
+    },
+    {
+      "metric_id": "longitudinal_change",
+      "name": "Longitudinal change",
+      "reason": "Excluded; requires session/reference governance outside ML-109."
+    },
+    {
+      "metric_id": "readiness_or_fatigue",
+      "name": "Readiness or fatigue",
+      "reason": "Excluded by product scientific boundary."
+    },
+    {
+      "metric_id": "clinical_or_diagnostic_output",
+      "name": "Clinical or diagnostic output",
+      "reason": "Excluded by product scope and authority lock."
+    }
+  ]
+}

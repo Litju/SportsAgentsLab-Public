@@ -1,0 +1,20 @@
+schema: sportsagentslab.heldout-policy.v1
+rule: publish_evaluation_code_unless_intentionally_held_out
+heldout_markers:
+  - held-out
+  - held_out
+  - answer-key
+  - answer_key
+  - oracle-answer
+  - oracle_answer
+  - blind-eval
+  - blind_eval
+allowed_public_evaluation:
+  - evaluator_implementation
+  - synthetic_fixtures
+  - public_regression_tests
+  - reproducible_scientific_checks
+never_publish:
+  - private_answer_keys
+  - adjudication_records
+  - hidden_test_vectors

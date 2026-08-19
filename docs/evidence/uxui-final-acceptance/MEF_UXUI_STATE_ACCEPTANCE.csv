@@ -1,0 +1,15 @@
+id,screen_id,route,query_state,expected_state_label,http_status,screen_found,observed_state,boundary_copy_visible,scientific_authority,fixture_only,horizontal_overflow,axe_serious_critical,screenshot,visual_result,severity
+03-imports-hub--empty,03-imports-hub,/imports,empty,Empty,200,YES,empty,YES,none,true,NO,0,states/03-imports-hub--empty.png,PASS,NONE
+03-imports-hub--error,03-imports-hub,/imports,error,Error,200,YES,error,YES,none,true,NO,0,states/03-imports-hub--error.png,PASS,NONE
+06-source-mapping--blocked,06-source-mapping,/imports/artifacts/artifact_preview_001/mapping,blocked,Blocked,200,YES,blocked,YES,none,true,NO,0,states/06-source-mapping--blocked.png,PASS,NONE
+08-acquisition-config--validation-error,08-acquisition-config,/imports/artifacts/artifact_preview_001/acquisition,validation-error,Validation error,200,YES,validation-error,YES,none,true,NO,0,states/08-acquisition-config--validation-error.png,PASS,NONE
+09-trial-library--empty,09-trial-library,/trials,empty,Empty,200,YES,empty,YES,none,true,NO,0,states/09-trial-library--empty.png,PASS,NONE
+11-trial-qa--loading,11-trial-qa,/trials/trial_preview_001/qa,loading,Loading,200,YES,loading,YES,none,true,NO,0,states/11-trial-qa--loading.png,PASS,NONE
+11-trial-qa--blocked,11-trial-qa,/trials/trial_preview_001/qa,blocked,Blocked,200,YES,blocked,YES,none,true,NO,0,states/11-trial-qa--blocked.png,PASS,NONE
+14-session-queue--empty,14-session-queue,/sessions,empty,Empty,200,YES,empty,YES,none,true,NO,0,states/14-session-queue--empty.png,PASS,NONE
+16-session-adjudication--review-conflict,16-session-adjudication,/sessions/session_preview_001/adjudicate,review-conflict,Review conflict,200,YES,review-conflict,YES,none,true,NO,0,states/16-session-adjudication--review-conflict.png,PASS,NONE
+20-athlete-longitudinal--planned-only,20-athlete-longitudinal,/athletes/athlete_preview_001/longitudinal,planned-only,Planned only,200,YES,planned-only,YES,none,true,NO,0,states/20-athlete-longitudinal--planned-only.png,PASS,NONE
+21-evidence-library--loading,21-evidence-library,/evidence,loading,Loading,200,YES,loading,YES,none,true,NO,0,states/21-evidence-library--loading.png,PASS,NONE
+22-evidence-record--missing-link,22-evidence-record,/evidence/evidence_preview_001,missing-link,Missing link,200,YES,missing-link,YES,none,true,NO,0,states/22-evidence-record--missing-link.png,PASS,NONE
+29-report-builder--forbidden-claim,29-report-builder,/reports/report_preview_001,forbidden-claim,Forbidden claim,200,YES,forbidden-claim,YES,none,true,NO,0,states/29-report-builder--forbidden-claim.png,PASS,NONE
+35-integrations--degraded,35-integrations,/settings/integrations,degraded,Degraded,200,YES,degraded,YES,none,true,NO,0,states/35-integrations--degraded.png,PASS,NONE

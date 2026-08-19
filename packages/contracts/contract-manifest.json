@@ -1,0 +1,60 @@
+{
+  "contract_family": "MEF",
+  "contract_version": "1.0.0",
+  "schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+  "root_schema": "schemas/domain-contracts.schema.json",
+  "auxiliary_contracts": [
+    {"name": "IngestionAdkV01", "schema_ref": "schemas/ingestion-adk.schema.json", "api_version": "0.1.0", "generated_models": false}
+  ],
+  "compatibility_policy": "compatibility-policy.json",
+  "entities": [
+    {"name": "SourceArtifact", "schema_ref": "#/$defs/SourceArtifact", "model_file": "source_artifact", "identifier": "source_artifact_id", "state_field": "lifecycle_state"},
+    {"name": "ImportAttempt", "schema_ref": "#/$defs/ImportAttempt", "model_file": "import_attempt", "identifier": "import_attempt_id", "state_field": "attempt_state"},
+    {"name": "CanonicalAcquisition", "schema_ref": "#/$defs/CanonicalAcquisition", "model_file": "canonical_acquisition", "identifier": "canonical_acquisition_id", "state_field": "acquisition_state"},
+    {"name": "ConfigurationContract", "schema_ref": "#/$defs/ConfigurationContract", "model_file": "configuration_contract", "identifier": "configuration_contract_id", "state_field": "configuration_state"},
+    {"name": "ProtocolContract", "schema_ref": "#/$defs/ProtocolContract", "model_file": "protocol_contract", "identifier": "protocol_contract_id", "state_field": "protocol_state"},
+    {"name": "Trial", "schema_ref": "#/$defs/Trial", "model_file": "trial", "identifier": "trial_id", "state_field": "trial_state"},
+    {"name": "Session", "schema_ref": "#/$defs/Session", "model_file": "session", "identifier": "session_id", "state_field": "session_state"},
+    {"name": "MetricObservation", "schema_ref": "#/$defs/MetricObservation", "model_file": "metric_observation", "identifier": "metric_observation_id", "state_field": "observation_state"},
+    {"name": "ReferenceEpoch", "schema_ref": "#/$defs/ReferenceEpoch", "model_file": "reference_epoch", "identifier": "reference_epoch_id", "state_field": "maturity_state"},
+    {"name": "InferenceResult", "schema_ref": "#/$defs/InferenceResult", "model_file": "inference_result", "identifier": "inference_result_id", "state_field": "inference_state"},
+    {"name": "EvidenceManifest", "schema_ref": "#/$defs/EvidenceManifest", "model_file": "evidence_manifest", "identifier": "evidence_manifest_id", "state_field": "manifest_state"},
+    {"name": "PractitionerDecision", "schema_ref": "#/$defs/PractitionerDecision", "model_file": "practitioner_decision", "identifier": "practitioner_decision_id", "state_field": "decision_state"},
+    {"name": "AgentContext", "schema_ref": "#/$defs/AgentContext", "model_file": "agent_context", "identifier": "agent_context_id", "state_field": "context_state"},
+    {"name": "AuditEvent", "schema_ref": "#/$defs/AuditEvent", "model_file": "audit_event", "identifier": "audit_event_id", "state_field": "audit_action"},
+    {"name": "Command", "schema_ref": "#/$defs/Command", "model_file": "command", "identifier": "command_id", "state_field": "command_type"},
+    {"name": "Job", "schema_ref": "#/$defs/Job", "model_file": "job", "identifier": "job_id", "state_field": "state"},
+    {"name": "JobAttempt", "schema_ref": "#/$defs/JobAttempt", "model_file": "job_attempt", "identifier": "job_attempt_id", "state_field": "outcome"},
+    {"name": "ProgressEvent", "schema_ref": "#/$defs/ProgressEvent", "model_file": "progress_event", "identifier": "progress_event_id", "state_field": "message_code"}
+  ],
+  "forbidden_field_tokens": [
+    "readiness",
+    "fatigue",
+    "recovery",
+    "injury",
+    "diagnosis",
+    "clearance",
+    "causal_training_effect",
+    "training_prescription"
+  ],
+  "nominal_identifier_prefixes": {
+    "SourceArtifactId": "src_",
+    "ImportAttemptId": "imp_",
+    "CanonicalAcquisitionId": "acq_",
+    "ConfigurationContractId": "cfg_",
+    "ProtocolContractId": "pro_",
+    "TrialId": "trl_",
+    "SessionId": "ses_",
+    "MetricObservationId": "met_",
+    "ReferenceEpochId": "epoch_",
+    "InferenceResultId": "inf_",
+    "EvidenceManifestId": "evm_",
+    "PractitionerDecisionId": "dec_",
+    "AgentContextId": "ctx_",
+    "AuditEventId": "aud_",
+    "CommandId": "cmd_",
+    "JobId": "job_",
+    "JobAttemptId": "jatt_",
+    "ProgressEventId": "pev_"
+  }
+}

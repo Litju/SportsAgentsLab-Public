@@ -1,0 +1,16 @@
+{
+  "id": "mef-ui-stack-v1-cycle-0-baseline",
+  "cycle": "CYCLE_0",
+  "surface": "MEF shared shell and 38-screen pattern map",
+  "problem": "The baseline shell had fixed presentation-only data and agent surfaces, leaving dense operational state, provenance navigation and empty scientific rendering without shared interaction contracts.",
+  "proposal": "Observe the existing source-owned composition seams and preserve protected authority boundaries while evaluating bounded interaction improvements.",
+  "rollback": "No product change is introduced by the baseline observation.",
+  "evidence": {
+    "routes": 38,
+    "critical_states": 14,
+    "axe_serious_or_critical": 0,
+    "responsive_overflow": false,
+    "bundle_heavy_surfaces_lazy": true,
+    "local_api_degraded_honestly": true
+  }
+}

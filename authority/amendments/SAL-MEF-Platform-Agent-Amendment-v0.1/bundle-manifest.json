@@ -1,0 +1,284 @@
+{
+  "bundle_id": "SAL-MEF-Platform-Agent-Amendment-v0.1",
+  "version": "0.1.0",
+  "created": "2026-08-11",
+  "status": "ADOPTED",
+  "file_count_excluding_manifest_and_sha256sums": 55,
+  "files": [
+    {
+      "path": "00_AUTHORITY/AMENDMENT_AUTHORITY.yaml",
+      "size": 3511,
+      "sha256": "c40cd8aa627d38c2d0615e44dacf264e89b5cc956a0f5b8ae0a2ca3c6c2d5b35"
+    },
+    {
+      "path": "00_AUTHORITY/CHANGE_IMPACT_REGISTER.md",
+      "size": 2730,
+      "sha256": "77ea7f37a6616bce4d83b0303f41b05e3c1a7219505f867ace90a6cf944f2d29"
+    },
+    {
+      "path": "00_AUTHORITY/DECISION_REGISTER.md",
+      "size": 1814,
+      "sha256": "263d8ed10358889df85af613dfeee1f28ab5a1f76bdb824885a4ecb28b226629"
+    },
+    {
+      "path": "00_AUTHORITY/EFFECTIVE_AUTHORITY_MAP.md",
+      "size": 1746,
+      "sha256": "9925185696887270c77b12dc4476da122c3331acac7900e14d4f678a3ff3020e"
+    },
+    {
+      "path": "00_AUTHORITY/SOURCE_BASIS.md",
+      "size": 3049,
+      "sha256": "a49a6a45cb8509e595ed86f6a58beef80d93fc647e8fcac5844ddac248a2078d"
+    },
+    {
+      "path": "00_AUTHORITY/SUPERSESSION_MATRIX.yaml",
+      "size": 5684,
+      "sha256": "901a1aeb882bd31b5d221b3e0e627f6b1b4515e1c887f48294ec811ade0cbc98"
+    },
+    {
+      "path": "01_SDD/SAL-MEF-SDD-0.1-PLATFORM-AGENT-AMENDMENT-v0.1.md",
+      "size": 11978,
+      "sha256": "067f114f9eb31207b12b27106b7886555a802264574ccbe99d9b655fa3d72491"
+    },
+    {
+      "path": "02_TDD/SAL-MEF-TDD-0.1-PLATFORM-AGENT-AMENDMENT-v0.1.md",
+      "size": 14558,
+      "sha256": "f1bfe85917b5df635df24f1e0afb6d00eee891842d25736b6c77a8c83f0836e9"
+    },
+    {
+      "path": "03_ADR/ADR-031-desktop-first-web-product.md",
+      "size": 1282,
+      "sha256": "d6cae3892c842c9f23728b50ca89ec91bcc8009d2d958ebf474e73feeb085fed"
+    },
+    {
+      "path": "03_ADR/ADR-032-vercel-first-prototype-deployment.md",
+      "size": 1352,
+      "sha256": "9d10ef98083b469cc6d6f5060c01e44285d0fb9ec25d4b10c30a37e9de3a75f7"
+    },
+    {
+      "path": "03_ADR/ADR-033-adopt-eve-agent-runtime.md",
+      "size": 1349,
+      "sha256": "e9da97ca035e301f24f610a6c34f84956d58a27224791a49edea5eae68ae6720"
+    },
+    {
+      "path": "03_ADR/ADR-034-opencode-primary-model-access.md",
+      "size": 1278,
+      "sha256": "73e62263f1a34e592616832dcafeca5424a1c84115f90d147422201b60be65c8"
+    },
+    {
+      "path": "03_ADR/ADR-035-ai-sdk-is-plumbing.md",
+      "size": 1243,
+      "sha256": "3034ce30dec644f0a73ac8b9473eafbedfdaf8cc5259a46294f028c3164126ba"
+    },
+    {
+      "path": "03_ADR/ADR-036-ml97-jobs-over-temporal-v1.md",
+      "size": 1332,
+      "sha256": "5cef96140a86f84f192dabfc429a0aac1641b20b9f0d6122ed4a422c5e76740b"
+    },
+    {
+      "path": "03_ADR/ADR-037-vercel-blob-primary-adapter.md",
+      "size": 1302,
+      "sha256": "aac45661c6f3a93111f8db97f09ce8c1e89ad4d70389a3cfb9bb56f5b08d4553"
+    },
+    {
+      "path": "03_ADR/ADR-038-neon-managed-postgres-candidate.md",
+      "size": 1192,
+      "sha256": "283914b77c32410885307214ff14c18b89d8d6be351d43f495452b2e5ed165b9"
+    },
+    {
+      "path": "03_ADR/ADR-039-one-nextjs-vercel-app.md",
+      "size": 1370,
+      "sha256": "c923c456578b02542e7b6e4b2e3ae7e5775bf422b137fd8dcdd08f0a64a7d7c1"
+    },
+    {
+      "path": "03_ADR/ADR-040-preview-first-agentic-velocity.md",
+      "size": 1277,
+      "sha256": "61aef95284b1005679e0932eaacd427e70a5748ff6784b42f59d1c10ce16e330"
+    },
+    {
+      "path": "03_ADR/ADR-041-vercel-sandbox-bounded-use.md",
+      "size": 1209,
+      "sha256": "360eb874814c348e1f5d5ea99b8a07aa36cc7b31704b134eceb80e4b242b54a1"
+    },
+    {
+      "path": "03_ADR/ADR-042-vercel-first-not-coupled.md",
+      "size": 1198,
+      "sha256": "1a1ebe33c68bbafeb91bb4d9fdb907ac781ea286a8017cc77f6f3193723034c8"
+    },
+    {
+      "path": "03_ADR/ADR-043-python-hosted-adapter.md",
+      "size": 1304,
+      "sha256": "1b702238dfb5c939e153f450ba979df7b1acea32fa0e60bcf3cece7b7a088596"
+    },
+    {
+      "path": "03_ADR/ADR-044-eve-approval-is-not-authority.md",
+      "size": 1310,
+      "sha256": "c42fb2c48bae561f013aa3f9a31f491b0e5a020aed2ba0220ee4c445fbb56d28"
+    },
+    {
+      "path": "03_ADR/ADR_INDEX_AND_BASELINE_DISPOSITION.md",
+      "size": 1163,
+      "sha256": "c8e8c1fde13741ea475f8562e7fd068c7603498a868b9e0a292a96ae521b54a8"
+    },
+    {
+      "path": "04_UX/DESKTOP_WEB_SHELL_AMENDMENT.md",
+      "size": 1460,
+      "sha256": "ced84467a8a246c31aab83e4a02c14f279b0e913f3427b71401e065a87ffe37a"
+    },
+    {
+      "path": "04_UX/EVE_AGENT_DOCK_AND_SESSION_AMENDMENT.md",
+      "size": 1507,
+      "sha256": "221fae856e1dc338bc75e7ad2c29c08c9face2623a84519ce8e07a13971f0bd1"
+    },
+    {
+      "path": "04_UX/RESPONSIVE_SCOPE_AMENDMENT.md",
+      "size": 639,
+      "sha256": "4b5f13dc86e315fa350a6f29c7239b40abdeee9c487466b27c94303abf29b8bd"
+    },
+    {
+      "path": "05_DIAGRAMS/agent_tool_authority_flow.dot",
+      "size": 921,
+      "sha256": "9c202d6005c35f44780748a0cd048815ff90584f904991f1f33e603d5f84b865"
+    },
+    {
+      "path": "05_DIAGRAMS/agent_tool_authority_flow.png",
+      "size": 81293,
+      "sha256": "b07fc48f45482866b85b072f025f3740c803eb35f7565ef2b73e0007db01e63c"
+    },
+    {
+      "path": "05_DIAGRAMS/agent_tool_authority_flow.svg",
+      "size": 9364,
+      "sha256": "7bdfccdf20bc2c42050d548df139e865f540227cdc8d2bfef1130a47f7a37f57"
+    },
+    {
+      "path": "05_DIAGRAMS/deployment_topology.dot",
+      "size": 710,
+      "sha256": "dfde463be2ccde40c1a9ee4569bd5665cd81bc545f1783f27faa3d7ff65c2a96"
+    },
+    {
+      "path": "05_DIAGRAMS/deployment_topology.png",
+      "size": 45427,
+      "sha256": "f1ebb3ade65c07f90a2dfa0232ca329e247da52c023f730721a7e91cf74f2f1b"
+    },
+    {
+      "path": "05_DIAGRAMS/deployment_topology.svg",
+      "size": 6641,
+      "sha256": "bf81b21d1f705061c35d13bca56f0b5dd3515b2151926dc5ce9ec9e49ae56cb3"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_container_architecture.dot",
+      "size": 1213,
+      "sha256": "85b3c3e01492e1dac861f4e2dbc77ab62db34024b3e3667a225e24d07df6d4d4"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_container_architecture.png",
+      "size": 101834,
+      "sha256": "f7fc84a1e97348ed4aedae79f7447b90e4fcee7947c4dfc7afe4f37c2389965d"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_container_architecture.svg",
+      "size": 10270,
+      "sha256": "6c764480cb0027a9ac0d57b5cd44279c67b76c4b3b7dce7ceda618491c8751db"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_system_context.dot",
+      "size": 1314,
+      "sha256": "db0bf671ff24c73b9a3b217949725dad10030fda923c3da85318a0225575d212"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_system_context.png",
+      "size": 109479,
+      "sha256": "0a98a43bc11f8aff0133d8e35679e0095cea186a68da2190d1815f5058ebf3c5"
+    },
+    {
+      "path": "05_DIAGRAMS/effective_system_context.svg",
+      "size": 11225,
+      "sha256": "2f96debc8a9950815696b551072cc0524afe65f1f2209510d2d51e300ac4024f"
+    },
+    {
+      "path": "05_DIAGRAMS/preview_delivery_flow.dot",
+      "size": 572,
+      "sha256": "e377ef78e041af9fc0dfa05426a393cc002e918159d7405e7e3df101a4879938"
+    },
+    {
+      "path": "05_DIAGRAMS/preview_delivery_flow.png",
+      "size": 35773,
+      "sha256": "4d3c48c0b18baed02b0858f7756931db70b5441ebe00874d74a6e899743a70be"
+    },
+    {
+      "path": "05_DIAGRAMS/preview_delivery_flow.svg",
+      "size": 5851,
+      "sha256": "ee38779d15ed354f0a863d41453e7eeabcfa2a1f757b07ba38c5e9f60baa0f74"
+    },
+    {
+      "path": "05_DIAGRAMS/request_job_execution_flow.dot",
+      "size": 737,
+      "sha256": "a160db71e9705f3faf443cdd3e2fb8e9ec597302db12ab1a9f35997e3b809697"
+    },
+    {
+      "path": "05_DIAGRAMS/request_job_execution_flow.png",
+      "size": 47241,
+      "sha256": "6b6d40b6f536bc46549d3fbb372a0924578dec4e757e58189710a83458f25209"
+    },
+    {
+      "path": "05_DIAGRAMS/request_job_execution_flow.svg",
+      "size": 8104,
+      "sha256": "d67dbfa16776bd7cb2e064f581a966efe312ca3089ee833b3e81d843629ef1d5"
+    },
+    {
+      "path": "06_MIGRATION/IMPLEMENTATION_SEQUENCE.md",
+      "size": 910,
+      "sha256": "823d27db151b527463773038f63dd5c7cae2ce6f3510132c349343f1d4014c9b"
+    },
+    {
+      "path": "06_MIGRATION/PLATFORM_REFACTOR_PLAN.md",
+      "size": 2620,
+      "sha256": "1474d663242cd061a0b2c4eea0f5b82fc8ace0dbc8908ea20aed1f84a0c91150"
+    },
+    {
+      "path": "06_MIGRATION/PRESERVED_VS_CHANGED.md",
+      "size": 1233,
+      "sha256": "976a8c68f20f2d76e3f5b09e5745aea04ca775bbb805c17a92f7af02e8917145"
+    },
+    {
+      "path": "06_MIGRATION/ROADMAP_INSERTION.md",
+      "size": 1187,
+      "sha256": "82c95cffc31c1eec85ddc3630ee79e8cd89e9ff31c9bb7653d3f32f3728c536e"
+    },
+    {
+      "path": "07_VALIDATION/AMENDMENT_ACCEPTANCE_CRITERIA.md",
+      "size": 942,
+      "sha256": "1bd1d929413629c56d45976fa7ac9d837c683b050bc77fa27bfcfd4479066754"
+    },
+    {
+      "path": "07_VALIDATION/ARCHITECTURE_INVARIANTS.md",
+      "size": 1524,
+      "sha256": "53ee93afc03b0e2dae3f024f3f551e3c4f623263fa2c6c5ab935a95ba229d744"
+    },
+    {
+      "path": "07_VALIDATION/PLATFORM_QUALIFICATION_PLAN.md",
+      "size": 1939,
+      "sha256": "0b454ec3980f1ae977357486afce61b9ee35173dc147e3aa95225fa3ecbf1bf6"
+    },
+    {
+      "path": "07_VALIDATION/THREAT_BOUNDARY_DELTA.md",
+      "size": 1055,
+      "sha256": "dde32380d38b45b1909f30d23bcff951c7a25a7aced9329166318e83a57489f0"
+    },
+    {
+      "path": "08_HANDOFF/LINEAR_ISSUE_PROPOSALS.md",
+      "size": 1705,
+      "sha256": "51f2c1e3c61bac4df3c5b308bdaa29db28ddf5e9fa5b27d2912d63e9f3c09ccd"
+    },
+    {
+      "path": "08_HANDOFF/LUNA_REPO_MATERIALIZATION_PROMPT.md",
+      "size": 2470,
+      "sha256": "9842b9f15e10ba655f58cb73a0fcdd587c6896b45840612531090c2274de9345"
+    },
+    {
+      "path": "README.md",
+      "size": 4903,
+      "sha256": "f14b387a03ff4bddf56f4ac1e3b67f9ce6f495ae736147a087d237ddf3b95d0a"
+    }
+  ]
+}

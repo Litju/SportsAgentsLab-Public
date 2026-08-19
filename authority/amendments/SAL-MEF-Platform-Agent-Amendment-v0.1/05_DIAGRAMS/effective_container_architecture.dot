@@ -1,0 +1,28 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", labelloc=t, label="MEF Effective Container / Deployment Architecture", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  subgraph cluster_vercel {
+    label="Vercel prototype/development profile";
+    web [label="apps/practitioner-web\nNext.js deployment"];
+    routes [label="Same-origin route handlers\nControl/API adapters"];
+    eve [label="agent/\nEve"];
+    vadapter [label="Vercel deployment adapters\nBlob / optional Sandbox"];
+    pyfn [label="Python Function adapter\neligible after qualification", style="rounded,dashed"];
+  }
+  opencode [label="OpenCode Go API"];
+  neon [label="Managed PostgreSQL\nNeon initial candidate"];
+  blob [label="Private Vercel Blob"];
+  core [label="Framework-neutral packages\ncontracts • agent-boundary • operational-state"];
+  science [label="scientific/kernel\nPython"];
+  web -> routes;
+  web -> eve;
+  eve -> opencode;
+  eve -> routes [label="tools"];
+  routes -> core;
+  core -> neon;
+  core -> vadapter;
+  vadapter -> blob;
+  routes -> pyfn [label="worker adapter", style=dashed];
+  pyfn -> science [style=dashed];
+  core -> science [label="local/replaceable worker port", style=dashed];
+}

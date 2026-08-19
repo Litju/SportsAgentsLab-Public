@@ -1,0 +1,18 @@
+{
+  "manifest_version": "1.0.0",
+  "scope": "ML-102 immutable source bytes and import-attempt qualification",
+  "scientific_data": false,
+  "fixtures": [
+    { "path": "valid-small.csv", "byte_size": 56, "sha256": "0eb0aabcc4d1c4f1b9e228d678bcf37bd42367041527ff1aa1501047f92efa96" },
+    { "path": "valid-small-copy.csv", "byte_size": 56, "sha256": "0eb0aabcc4d1c4f1b9e228d678bcf37bd42367041527ff1aa1501047f92efa96" },
+    { "path": "same-name-different-bytes.csv", "byte_size": 38, "sha256": "5f9f80e0dfe74858038500efedd00b9421ad1e57c2e2537f2711f3045c6229e4", "upload_filename_for_comparison": "valid-small.csv" },
+    { "path": "empty.csv", "byte_size": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" },
+    { "path": "unsupported.bin", "byte_size": 36, "sha256": "b7790874186d5e4f0837a5a2e5fdb2158ce523727e50f6f03bcdd3900e60cc48" },
+    { "path": "unicode-name-測試.csv", "byte_size": 40, "sha256": "92f27c88abedf463ddd946917aeff04bf0729983210c84dbe9f0f83e306285ec" },
+    { "path": "path-traversal-name.fixture.csv", "byte_size": 37, "sha256": "8910cbcdf0a84bd0c5a87ce3fb4af10be3e46bc48d178760adbaed0c5c5a5215", "requested_filename_for_negative_case": "../path-traversal-name.fixture.csv" },
+    { "path": "moderate-streaming.csv", "byte_size": 343, "sha256": "b3a0d7c2d48c2c8a419081eed83a8e82412b794e6f4fe3fd28d3d8044d8e015c" },
+    { "path": "binary-bytes.bin.base64", "byte_size": 9, "sha256": "e63ba5a133471f4aa5c22f8c15eb4a097498be346affb80fcdee4bc33eab9254", "decoded_byte_size": 4, "decoded_sha256": "b992c48eafa5b8b91c4e1cbcc8da823f67db7516cbcbf7c57b13a3e6cc84bbfd" },
+    { "path": "qualification-source.csv", "byte_size": 59, "sha256": "933922d665e0106303cccc9ac5b6704900d0a4d2ed49495cd4258280bfd4826d" },
+    { "path": "qualification-unsupported.vendorbin", "byte_size": 30, "sha256": "c4d3971aeb60a154a99b8463308670c4f65c42c999df2e536e067bfcacadfcbe" }
+  ]
+}

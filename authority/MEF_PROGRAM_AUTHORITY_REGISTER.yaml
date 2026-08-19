@@ -1,0 +1,1196 @@
+register_id: MEF-PROGRAM-AUTHORITY-REGISTER
+version: 1.1.0
+status: NORMATIVE
+acceptance: FOUNDER_REVIEW_REQUIRED
+mission: SPORTSAGENTSLAB_MEF_ML93_PROGRAM_AUTHORITY_FREEZE
+linear_issue: ML-93
+milestone: B00_PROGRAM_AUTHORITY_AND_ENGINEERING_FOUNDATION
+repository: <LOCAL_PATH_REDACTED>
+branch: work/ml93-program-authority-freeze
+base_head: f70ab7e44b54eca17d4e172d4ef7b970abb4f267
+current_head_at_freeze: f70ab7e44b54eca17d4e172d4ef7b970abb4f267
+staged_files_at_freeze: 0
+product_implementation: FORBIDDEN
+scientific_implementation: FORBIDDEN
+monorepo_topology_design: FORBIDDEN
+linear_mutation: FORBIDDEN
+git_commit_push: FORBIDDEN
+status_vocabulary: [NORMATIVE, INFORMATIVE, PROPOSED, SUPERSEDED, IMPLEMENTATION_EVIDENCE, REJECTED, FOUNDER_CURATED_CANDIDATE, ADOPTED]
+source_bundles:
+  - id: "MEF-SOURCE-BUNDLE-UX-V030"
+    filename: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    repository_path: "authority/SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    expected_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    member_count: 27
+    status: "NORMATIVE"
+    internal_hash_manifest: "SAL-MEF-UX-UI-FREEZE-v0.3/SHA256SUMS"
+    notes: "Frozen UX/UI authority; internal checksum manifest reconciled."
+  - id: "MEF-SOURCE-BUNDLE-DIAGRAMS-20260803"
+    filename: "SAL-MEF-Architecture-Diagrams.zip"
+    repository_path: "authority/SAL-MEF-Architecture-Diagrams.zip"
+    sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    expected_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    member_count: 21
+    status: "PROPOSED"
+    internal_hash_manifest: "none"
+    notes: "Architecture diagram rendering/source supplement; duplicated DOT/PNG sources match the dated architecture bundle."
+  - id: "MEF-SOURCE-BUNDLE-ARCH-20260803"
+    filename: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    repository_path: "authority/SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    expected_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    member_count: 24
+    status: "PROPOSED"
+    internal_hash_manifest: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/bundle-manifest.json"
+    notes: "Curated architecture baseline for owner review; implementation_authorized=false."
+authority_precedence:
+  - rank: 1
+    authority: Founder ML-93 sequencing and product-identity decision
+    controls: Current product identity, initial scope, B00 gate, repository boundary, and prohibition on implementation/topology inference.
+  - rank: 2
+    authority: SAL-MEF-UX-UI-FREEZE-v0.3 internal freeze record and UXD v0.3.0 contracts
+    controls: Frozen UX identity, routes, screen/state model, MEF Agent UX, accessibility, and UX safety boundary.
+  - rank: 3
+    authority: SAL-MEF-ADR-0.1, SAL-MEF-SDD-0.1, and SAL-MEF-TDD-0.1 curated baseline
+    controls: Proposed architecture/scientific/evidence baseline and internal accepted ADR directions; no implementation authority is granted by the source documents.
+  - rank: 4
+    authority: Architecture diagram DOT sources and rendered representations
+    controls: Supporting/proposed visualization of the dated architecture baseline; byte-identical duplicates are not competing authority.
+  - rank: 5
+    authority: SportsAgentsLab Engineering Control Plane
+    controls: Development-time skills, personas, QA, reviewer separation, and Windows-native execution; it is not MEF product authority or runtime architecture.
+  - rank: 6
+    authority: Live Git state and raw QA evidence
+    controls: Observable repository, branch, staging, diff, commands, and review results; cannot broaden product authority.
+artifacts:
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-A11Y-REPORT-JSON"
+    name: "implementation evidence: a11y-report.json"
+    artifact_type: "implementation_evidence"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/a11y-report.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "IMPLEMENTATION_EVIDENCE"
+    sha256: "70072e7084f62f9541b8b17a60f63190d0bf70928859b068ff295bc632c2ea94"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["accessibility"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-DOCX"]
+    notes: "Source-bundle accessibility evidence; not product implementation evidence."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-01-INFORMATION-ARCHITECTURE-AND-ROUTES-MD"
+    name: "ux contract: 01_INFORMATION_ARCHITECTURE_AND_ROUTES.md"
+    artifact_type: "ux_contract"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/contracts/01_INFORMATION_ARCHITECTURE_AND_ROUTES.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "a8732a7259f77f75c7730ef8733db76c7217ea464a027d1bf27764a781fdf7a5"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_navigation", "routes", "navigation"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-02-SCREEN-CONTRACT-REGISTRY-MD"
+    name: "ux contract: 02_SCREEN_CONTRACT_REGISTRY.md"
+    artifact_type: "ux_contract"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/contracts/02_SCREEN_CONTRACT_REGISTRY.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "9bb58ecd6d86d221cad913f07992c99dd59f7f128bad9c8c963f88263fb7fb15"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_screens", "states", "error_states"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-03-PERSISTENT-MEF-AGENT-CONTRACT-MD"
+    name: "ux contract: 03_PERSISTENT_MEF_AGENT_CONTRACT.md"
+    artifact_type: "ux_contract"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/contracts/03_PERSISTENT_MEF_AGENT_CONTRACT.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "a711f3e391c2e2f22be2821aa326d5518e82c10bed7f61834e02c43942d4b1c6"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["agent_identity", "agent_memory", "agent_safety"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-04-MEASUREMENT-CASE-STATE-MODEL-MD"
+    name: "ux contract: 04_MEASUREMENT_CASE_STATE_MODEL.md"
+    artifact_type: "ux_contract"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/contracts/04_MEASUREMENT_CASE_STATE_MODEL.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "baa99dac06b961eb81e3e928e9af3949c38d9362f9f5f3b300eb532cc7b0de37"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_state_model", "unknown_semantics", "override_semantics"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-05-UX-IMPLEMENTATION-ACCEPTANCE-GATES-MD"
+    name: "ux contract: 05_UX_IMPLEMENTATION_ACCEPTANCE_GATES.md"
+    artifact_type: "ux_contract"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/contracts/05_UX_IMPLEMENTATION_ACCEPTANCE_GATES.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "5a9825b9a3b3c6f746f7d39b9f0a79cdf10b93d401e7e200e1df9a4c8834159e"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_acceptance", "accessibility", "safety"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD", "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-CONTRACTS-03-PERSISTENT-MEF-AGENT-CONTRACT-MD"]
+    notes: "Frozen UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-INFORMATION-ARCHITECTURE-DOT"
+    name: "diagram source: information_architecture.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/information_architecture.dot"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "19f53b4b52814c413fb1f5a4cbb52d4ae49c7030008a8d2f738062de90ee3ddf"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_visual_architecture"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX diagram source."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-INFORMATION-ARCHITECTURE-PNG"
+    name: "diagram rendering: information_architecture.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/information_architecture.png"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "11a48021bc94679cadcf46e50255ef36469ef49ffd15e26bfa179bdd98e1e9db"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-INFORMATION-ARCHITECTURE-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-INFORMATION-ARCHITECTURE-SVG"
+    name: "diagram rendering: information_architecture.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/information_architecture.svg"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "ada2d2ca01bd3030fcb670e9a7ff74746c8922487393f7199bd41f4f04ca459e"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-INFORMATION-ARCHITECTURE-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-OVERVIEW-DASHBOARD-ANATOMY-DOT"
+    name: "diagram source: overview_dashboard_anatomy.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/overview_dashboard_anatomy.dot"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "d0fb335988a82a71e36fa56239ad1669d40a8ff4b84465cab376258e77885c6a"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_visual_architecture"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX diagram source."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-OVERVIEW-DASHBOARD-ANATOMY-PNG"
+    name: "diagram rendering: overview_dashboard_anatomy.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/overview_dashboard_anatomy.png"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "a55f44000951f008e9e92b594de46fffdd5884cae9e9bb5e46b029bc43a0b9a3"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-OVERVIEW-DASHBOARD-ANATOMY-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-OVERVIEW-DASHBOARD-ANATOMY-SVG"
+    name: "diagram rendering: overview_dashboard_anatomy.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/overview_dashboard_anatomy.svg"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "74da205dd04d123f0d10f1fc936b055004e99f168d274a6992a7a71319bebb1c"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-OVERVIEW-DASHBOARD-ANATOMY-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-TEST-DETAIL-WORKFLOW-DOT"
+    name: "diagram source: test_detail_workflow.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/test_detail_workflow.dot"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "e4d0d1f450d09498882045d9a7f0b1ec3213aa53de35ee301a1a3d58ffc3ff40"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_visual_architecture"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Frozen UX diagram source."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-TEST-DETAIL-WORKFLOW-PNG"
+    name: "diagram rendering: test_detail_workflow.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/test_detail_workflow.png"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "cbbd8c56903005f1b3161f54e254382f15102d3d6f030ce6377b171646be24b7"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-TEST-DETAIL-WORKFLOW-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-TEST-DETAIL-WORKFLOW-SVG"
+    name: "diagram rendering: test_detail_workflow.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/diagrams/test_detail_workflow.svg"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "1f4a1c459c15b18ebc03314d21eac9b116a2362119941000781b47a9484b361c"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-DIAGRAMS-TEST-DETAIL-WORKFLOW-DOT"]
+    notes: "Rendered UX diagram; labels and visual relationship inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-FREEZE-RECORD-MD"
+    name: "freeze record: FREEZE_RECORD.md"
+    artifact_type: "freeze_record"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/FREEZE_RECORD.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "1e7536c70fb25a930280f531d0f1ee125a731f88ae627adb9863d5fd04005436"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["product_identity", "initial_scope", "ux_freeze", "forbidden_claims", "human_authority"]
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Explicitly frozen for implementation planning; rejected concepts are recorded inside the file."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-IMPLEMENTATION-SEQUENCE-DECISION-BRIEF-MD"
+    name: "decision brief: IMPLEMENTATION_SEQUENCE_DECISION_BRIEF.md"
+    artifact_type: "decision_brief"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/IMPLEMENTATION_SEQUENCE_DECISION_BRIEF.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "PROPOSED"
+    sha256: "4a8e0b2590ddbcac5edb37a54df11abf86953a1ffe3cfb03d6901be5ea263492"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Decision support only; no implementation sequence is selected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-README-MD"
+    name: "readme: README.md"
+    artifact_type: "readme"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/README.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "01f2efa8c5e9c8db4dd73dab85fd877aa4e1bfdb3be0205061408da23b8b71e9"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Bundle orientation and authority boundary."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-DOCX"
+    name: "document representation: SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.docx"
+    artifact_type: "document_representation"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.docx"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "0c10b9bfe31debe8f45838fc698d3172f1a6c03d3c2aa6b79f4efb8b1f4de517"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Rendered UX specification representation; extracted content inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"
+    name: "ux design spec: SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.md"
+    artifact_type: "ux_design_spec"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.md"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "f6beb41a3032d2ae58a60df3b21c11b004ef5f4ec67025811eb1e2f11b4ff4d4"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_freeze", "visual_language", "responsive_behavior", "accessibility", "forbidden_claims"]
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Canonical readable UX specification."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-PDF"
+    name: "document representation: SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.pdf"
+    artifact_type: "document_representation"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/SAL-MEF-UX-UI-DESIGN-FREEZE-v0.3.pdf"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "de6e7a0b2531d8b5429cc76feec6231803d04941229beff62f019c59db6a835f"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Rendered UX specification representation; extracted content inspected."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SCHEMAS-ASSISTANT-CONTEXT-SCHEMA-JSON"
+    name: "schema: assistant-context.schema.json"
+    artifact_type: "schema"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/schemas/assistant-context.schema.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "a9be1264cee41fe436361cb42969b29afb43e2db82b884a2652016f48ad3a4e9"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["agent_context"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Machine-readable UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SCHEMAS-DASHBOARD-PROFILE-SCHEMA-JSON"
+    name: "schema: dashboard-profile.schema.json"
+    artifact_type: "schema"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/schemas/dashboard-profile.schema.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "1cd46634f852980b886cf9a350f4b462925d65394d0f225bf6b875cfd305db45"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["dashboard_profiles", "reference_context"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Machine-readable UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SCHEMAS-NAVIGATION-CONTRACT-JSON"
+    name: "schema: navigation.contract.json"
+    artifact_type: "schema"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/schemas/navigation.contract.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "fa2edd7a73a882f38392294a55c7e519e3421b8884c323d19b9c44a788755612"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_navigation", "routes"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Machine-readable UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SCHEMAS-SCREEN-STATE-REGISTRY-JSON"
+    name: "schema: screen-state-registry.json"
+    artifact_type: "schema"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/schemas/screen-state-registry.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "9484922afa084a972cccfa52a42eff0d98a10d9927aa6bba07699aaecc6981c5"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_state_model", "error_states"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Machine-readable UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SCHEMAS-UX-FREEZE-MANIFEST-JSON"
+    name: "schema: ux-freeze-manifest.json"
+    artifact_type: "schema"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/schemas/ux-freeze-manifest.json"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "NORMATIVE"
+    sha256: "d74cbf83257e5254de368eaed63017917c1ce039a1f2836103009df1fde3f533"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: ["ux_freeze_manifest"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SAL-MEF-UX-UI-DESIGN-FREEZE-V0-3-MD"]
+    notes: "Machine-readable UX contract."
+  - id: "MEF-UX-SAL-MEF-UX-UI-FREEZE-V0-3-SHA256SUMS"
+    name: "checksum manifest: SHA256SUMS"
+    artifact_type: "checksum_manifest"
+    source_bundle: "SAL-MEF-UX-UI-FREEZE-v0.3.zip"
+    internal_path: "SAL-MEF-UX-UI-FREEZE-v0.3/SHA256SUMS"
+    owner: "SportsAgentsLab product and UX authority (role; individual not named in bundle)"
+    version: "0.3.0"
+    status: "INFORMATIVE"
+    sha256: "2797eebb6bc481fd08fcaf78390089b5987e9f9640825563d620b24a8a9dba72"
+    container_sha256: "a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Internal checksum evidence."
+  - id: "MEF-DIAG-CONTAINER-ARCHITECTURE-DOT"
+    name: "diagram source: container_architecture.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "container_architecture.dot"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "09797fbe59d76706b5ccbc66a8184852b3228af03934dc9186727fb452fc66cd"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-CONTAINER-ARCHITECTURE-DOT"]
+    notes: "Architecture source duplicated byte-for-byte in the dated architecture bundle."
+  - id: "MEF-DIAG-CONTAINER-ARCHITECTURE-PDF"
+    name: "diagram rendering: container_architecture.pdf"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "container_architecture.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "03a38a213f180e089df6c2334dc159323eb81c02f1c6aa5647bf17627a0d74bd"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-CONTAINER-ARCHITECTURE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-CONTAINER-ARCHITECTURE-PNG"
+    name: "diagram rendering: container_architecture.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "container_architecture.png"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "1754f8cf37e869e97ad986af6643121b721085e506f7bafed7c61850e170fa47"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-CONTAINER-ARCHITECTURE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-CONTAINER-ARCHITECTURE-SVG"
+    name: "diagram rendering: container_architecture.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "container_architecture.svg"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "3ff40a95b97af06aa940e0d0df1ce8275b114de6237a3600ebffc421107704a3"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-CONTAINER-ARCHITECTURE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-EVIDENCE-STATE-DOT"
+    name: "diagram source: evidence_state.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "evidence_state.dot"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "6b38bf0e6de5f7e50b191edbf519ae9f38b64ffc9eee29f9fae084032644fe19"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-EVIDENCE-STATE-DOT"]
+    notes: "Architecture source duplicated byte-for-byte in the dated architecture bundle."
+  - id: "MEF-DIAG-EVIDENCE-STATE-PDF"
+    name: "diagram rendering: evidence_state.pdf"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "evidence_state.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "75e57b831927b4926fa57cbd0466d97a8bcb744552e328b3b8b11c97ed0df4c5"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-EVIDENCE-STATE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-EVIDENCE-STATE-PNG"
+    name: "diagram rendering: evidence_state.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "evidence_state.png"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "6607e8f7065139e956b4ceb90c293f177e966c9998505ad41f3cb22685327460"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-EVIDENCE-STATE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-EVIDENCE-STATE-SVG"
+    name: "diagram rendering: evidence_state.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "evidence_state.svg"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "d0aaa6b4df7cb7efff527611f95e4b9866e0383d6845507726747dff32def1f7"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-EVIDENCE-STATE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-RELEASE-FACTORY-DOT"
+    name: "diagram source: release_factory.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "release_factory.dot"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "fbc59f5205af87c8ec99e37d19276b235872c0eaa8c9cf89eb64133fd6822262"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-RELEASE-FACTORY-DOT"]
+    notes: "Architecture source duplicated byte-for-byte in the dated architecture bundle."
+  - id: "MEF-DIAG-RELEASE-FACTORY-PDF"
+    name: "diagram rendering: release_factory.pdf"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "release_factory.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "b872d628cede031a142d617ccba509ae54d371b0b2ad495ef731867eb73fa896"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-RELEASE-FACTORY-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-RELEASE-FACTORY-PNG"
+    name: "diagram rendering: release_factory.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "release_factory.png"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "40bf9a1b014091680d38896bd55f09a16e845b0115c5db31e6630aa0b752df61"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-RELEASE-FACTORY-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-RELEASE-FACTORY-SVG"
+    name: "diagram rendering: release_factory.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "release_factory.svg"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "1576af035873d3f383b5ae5531abe33208a7078bf4ff7b6efc162447d8e96958"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-RELEASE-FACTORY-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SAL-MEF-ARCHITECTURE-DIAGRAMS-PDF"
+    name: "diagram compendium: SAL-MEF-Architecture-Diagrams.pdf"
+    artifact_type: "diagram_compendium"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "SAL-MEF-Architecture-Diagrams.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "f6e11f7b96d99243c9e9e97ee2a66d9b7989d4bc29e2549d4dd82b2ff374b95b"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-CONTAINER-ARCHITECTURE-DOT", "MEF-DIAG-SYSTEM-CONTEXT-DOT", "MEF-DIAG-SCIENTIFIC-PIPELINE-DOT", "MEF-DIAG-RELEASE-FACTORY-DOT", "MEF-DIAG-EVIDENCE-STATE-DOT"]
+    notes: "Rendered architecture diagram compendium; text and pages inspected."
+  - id: "MEF-DIAG-SCIENTIFIC-PIPELINE-DOT"
+    name: "diagram source: scientific_pipeline.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "scientific_pipeline.dot"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "71fc498bb93c3e37f59e5fbba9de7824c260de7b78c9ff724be5157bc4a4c8ce"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SCIENTIFIC-PIPELINE-DOT"]
+    notes: "Architecture source duplicated byte-for-byte in the dated architecture bundle."
+  - id: "MEF-DIAG-SCIENTIFIC-PIPELINE-PDF"
+    name: "diagram rendering: scientific_pipeline.pdf"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "scientific_pipeline.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "e4d09805c12c1855c69f8aafbf3e987caf35f67f1c5c1c8921024e555affd6a2"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SCIENTIFIC-PIPELINE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SCIENTIFIC-PIPELINE-PNG"
+    name: "diagram rendering: scientific_pipeline.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "scientific_pipeline.png"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "470984d7aca0cd0d9a369a8acb67f2b9a8d7bb9a86125371ac3b482d066f277f"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SCIENTIFIC-PIPELINE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SCIENTIFIC-PIPELINE-SVG"
+    name: "diagram rendering: scientific_pipeline.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "scientific_pipeline.svg"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "3f2f5c1c6d56a493317b15dbfb4203e9d0022e44d5c70b7c63978a8180c27b23"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SCIENTIFIC-PIPELINE-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SYSTEM-CONTEXT-DOT"
+    name: "diagram source: system_context.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "system_context.dot"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "233eab6e5b5e0364dfb563147ba49aa1fdb1b3caa1b5157fb23b60f460cbf43f"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SYSTEM-CONTEXT-DOT"]
+    notes: "Architecture source duplicated byte-for-byte in the dated architecture bundle."
+  - id: "MEF-DIAG-SYSTEM-CONTEXT-PDF"
+    name: "diagram rendering: system_context.pdf"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "system_context.pdf"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "9e68a804bf46f0b9140270a1925b38c60849189b7de49f15fecc6a25a9024c22"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SYSTEM-CONTEXT-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SYSTEM-CONTEXT-PNG"
+    name: "diagram rendering: system_context.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "system_context.png"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "b2d4c22c0dd96267d47217e55f0745e04aa011e9df5618dc62c3452b4aac2d21"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SYSTEM-CONTEXT-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-DIAG-SYSTEM-CONTEXT-SVG"
+    name: "diagram rendering: system_context.svg"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SAL-MEF-Architecture-Diagrams.zip"
+    internal_path: "system_context.svg"
+    owner: "SportsAgentsLab architecture authority (rendering bundle; individual not named)"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "5e0eeb6de70a259a538917ad37fd7c21840ca2526b562ad25e980c53db65e908"
+    container_sha256: "1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-DIAG-SYSTEM-CONTEXT-DOT"]
+    notes: "Architecture rendering; visual labels inspected and hashes reconciled."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-BUNDLE-MANIFEST-JSON"
+    name: "bundle manifest: bundle-manifest.json"
+    artifact_type: "bundle_manifest"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/bundle-manifest.json"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "efbaca098cc902718561fd3ed2fdb1ccb7fbff81e2f632ae36eb02c078338cdf"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Bundle member sizes and SHA-256 manifest; independently verified."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-CONTAINER-ARCHITECTURE-DOT"
+    name: "diagram source: container_architecture.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/container_architecture.dot"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "09797fbe59d76706b5ccbc66a8184852b3228af03934dc9186727fb452fc66cd"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Proposed architecture diagram source."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-CONTAINER-ARCHITECTURE-PNG"
+    name: "diagram rendering: container_architecture.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/container_architecture.png"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "1754f8cf37e869e97ad986af6643121b721085e506f7bafed7c61850e170fa47"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-CONTAINER-ARCHITECTURE-DOT"]
+    notes: "Proposed architecture diagram rendering."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-EVIDENCE-STATE-DOT"
+    name: "diagram source: evidence_state.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/evidence_state.dot"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "6b38bf0e6de5f7e50b191edbf519ae9f38b64ffc9eee29f9fae084032644fe19"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Proposed architecture diagram source."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-EVIDENCE-STATE-PNG"
+    name: "diagram rendering: evidence_state.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/evidence_state.png"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "6607e8f7065139e956b4ceb90c293f177e966c9998505ad41f3cb22685327460"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-EVIDENCE-STATE-DOT"]
+    notes: "Proposed architecture diagram rendering."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-RELEASE-FACTORY-DOT"
+    name: "diagram source: release_factory.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/release_factory.dot"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "fbc59f5205af87c8ec99e37d19276b235872c0eaa8c9cf89eb64133fd6822262"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Proposed architecture diagram source."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-RELEASE-FACTORY-PNG"
+    name: "diagram rendering: release_factory.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/release_factory.png"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "40bf9a1b014091680d38896bd55f09a16e845b0115c5db31e6630aa0b752df61"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-RELEASE-FACTORY-DOT"]
+    notes: "Proposed architecture diagram rendering."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SCIENTIFIC-PIPELINE-DOT"
+    name: "diagram source: scientific_pipeline.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/scientific_pipeline.dot"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "71fc498bb93c3e37f59e5fbba9de7824c260de7b78c9ff724be5157bc4a4c8ce"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Proposed architecture diagram source."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SCIENTIFIC-PIPELINE-PNG"
+    name: "diagram rendering: scientific_pipeline.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/scientific_pipeline.png"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "470984d7aca0cd0d9a369a8acb67f2b9a8d7bb9a86125371ac3b482d066f277f"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SCIENTIFIC-PIPELINE-DOT"]
+    notes: "Proposed architecture diagram rendering."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SYSTEM-CONTEXT-DOT"
+    name: "diagram source: system_context.dot"
+    artifact_type: "diagram_source"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/system_context.dot"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "PROPOSED"
+    sha256: "233eab6e5b5e0364dfb563147ba49aa1fdb1b3caa1b5157fb23b60f460cbf43f"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_architecture_visualization"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Proposed architecture diagram source."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SYSTEM-CONTEXT-PNG"
+    name: "diagram rendering: system_context.png"
+    artifact_type: "diagram_rendering"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/diagrams/system_context.png"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "b2d4c22c0dd96267d47217e55f0745e04aa011e9df5618dc62c3452b4aac2d21"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-DIAGRAMS-SYSTEM-CONTEXT-DOT"]
+    notes: "Proposed architecture diagram rendering."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-QUALITY-SAL-MEF-ADR-0-1-A11Y-JSON"
+    name: "implementation evidence: SAL-MEF-ADR-0.1.a11y.json"
+    artifact_type: "implementation_evidence"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/quality/SAL-MEF-ADR-0.1.a11y.json"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "IMPLEMENTATION_EVIDENCE"
+    sha256: "65191395c99aa992f6d3f6413b79f58a039aad2dd670654db3a6d130b421cb06"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["source_document_accessibility"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-DOCX"]
+    notes: "Source-bundle accessibility evidence; not product implementation evidence."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-QUALITY-SAL-MEF-SDD-0-1-A11Y-JSON"
+    name: "implementation evidence: SAL-MEF-SDD-0.1.a11y.json"
+    artifact_type: "implementation_evidence"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/quality/SAL-MEF-SDD-0.1.a11y.json"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "IMPLEMENTATION_EVIDENCE"
+    sha256: "893377c67c6ead00c95b61cb457f6686b900d39aaa900ac0ca050aa53ee175a1"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["source_document_accessibility"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-DOCX"]
+    notes: "Source-bundle accessibility evidence; not product implementation evidence."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-QUALITY-SAL-MEF-TDD-0-1-A11Y-JSON"
+    name: "implementation evidence: SAL-MEF-TDD-0.1.a11y.json"
+    artifact_type: "implementation_evidence"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/quality/SAL-MEF-TDD-0.1.a11y.json"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "IMPLEMENTATION_EVIDENCE"
+    sha256: "1b133b12c519222d0a64a7d2f4881599876566a17acdd2e131817b574181e764"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["source_document_accessibility"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-DOCX"]
+    notes: "Source-bundle accessibility evidence; not product implementation evidence."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-README-MD"
+    name: "readme: README.md"
+    artifact_type: "readme"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/README.md"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "6107054afd017e83f191146f34e3305b1b288152979435cab67203a212b4f24f"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "Curated architecture bundle orientation; implementation authority is withheld."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-DOCX"
+    name: "document representation: SAL-MEF-ADR-0.1.docx"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-ADR-0.1.docx"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "3801e9176e4643a2222cf5cfbc324dac55e459128b5f17d9d5b4d86bdc390b60"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-MD"
+    name: "adr compendium: SAL-MEF-ADR-0.1.md"
+    artifact_type: "adr_compendium"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-ADR-0.1.md"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "0.1.0"
+    status: "PROPOSED"
+    sha256: "9ba4a29b846ac8475f6350baed98628f87a314287bb2e8fb0664c4d90011e6c0"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["architecture_decisions", "scientific_boundary", "human_authority", "evidence_authority"]
+    supersedes: []
+    superseded_by: []
+    dependencies: []
+    notes: "CURATED_BASELINE_FOR_OWNER_REVIEW; implementation authority explicitly withheld."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-PDF"
+    name: "document representation: SAL-MEF-ADR-0.1.pdf"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-ADR-0.1.pdf"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "ccd5effd6bfd2f45a7f98c37f43ed173b48712e627cb8dd44dbac99d32be3e45"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-DOCX"
+    name: "document representation: SAL-MEF-SDD-0.1.docx"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-SDD-0.1.docx"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "037ddad214ca7ebd685ad008815ca50dab916c60b3757625321aec2d31e29230"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD"
+    name: "sdd: SAL-MEF-SDD-0.1.md"
+    artifact_type: "sdd"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-SDD-0.1.md"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "0.1.0"
+    status: "PROPOSED"
+    sha256: "36bec94a52993e19a42d9844cbeb2b32dca1a4e7601a0391532e3f73f8f86793"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["architecture_baseline", "scientific_contract", "data_boundary", "safety", "validation"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-MD"]
+    notes: "Curated owner-review baseline; no implementation authority."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-PDF"
+    name: "document representation: SAL-MEF-SDD-0.1.pdf"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-SDD-0.1.pdf"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "ad5723b3f5853cd385dd26c4fcb4156446fb6e953cf205c21adcb9617d702874"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-DOCX"
+    name: "document representation: SAL-MEF-TDD-0.1.docx"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-TDD-0.1.docx"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "784f882f3ef6c0053b725ab6daf5c5319692be376fe4c4161ac7380707281a41"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"
+    name: "tdd: SAL-MEF-TDD-0.1.md"
+    artifact_type: "tdd"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-TDD-0.1.md"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "0.1.0"
+    status: "PROPOSED"
+    sha256: "61ca2d6915f01f10d324f9f078897fb81389636fe24a1e3f362322de5675b237"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: ["proposed_implementation_boundaries", "security", "validation", "evidence"]
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-ADR-0-1-MD", "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-SDD-0-1-MD"]
+    notes: "Proposed topology/technology baseline; ML-94 owns topology."
+  - id: "MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-PDF"
+    name: "document representation: SAL-MEF-TDD-0.1.pdf"
+    artifact_type: "document_representation"
+    source_bundle: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip"
+    internal_path: "SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03/SAL-MEF-TDD-0.1.pdf"
+    owner: "SportsAgentsLab founder / architecture authority"
+    version: "bundle-2026-08-03"
+    status: "INFORMATIVE"
+    sha256: "5d735aec3a212dd20079babedba9ea5406df498c7678e49e52891b5fee62c7c6"
+    container_sha256: "e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0"
+    normative_for: []
+    supersedes: []
+    superseded_by: []
+    dependencies: ["MEF-ARCH-SPORTSAGENTSLAB-MEF-ARCHITECTURE-BUNDLE-2026-08-03-SAL-MEF-TDD-0-1-MD"]
+    notes: "Curated architecture document representation; extracted content inspected."
+deterministic_order:
+  - source_bundle_order: UX, DIAG, ARCH
+  - internal_path: ascending case-insensitive ordinal path; case-sensitive path is the first tie-breaker
+  - id: ascending final tie-breaker
+reference_policy:
+  - all supersedes and superseded_by values must resolve to artifact IDs
+  - dependencies must resolve to artifact IDs
+  - no artifact may be both active and superseded
+  - container_sha256 must equal the corresponding source-bundle sha256
+artifact_counts:
+  NORMATIVE: 15
+  INFORMATIVE: 39
+  PROPOSED: 14
+  SUPERSEDED: 0
+  IMPLEMENTATION_EVIDENCE: 4
+  REJECTED: 0
+validation:
+  source_bundle_hashes: PASS
+  source_internal_hashes: PASS
+  manifest_reconciliation: PASS
+  duplicate_architecture_render_reconciliation: PASS
+  yaml_reference_integrity: REQUIRED
+  founder_review_required: true
+
+candidate_authority_layers:
+  - id: "MEF-PLATFORM-AGENT-AMENDMENT-V0-1"
+    name: "SAL-MEF Platform + Agent Architecture Amendment v0.1"
+    version: "0.1.0"
+    status: "ADOPTED"
+    effective_status: "NORMATIVE_PLATFORM_AGENT_AMENDMENT"
+    adoption_date: "2026-08-11"
+    source_bundle: "SAL-MEF-Platform-Agent-Amendment-v0.1.zip"
+    source_repository_path: "authority/SAL-MEF-Platform-Agent-Amendment-v0.1.zip"
+    source_sha256: "d0916ea63cd738480424b1203e06a2378243130edaca47c1b67b02cad9a15826"
+    materialized_repository_path: "authority/amendments/SAL-MEF-Platform-Agent-Amendment-v0.1"
+    implementation_authority: false
+    effective_precedence: "ACTIVE_AFTER_FOUNDER_ADOPTION"
+    adoption_rule: "Founder acceptance and repository materialization are both required; original frozen source artifacts remain immutable."
+    prerequisite_gate: "ML-97 independent founder acceptance remains separate and is not granted by this candidate layer."
+    supersession_matrix: "authority/amendments/SAL-MEF-Platform-Agent-Amendment-v0.1/00_AUTHORITY/SUPERSESSION_MATRIX.yaml"
+    decision_register: "authority/amendments/SAL-MEF-Platform-Agent-Amendment-v0.1/00_AUTHORITY/DECISION_REGISTER.md"
+    adr_range: [ADR-031, ADR-032, ADR-033, ADR-034, ADR-035, ADR-036, ADR-037, ADR-038, ADR-039, ADR-040, ADR-041, ADR-042, ADR-043, ADR-044]
+    affected_layers: [platform, deployment, agent_runtime, model_access, workflow, artifact_adapter, hosted_database, scientific_host_adapter, delivery]
+    unchanged_authority_record: "authority/amendments/SAL-MEF-Platform-Agent-Amendment-v0.1/00_AUTHORITY/AMENDMENT_AUTHORITY.yaml"
+    change_impact_record: "authority/amendments/SAL-MEF-Platform-Agent-Amendment-v0.1/00_AUTHORITY/CHANGE_IMPACT_REGISTER.md"
+    adoption_record: "authority/MEF_PLATFORM_AGENT_AMENDMENT_ADOPTION.md"
+    adr_044_disposition: "AUTHORITY_PRESERVATION_CLARIFICATION_NO_SUPERSESSION_ROW_REQUIRED"
+    required_revalidation: [authority_hashes, architecture_checks, yaml_json_parsing, amendment_sha256sums, git_diff_check]
+    founder_acceptance: ADOPTED
+    linear_mutation: FORBIDDEN

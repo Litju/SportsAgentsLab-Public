@@ -1,0 +1,95 @@
+amendment_id: SAL-MEF-PLATFORM-AGENT-AMENDMENT-v0.1
+version: 0.1.0
+date: 2026-08-11
+owner: SportsAgentsLab founder / architecture authority
+status: ADOPTED
+effective_status: NORMATIVE_PLATFORM_AGENT_AMENDMENT
+adoption_date: 2026-08-11
+implementation_authority: false
+adoption_rule: >-
+  Becomes effective only after founder acceptance and repository materialization.
+  Original frozen source artifacts remain immutable and historical.
+
+source_authority:
+  ux_freeze:
+    bundle: SAL-MEF-UX-UI-FREEZE-v0.3.zip
+    sha256: a5eb02c1aeb271e763211e733fdfb761df9a7663d0ce00acc8e5122ce4c941f5
+    status: NORMATIVE
+  architecture_diagrams:
+    bundle: SAL-MEF-Architecture-Diagrams.zip
+    sha256: 1a046c587f7413fc4e2cd4c75d20dd57efa5559eec4ea6a5d814c8a48d94c46f
+    status: PROPOSED
+  architecture_bundle:
+    bundle: SportsAgentsLab_MEF_Architecture_Bundle_2026-08-03.zip
+    sha256: e3fa4e306e14d440d95933a084dc2623724117af5a00d5a164cd401f4ce8d9f0
+    status: CURATED_BASELINE_FOR_OWNER_REVIEW
+  source_documents:
+    sdd:
+      id: SAL-MEF-SDD-0.1
+      sha256: 36bec94a52993e19a42d9844cbeb2b32dca1a4e7601a0391532e3f73f8f86793
+    tdd:
+      id: SAL-MEF-TDD-0.1
+      sha256: 61ca2d6915f01f10d324f9f078897fb81389636fe24a1e3f362322de5675b237
+    adr:
+      id: SAL-MEF-ADR-0.1
+      sha256: 9ba4a29b846ac8475f6350baed98628f87a314287bb2e8fb0664c4d90011e6c0
+
+implementation_baseline:
+  ml94_topology: ACCEPTED
+  ml95_contracts: ACCEPTED
+  ml96_operational_state:
+    status: ACCEPTED
+    commit: fc6c6c66a6a72ff9280de647af6c4ca7b26e9c72
+  ml97_job_execution:
+    status: IN_REVIEW
+    note: >-
+      Implementation and real PostgreSQL qualification passed; final independent QA
+      judge remained blocked because reviewer contexts timed out. This amendment does
+      not silently accept ML-97. References to the ML-97 execution model become
+      implementation-effective only after founder acceptance of ML-97.
+
+amended_decisions:
+  client_platform: WEB
+  ux_target: DESKTOP_FIRST
+  native_desktop_v1: false
+  responsive_secondary: true
+  web_framework: NEXTJS_REACT_TYPESCRIPT
+  primary_prototype_deployment: VERCEL
+  current_vercel_plan: HOBBY_DEVELOPMENT_NONCOMMERCIAL
+  agent_runtime: EVE
+  agent_runtime_status: PUBLIC_PREVIEW_PINNED_AND_UPGRADE_GATED
+  primary_model_provider: OPENCODE_GO
+  vercel_ai_gateway_required: false
+  ai_sdk_architectural_layer: false
+  database: POSTGRESQL
+  initial_hosted_postgres_candidate: NEON
+  artifact_store_port: IMMUTABLE_ARTIFACT_STORE
+  primary_vercel_artifact_adapter: VERCEL_BLOB_PRIVATE
+  portable_artifact_adapter: S3_COMPATIBLE
+  system_orchestration_v1: ML97_COMMAND_JOB_SYSTEM_AFTER_ACCEPTANCE
+  temporal_v1: DEFERRED
+  sandbox_provider: VERCEL_SANDBOX
+  sandbox_usage: SPECIAL_ISOLATED_WORKLOADS_ONLY
+  scientific_kernel: PYTHON_PROVIDER_NEUTRAL
+  scientific_hosted_adapter: VERCEL_PYTHON_FUNCTIONS_ELIGIBLE_AFTER_QUALIFICATION
+  delivery_mode: PREVIEW_FIRST
+  provider_lock_in: FORBIDDEN_IN_CORE
+
+unchanged_authority:
+  - product_identity
+  - athlete_population_boundary
+  - initial_force_plate_scope
+  - initial_cmj_protocol_scope
+  - deterministic_processing_separation
+  - statistical_inference_separation
+  - evidence_authority
+  - practitioner_final_authority
+  - unknown_semantics
+  - override_preserves_original_evidence
+  - forbidden_claims
+  - scientific_kernel_independence
+  - json_schema_contract_authority
+  - openapi_api_contract_direction
+  - postgresql_system_of_record
+  - provenance_and_evidence_requirements
+  - raw_signal_llm_minimization

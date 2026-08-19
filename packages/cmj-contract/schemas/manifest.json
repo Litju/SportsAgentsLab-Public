@@ -1,0 +1,33 @@
+{
+  "$generated_from": "contract.source.json",
+  "contract_id": "ML109-CMJ-PROCESSOR-CONTRACT",
+  "contract_version": "1.0.0",
+  "protocol_id": "CMJ-U-BI-HOH",
+  "protocol_version": "1.0.0",
+  "metric_pack_id": "CMJ_VERTICAL_CORE",
+  "metric_pack_version": "1.0.0",
+  "numerical_policy_version": "1.0.0",
+  "generated_files": [
+    "contract.json",
+    "events.json",
+    "excluded-metrics.json",
+    "manifest.json",
+    "metric-pack.json",
+    "numerical-policy.json",
+    "protocol.json",
+    "quality-taxonomy.json"
+  ],
+  "primary_metric_ids": [
+    "jump_height_impulse_momentum_m"
+  ],
+  "event_ids": [
+    "MOVEMENT_ONSET",
+    "TAKEOFF",
+    "LANDING"
+  ],
+  "supported_physical_configurations": [
+    "single.total_fz",
+    "dual.independent_fz"
+  ],
+  "manifest_sha256": "28f3f5cbbbe8d49585cd59fb317dd6d42aa4ed402e78cca7cd2688c0f4a6ef3c"
+}

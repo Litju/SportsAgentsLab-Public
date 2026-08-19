@@ -1,0 +1,16 @@
+{
+  "candidate": "mef-ui-stack-v1-final-composition",
+  "commit": "3cf18df",
+  "gates": {
+    "p0_protected_contracts": true,
+    "p0_build": true,
+    "p1_accessibility": true,
+    "p1_keyboard": true,
+    "p1_reduced_motion": true,
+    "p1_responsive": true
+  },
+  "limitations": [
+    "Authenticated hosted bootstrap and route rendering passed through the protected-deployment relay; the relay did not complete the client-side file-upload state transition, so hosted upload success is not claimed.",
+    "Direct interactive browser acceptance requires a Vercel SSO session; local production-build interaction and axe coverage passed."
+  ]
+}

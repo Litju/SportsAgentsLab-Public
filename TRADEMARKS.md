@@ -1,4 +1,6 @@
 # Trademarks
 
-SportsAgentsLab and associated names and logos are reserved project branding.
-No trademark license is granted. No registration claim is made by this file.
+SportsAgentsLab and related names, logos, marks, and branding are trademarks
+or trade names of Julio Rodriguez or the applicable owner. This repository
+does not grant permission to use them to imply endorsement, affiliation, or
+origin of a modified or redistributed product.

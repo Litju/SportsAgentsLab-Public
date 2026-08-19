@@ -1,0 +1,7 @@
+id,severity,finding,status,repair_or_owner_action,verification
+VD-001,P2,Secondary button and provenance-node supporting text missed the target contrast ratio in the initial audit.,FIXED,apps/practitioner-web/app/globals.css,52 axe scans; 0 violations; workspace/provenance recheck
+VD-002,P2,Open SVG axis path rendered as a black filled triangle in the initial Trial QA capture.,FIXED,apps/practitioner-web/app/globals.css,Final 11-trial-qa.png; plot grid/axis fill:none
+VD-003,P2,Tablet Eve dock could cover primary workspace content in the initial 1024px capture.,FIXED,apps/practitioner-web/app/globals.css,Final tablet-1024x900.png; reserved drawer width
+VD-004,P2,Mobile command-note positioning overlapped the hero copy in the initial capture.,FIXED,apps/practitioner-web/app/globals.css,Final mobile-390x844.png; note returns to flow
+VD-005,P2,Mobile search utility was not reachable as a visible control in the initial capture.,FIXED,apps/practitioner-web/app/globals.css,Final mobile-390x844.png; icon-only search trigger
+VD-006,P3,Hosted Vercel preview is protected by the platform login and the share-access connector could not create an external URL.,LIMITATION,N/A - environment access,Local production build used an explicit route-mocked tenant; no hosted PASS claimed

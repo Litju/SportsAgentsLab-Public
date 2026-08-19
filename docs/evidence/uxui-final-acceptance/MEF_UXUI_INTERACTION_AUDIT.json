@@ -1,0 +1,19 @@
+{
+  "authMode": "route-mocked-local-tenant",
+  "search": {
+    "opened": true,
+    "focusOnOpen": true,
+    "tabFocus": {
+      "tag": "BUTTON",
+      "ariaLabel": "Close workspace search"
+    },
+    "closedByEscape": true,
+    "focusReturned": true
+  },
+  "mobileNavigation": {
+    "expandedAfterOpen": true,
+    "backdropVisible": true,
+    "collapsedByEscape": true,
+    "focusReturned": true
+  }
+}

@@ -1,30 +1,33 @@
-SportsAgentsLab Public Source-Available License
-Version 1.0 — 2026-08-19
+SportsAgentsLab Proprietary Source-Available License
+Copyright Julio Rodriguez 2026
+All rights reserved.
 
-Copyright © 2026 Julio Rodriguez. All Rights Reserved.
+This license governs the SportsAgentsLab source made available in this
+repository (the “Software”). The Software is source-available and is not
+licensed as open-source software. No general permission is granted to use,
+copy, modify, adapt, merge, publish, distribute, sublicense, sell, host,
+commercialize, or create derivative works from the Software, in source or
+compiled form, except as expressly permitted below or by a separate written
+license signed by Julio Rodriguez.
 
-This repository and all code, documentation, diagrams, screenshots, synthetic
-datasets, examples, specifications, and other materials are proprietary. They
-are made publicly accessible for viewing, demonstration, professional
-evaluation, and portfolio or research inspection only. Public availability does
-not make these materials open source.
+You may view the source and make local, private copies solely for evaluation,
+security review, and understanding of the Software. You may not operate,
+provide, expose, or commercialize the Software or a derivative without prior
+written permission from Julio Rodriguez.
 
-Except for rights necessarily granted directly under GitHub's Terms of Service
-for public repository functionality, NO license or permission is granted to:
+GitHub Terms carve-out: nothing in this license is intended to restrict the
+rights that GitHub’s Terms of Service grant to GitHub or to users as necessary
+to view, fork, cache, transmit, or display repository content through GitHub’s
+ordinary repository features. That carve-out grants no independent general
+right to use the Software outside those GitHub features.
 
-* use the materials in production;
-* copy them beyond platform-granted functionality;
-* modify them or create derivative works;
-* redistribute, republish, sublicense, sell, or commercialize them;
-* host them as a service or incorporate them into a product or service;
-* use them to create or improve a competing product or service;
-* extract or reuse code, diagrams, specifications, synthetic data, screenshots,
-  or documentation;
-* use any material for AI/ML training, fine-tuning, evaluation, benchmark
-  construction, or model or agent development.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EXPRESS OR IMPLIED, TO THE MAXIMUM EXTENT PERMITTED BY LAW. JULIO
+RODRIGUEZ SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY
+ARISING FROM THE SOFTWARE OR ITS USE.
 
-No patent, trademark, or implied license is granted. Commercial or other use
-requires separate written permission from the copyright owner.
+This license does not grant trademark rights. SportsAgentsLab names, logos,
+marks, and branding remain subject to `TRADEMARKS.md`.
 
-Nothing in this license attempts to remove rights that GitHub itself grants
-users under its Terms of Service for public repository functionality.
+This license is intended to be legally restrictive. Obtain independent legal
+counsel before relying on it for a distribution or commercial arrangement.

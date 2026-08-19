@@ -1,0 +1,12 @@
+{
+  "name": "@mef/ingestion-adk",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-loader ../../packages/operational-state/test/ts-loader.mjs --test test/reference.test.ts"
+  },
+  "mefSmokePaths": [
+    "src/index.ts"
+  ]
+}

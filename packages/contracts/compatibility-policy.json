@@ -1,0 +1,25 @@
+{
+  "policy_id": "mef-contract-compatibility",
+  "policy_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "mode": "closed-backward-compatible",
+  "allowed_changes": [
+    "add_optional_property_without_changing_existing_property_semantics",
+    "add_new_non-governed_document_metadata_outside_required_contract_fields"
+  ],
+  "breaking_changes": [
+    "remove_property",
+    "remove_required_property",
+    "add_required_property",
+    "change_property_type",
+    "change_property_format_or_identifier_prefix",
+    "change_governed_enum_values",
+    "rename_governed_property",
+    "change_schema_id",
+    "change_schema_version"
+  ],
+  "unknown_schema_versions": "reject",
+  "unknown_governed_enum_values": "reject",
+  "additional_properties_default": "reject",
+  "semantic_versioning_claim": "not-claimed"
+}

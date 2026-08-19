@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sportsagentslab.local/mef/0.1.0/ingestion-adk.schema.json",
+  "title": "SportsAgentsLab MEF Ingestion ADK v0.1",
+  "type": "object",
+  "$defs": {
+    "Hash": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "Locator": {
+      "type":"object",
+      "required":["kind","version"],
+      "properties":{"kind":{"enum":["delimited_column","metadata_entry","json_pointer","spreadsheet_cell","binary_field"]},"version":{"const":"1"}},
+      "additionalProperties": true
+    },
+    "Evidence": {
+      "type":"object",
+      "required":["locator","statement"],
+      "properties":{"locator":{"$ref":"#/$defs/Locator"},"statement":{"type":"string","minLength":1}},
+      "additionalProperties": false
+    },
+    "Declaration": {
+      "type":"object",
+      "required":["status","evidence"],
+      "properties":{"status":{"enum":["known","unknown","conflicting"]},"value":{"type":"string"},"values":{"type":"array","items":{"type":"string"}},"evidence":{"type":"array","items":{"$ref":"#/$defs/Evidence"}}},
+      "additionalProperties": false
+    },
+    "Field": {
+      "type":"object",
+      "required":["sourceName","locator","classification","quantity","unit","axis","plate","evidence"],
+      "properties":{"sourceName":{"type":"string","minLength":1},"locator":{"$ref":"#/$defs/Locator"},"classification":{"$ref":"#/$defs/Declaration"},"quantity":{"$ref":"#/$defs/Declaration"},"unit":{"$ref":"#/$defs/Declaration"},"axis":{"$ref":"#/$defs/Declaration"},"plate":{"$ref":"#/$defs/Declaration"},"evidence":{"type":"array","items":{"$ref":"#/$defs/Evidence"}}},
+      "additionalProperties": false
+    },
+    "Schema": {
+      "type":"object",
+      "required":["schemaVersion","containerType","encoding","headerRowCount","orderedColumns","metadataKeys"],
+      "properties":{"schemaVersion":{"type":"string","minLength":1},"containerType":{"enum":["delimited","json","spreadsheet","binary","unknown"]},"encoding":{"type":"string","minLength":1},"delimiter":{"type":"string","minLength":1,"maxLength":1},"headerRowCount":{"type":"integer","minimum":0},"orderedColumns":{"type":"array","items":{"type":"string"}},"metadataKeys":{"type":"array","items":{"type":"string"}}},
+      "additionalProperties": false
+    },
+    "Observation": {
+      "type":"object",
+      "required":["sourceObservationVersion","sourceArtifactId","sourceContentSha256","adapterExecution","schema","schemaFingerprint","fields","metadata","warnings","provenance","observationSha256"],
+      "properties":{
+        "sourceObservationVersion":{"const":"0.1.0"},
+        "sourceArtifactId":{"type":"string","pattern":"^src_[a-z0-9][a-z0-9_-]{0,127}$"},
+        "sourceContentSha256":{"$ref":"#/$defs/Hash"},
+        "adapterExecution":{"type":"object","required":["adapterId","adapterVersion","adkApiVersion","qualification","executedAt"],"properties":{"adapterId":{"type":"string","minLength":1},"adapterVersion":{"type":"string","minLength":1},"adkApiVersion":{"const":"0.1.0"},"qualification":{"enum":["reference","unqualified","qualified"]},"executedAt":{"type":"string","format":"date-time"}},"additionalProperties":false},
+        "schema":{"$ref":"#/$defs/Schema"},
+        "schemaFingerprint":{"$ref":"#/$defs/Hash"},
+        "fields":{"type":"array","items":{"$ref":"#/$defs/Field"},"minItems":1},
+        "metadata":{"type":"array","items":{"type":"object","required":["key","declaration"],"properties":{"key":{"type":"string","minLength":1},"declaration":{"$ref":"#/$defs/Declaration"}},"additionalProperties":false}},
+        "warnings":{"type":"array","items":{"type":"string"}},
+        "provenance":{"type":"object","required":["sourceArtifactId","sourceContentSha256","locators"],"properties":{"sourceArtifactId":{"type":"string"},"sourceContentSha256":{"$ref":"#/$defs/Hash"},"locators":{"type":"array","items":{"$ref":"#/$defs/Locator"},"minItems":1}},"additionalProperties":false},
+        "observationSha256":{"$ref":"#/$defs/Hash"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {"$ref":"#/$defs/Observation"}
+  ]
+}

@@ -1,0 +1,713 @@
+{
+  "SourceArtifact": {
+    "entity_type": "SourceArtifact",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/source-artifact.schema.json",
+    "schema_version": "1.0.0",
+    "source_artifact_id": "src_fixture-source",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:00Z",
+    "lifecycle_state": "VERIFIED",
+    "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "byte_size": 4096,
+    "media_type": "application/octet-stream",
+    "original_filename": "fixture-force-plate.bin",
+    "ingested_at": "2026-08-10T12:00:01Z",
+    "source_declaration": {
+      "state": "KNOWN",
+      "value": "fixture-force-plate-export",
+      "evidence_references": [
+        {
+          "evidence_manifest_id": "evm_fixture-evidence",
+          "component": "source",
+          "locator": "positive-entities.json#/SourceArtifact"
+        }
+      ]
+    },
+    "immutable_source": true
+  },
+  "ImportAttempt": {
+    "entity_type": "ImportAttempt",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/import-attempt.schema.json",
+    "schema_version": "1.0.0",
+    "import_attempt_id": "imp_fixture-attempt",
+    "record_version": 1,
+    "source_artifact_id": "src_fixture-source",
+    "attempt_number": 1,
+    "attempted_at": "2026-08-10T12:00:02Z",
+    "attempt_state": "ACCEPTED",
+    "errors": []
+  },
+  "CanonicalAcquisition": {
+    "entity_type": "CanonicalAcquisition",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/canonical-acquisition.schema.json",
+    "schema_version": "1.0.0",
+    "canonical_acquisition_id": "acq_fixture-acquisition",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:03Z",
+    "source_artifact_id": "src_fixture-source",
+    "source_observation_id": "sob_fixture-observation",
+    "source_observation_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "canonicalizer_version": "0.1.0",
+    "mapping_manifest_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "signal_artifact_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "integrity_report_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "canonical_identity_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "acquisition_state": "PARTIALLY_RESOLVED",
+    "modality": {
+      "state": "KNOWN",
+      "value": "declared_measurement_stream",
+      "evidence_references": []
+    },
+    "channels": [
+      {
+        "channel_id": "channel_time",
+        "physical_quantity": {
+          "state": "KNOWN",
+          "value": "time",
+          "evidence_references": []
+        },
+        "unit": {
+          "state": "KNOWN",
+          "unit": {
+            "system": "SI",
+            "symbol": "s"
+          },
+          "evidence_references": []
+        },
+        "axis": {
+          "state": "NOT_APPLICABLE",
+          "reason": "Time has no spatial axis in this canonical representation.",
+          "evidence_references": []
+        },
+        "sign_convention": {
+          "state": "KNOWN",
+          "value": "positive",
+          "evidence_references": []
+        },
+        "sample_time": {
+          "state": "KNOWN",
+          "value": "source_field=time",
+          "evidence_references": []
+        },
+        "quality_state": "QUALIFIED",
+        "sample_count": 2,
+        "transformation": {
+          "kind": "IDENTITY",
+          "scale": 1,
+          "offset": 0,
+          "source_unit": {"system": "SI", "symbol": "s"},
+          "target_unit": {"system": "SI", "symbol": "s"}
+        },
+        "evidence_references": []
+      },
+      {
+        "channel_id": "channel_force_z",
+        "physical_quantity": {
+          "state": "KNOWN",
+          "value": "force",
+          "evidence_references": []
+        },
+        "unit": {
+          "state": "KNOWN",
+          "unit": {
+            "system": "SI",
+            "symbol": "N"
+          },
+          "evidence_references": []
+        },
+        "axis": {
+          "state": "KNOWN",
+          "value": "vertical",
+          "evidence_references": []
+        },
+        "sign_convention": {
+          "state": "KNOWN",
+          "value": "positive",
+          "evidence_references": []
+        },
+        "sample_time": {
+          "state": "KNOWN",
+          "value": "source_field=time",
+          "evidence_references": []
+        },
+        "quality_state": "QUALIFIED",
+        "sample_count": 2,
+        "transformation": {
+          "kind": "IDENTITY",
+          "scale": 1,
+          "offset": 0,
+          "source_unit": {"system": "SI", "symbol": "N"},
+          "target_unit": {"system": "SI", "symbol": "N"}
+        },
+        "evidence_references": []
+      }
+    ],
+    "source_mappings": [
+      {
+        "channel_id": "channel_time",
+        "source_label": "time",
+        "mapping_state": "KNOWN",
+        "evidence_references": [],
+        "transformation": {"kind": "IDENTITY", "scale": 1, "offset": 0, "source_unit": {"system": "SI", "symbol": "s"}, "target_unit": {"system": "SI", "symbol": "s"}}
+      },
+      {
+        "channel_id": "channel_force_z",
+        "source_label": "force_z",
+        "mapping_state": "KNOWN",
+        "evidence_references": [],
+        "transformation": {"kind": "IDENTITY", "scale": 1, "offset": 0, "source_unit": {"system": "SI", "symbol": "N"}, "target_unit": {"system": "SI", "symbol": "N"}}
+      }
+    ],
+    "sample_semantics": {
+      "state": "KNOWN",
+      "value": "source_record_indices_preserved",
+      "evidence_references": []
+    },
+    "timebase": {
+      "state": "KNOWN",
+      "timestamp_channel_id": "channel_time",
+      "timestamp_unit": {"system": "SI", "symbol": "s"},
+      "sample_interval_seconds": 0.01,
+      "uniformity": "UNIFORM",
+      "evidence_references": []
+    },
+    "synchronization": {
+      "state": "UNKNOWN",
+      "reason": "Fixture does not declare an external synchronization source.",
+      "evidence_references": []
+    },
+    "calibration": {
+      "state": "KNOWN",
+      "value": "no_calibration_applied_by_canonicalizer",
+      "evidence_references": []
+    },
+    "preprocessing": {
+      "state": "UNRESOLVED",
+      "reason": "Fixture keeps preprocessing semantics unresolved for structural contract coverage.",
+      "evidence_references": []
+    },
+    "missingness_quality": {
+      "state": "KNOWN",
+      "value": "explicit_integrity_findings",
+      "evidence_references": []
+    },
+    "configuration_resolution": "NOT_EVALUATED",
+    "manifest": {
+      "source_observation_id": "sob_fixture-observation",
+      "source_observation_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "source_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "canonicalizer_version": "0.1.0",
+      "mapping_manifest_id": "map_fixture-mapping",
+      "mapping_manifest_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "adapter_id": "mef.reference.source-v1",
+      "evidence_references": []
+    },
+    "signal_artifact": {
+      "content_hash": "3333333333333333333333333333333333333333333333333333333333333333",
+      "storage_key": "canonical/sha256/3333333333333333333333333333333333333333333333333333333333333333",
+      "byte_size": 128,
+      "media_type": "application/x-ndjson",
+      "encoding": "MEF_CANONICAL_SIGNAL_NDJSON_V0_1",
+      "channel_order": ["channel_time", "channel_force_z"]
+    },
+    "integrity_report": {
+      "status": "REVIEW_REQUIRED",
+      "record_count": 2,
+      "channel_count": 2,
+      "finite_value_count": 4,
+      "finding_count": 1,
+      "findings": [
+        {
+          "finding_id": "cif_fixture-warning",
+          "code": "EXTRA_UNKNOWN_CHANNEL",
+          "severity": "WARNING",
+          "message": "Fixture contains an unmapped producer field.",
+          "evidence_references": []
+        }
+      ],
+      "checks": [
+        {
+          "check_id": "EXTRA_FIELDS",
+          "status": "WARN",
+          "finding_ids": ["cif_fixture-warning"],
+          "evidence_references": []
+        }
+      ]
+    },
+    "quality_state": "REVIEW_REQUIRED",
+    "blocking_reasons": [
+      {
+        "code": "fixture_review_required",
+        "description": "Fixture intentionally remains review-required for structural contract coverage.",
+        "evidence_references": []
+      }
+    ]
+  },
+  "ConfigurationContract": {
+    "entity_type": "ConfigurationContract",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/configuration-contract.schema.json",
+    "schema_version": "1.0.0",
+    "configuration_contract_id": "cfg_fixture-configuration",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:04Z",
+    "canonical_acquisition_id": "acq_fixture-acquisition",
+    "configuration_state": "RESOLVED_UNQUALIFIED",
+    "configuration_name": {
+      "state": "KNOWN",
+      "value": "fixture-qualified-vertical-force",
+      "evidence_references": []
+    },
+    "qualification_evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "configuration",
+        "locator": "positive-entities.json#/ConfigurationContract"
+      }
+    ],
+    "reason_references": []
+  },
+  "ProtocolContract": {
+    "entity_type": "ProtocolContract",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/protocol-contract.schema.json",
+    "schema_version": "1.0.0",
+    "protocol_contract_id": "pro_fixture-protocol",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:05Z",
+    "protocol_key": "bilateral-unloaded-hands-on-hips-countermovement-jump",
+    "protocol_version": "1.0.0",
+    "protocol_state": "ELIGIBLE",
+    "bilateral": {
+      "condition": "BILATERAL",
+    "observation_state": "CONFIRMED",
+    "authority_type": "HUMAN_PRACTITIONER",
+    "evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "protocol-condition",
+        "locator": "fixture/protocol/bilateral"
+      }
+    ]
+    },
+    "unloaded": {
+      "condition": "UNLOADED",
+    "observation_state": "CONFIRMED",
+    "authority_type": "HUMAN_PRACTITIONER",
+    "evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "protocol-condition",
+        "locator": "fixture/protocol/unloaded"
+      }
+    ]
+    },
+    "hands_on_hips": {
+      "condition": "HANDS_ON_HIPS",
+    "observation_state": "CONFIRMED",
+    "authority_type": "HUMAN_PRACTITIONER",
+    "evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "protocol-condition",
+        "locator": "fixture/protocol/hands-on-hips"
+      }
+    ]
+    },
+    "countermovement_jump": {
+      "condition": "COUNTERMOVEMENT_JUMP",
+    "observation_state": "CONFIRMED",
+    "authority_type": "MACHINE_OBSERVED",
+    "evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "protocol-condition",
+        "locator": "fixture/protocol/countermovement-jump"
+      }
+    ]
+  },
+  "eligibility_evidence_references": [
+    {
+      "evidence_manifest_id": "evm_fixture-evidence",
+      "component": "protocol-eligibility",
+      "locator": "fixture/protocol/eligibility"
+    }
+  ]
+  },
+  "Trial": {
+    "entity_type": "Trial",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/trial.schema.json",
+    "schema_version": "1.0.0",
+    "trial_id": "trl_fixture-trial",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:06Z",
+    "trial_state": "PENDING_REVIEW",
+    "canonical_acquisition_id": "acq_fixture-acquisition",
+    "protocol_contract_id": "pro_fixture-protocol",
+    "session_id": "ses_fixture-session",
+    "quality_state": "REVIEW_REQUIRED",
+    "original_outcome": {
+      "state": "REVIEW_REQUIRED",
+      "reason_references": []
+    },
+    "event_evidence_references": [],
+    "eligibility_evidence_references": [
+      {
+        "evidence_manifest_id": "evm_fixture-evidence",
+        "component": "trial",
+        "locator": "positive-entities.json#/Trial"
+      }
+    ]
+  },
+  "Session": {
+    "entity_type": "Session",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/session.schema.json",
+    "schema_version": "1.0.0",
+    "session_id": "ses_fixture-session",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:07Z",
+    "session_state": "MACHINE_PROPOSED",
+    "contributing_trial_ids": [
+      "trl_fixture-trial"
+    ],
+    "machine_proposed_disposition": {
+      "state": "PROPOSED_INCLUDE",
+      "authority_type": "MACHINE",
+      "reason_references": []
+    },
+    "review_references": []
+  },
+  "MetricObservation": {
+    "entity_type": "MetricObservation",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/metric-observation.schema.json",
+    "schema_version": "1.0.0",
+    "metric_observation_id": "met_fixture-observation",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:08Z",
+    "metric_definition": {
+      "definition_id": "metric_peak_vertical_force",
+      "definition_version": "1.0.0"
+    },
+    "value": {
+      "value": 1250.0,
+      "unit": {
+        "system": "SI",
+        "symbol": "N"
+      },
+      "precision": {
+        "representation": "DECIMAL",
+        "digits": 1
+      }
+    },
+    "processor": {
+      "processor_id": "processor_fixture-pack",
+      "component_version": "1.0.0"
+    },
+    "contributing_trial_ids": [
+      "trl_fixture-trial"
+    ],
+    "contributing_session_id": "ses_fixture-session",
+    "observation_state": "OBSERVED",
+    "eligibility_state": "REVIEW_REQUIRED",
+    "evidence_references": []
+  },
+  "ReferenceEpoch": {
+    "entity_type": "ReferenceEpoch",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/reference-epoch.schema.json",
+    "schema_version": "1.0.0",
+    "reference_epoch_id": "epoch_fixture-reference",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:09Z",
+    "reference_policy_id": "policy_fixture-reference",
+    "reference_policy_version": "1.0.0",
+    "membership": {
+      "session_ids": [
+        "ses_fixture-session"
+      ],
+      "metric_observation_ids": [
+        "met_fixture-observation"
+      ],
+      "membership_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "maturity_state": "MATURE",
+    "approval_state": "PENDING",
+    "membership_evidence_references": []
+  },
+  "InferenceResult": {
+    "entity_type": "InferenceResult",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/inference-result.schema.json",
+    "schema_version": "1.0.0",
+    "inference_result_id": "inf_fixture-inference",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:10Z",
+    "metric_observation_id": "met_fixture-observation",
+    "reference_epoch_id": "epoch_fixture-reference",
+    "inference_state": "REVIEW_REQUIRED",
+    "measurement_estimate": {
+      "value": 1250.0,
+      "unit": {
+        "system": "SI",
+        "symbol": "N"
+      },
+      "precision": {
+        "representation": "DECIMAL",
+        "digits": 1
+      }
+    },
+    "uncertainty": {
+      "state": "KNOWN",
+      "standard_error": {
+        "value": 12.5,
+        "unit": {
+          "system": "SI",
+          "symbol": "N"
+        },
+        "precision": {
+          "representation": "DECIMAL",
+          "digits": 1
+        }
+      },
+      "lower": 1200.0,
+      "upper": 1300.0,
+      "evidence_references": []
+    },
+    "directional_probability": {
+      "state": "KNOWN",
+      "probability": 0.75,
+      "direction": "INCREASED",
+      "evidence_references": []
+    },
+    "practical_threshold_interpretation": {
+      "state": "NOT_APPLICABLE",
+      "interpretation": "NOT_REGISTERED",
+      "evidence_references": []
+    },
+    "diagnostics": [],
+    "eligibility_state": "REVIEW_REQUIRED",
+    "limitations": [
+      {
+        "code": "SCOPE_LIMITATION",
+        "description": "Fixture semantics do not establish product or scientific qualification."
+      }
+    ]
+  },
+  "EvidenceManifest": {
+    "entity_type": "EvidenceManifest",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/evidence-manifest.schema.json",
+    "schema_version": "1.0.0",
+    "evidence_manifest_id": "evm_fixture-evidence",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:11Z",
+    "manifest_version": "1.0.0",
+    "manifest_state": "DECLARED",
+    "source_artifact_ids": [
+      "src_fixture-source"
+    ],
+    "configuration_contract_ids": [
+      "cfg_fixture-configuration"
+    ],
+    "protocol_contract_ids": [
+      "pro_fixture-protocol"
+    ],
+    "processors": [
+      {
+        "processor_id": "processor_fixture-pack",
+        "component_version": "1.0.0"
+      }
+    ],
+    "metric_observation_ids": [
+      "met_fixture-observation"
+    ],
+    "session_ids": [
+      "ses_fixture-session"
+    ],
+    "reference_epoch_ids": [
+      "epoch_fixture-reference"
+    ],
+    "inference_result_ids": [
+      "inf_fixture-inference"
+    ],
+    "practitioner_decision_ids": [
+      "dec_fixture-decision"
+    ],
+    "integrity": {
+      "algorithm": "SHA-256",
+      "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "integrity_state": "DECLARED",
+      "component_version": "1.0.0",
+      "signed": false,
+      "verification_evidence_references": []
+    },
+    "component_version": "1.0.0"
+  },
+  "PractitionerDecision": {
+    "entity_type": "PractitionerDecision",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/practitioner-decision.schema.json",
+    "schema_version": "1.0.0",
+    "practitioner_decision_id": "dec_fixture-decision",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:12Z",
+    "decision_state": "RECORDED",
+    "authority_type": "HUMAN_PRACTITIONER",
+    "actor": {
+      "actor_type": "PRACTITIONER",
+      "actor_id": "practitioner_fixture",
+      "role": "QUALIFIED_PRACTITIONER"
+    },
+    "decided_at": "2026-08-10T12:00:13Z",
+    "decision": "REVIEW_REQUIRED",
+    "rationale": "Review remains required until the declared evidence scope is accepted.",
+    "target": {
+      "entity_type": "Session",
+      "object_id": "ses_fixture-session"
+    },
+    "evidence_manifest_ids": [
+      "evm_fixture-evidence"
+    ],
+    "machine_recommendation": {
+      "source": "AGENT_DRAFT",
+      "recommendation": "REVIEW_REQUIRED",
+      "evidence_references": []
+    }
+  },
+  "AgentContext": {
+    "entity_type": "AgentContext",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/agent-context.schema.json",
+    "schema_version": "1.0.0",
+    "agent_context_id": "ctx_fixture-context",
+    "record_version": 1,
+    "created_at": "2026-08-10T12:00:14Z",
+    "context_state": "BOUNDED",
+    "scope": {
+      "workspace": {
+        "state": "KNOWN",
+        "value": "workspace_fixture"
+      },
+      "athlete": {
+        "state": "KNOWN",
+        "value": "athlete_fixture"
+      },
+      "measurement_case": {
+        "state": "KNOWN",
+        "value": "case_fixture"
+      }
+    },
+    "screen_object_context": {
+      "state": "KNOWN",
+      "value": "Tests/Session"
+    },
+    "selected_evidence_manifest_ids": [
+      "evm_fixture-evidence"
+    ],
+    "unresolved_warnings": []
+  },
+  "AuditEvent": {
+    "entity_type": "AuditEvent",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/audit-event.schema.json",
+    "schema_version": "1.0.0",
+    "audit_event_id": "aud_fixture-event",
+    "record_version": 1,
+    "occurred_at": "2026-08-10T12:00:15Z",
+    "actor": {
+      "actor_type": "SYSTEM",
+      "actor_id": "system_fixture",
+      "role": "contract-fixture"
+    },
+    "audit_action": "CREATED",
+    "object": {
+      "entity_type": "SourceArtifact",
+      "object_id": "src_fixture-source"
+    },
+    "authority_type": "SYSTEM",
+    "reason": "Structural fixture record created for contract validation.",
+    "immutable_history": true
+  },
+  "Command": {
+    "entity_type": "Command",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/command.schema.json",
+    "schema_version": "1.0.0",
+    "command_id": "cmd_fixture-command",
+    "record_version": 1,
+    "command_type": "FIXTURE_EXECUTION",
+    "idempotency_key": "fixture-command-key",
+    "semantic_input_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "submitted_at": "2026-08-10T12:00:16Z",
+    "request_payload": {
+      "payload_kind": "STRUCTURAL",
+      "input_label": "fixture-input",
+      "input_value": "same semantic input",
+      "fixture_scenario": "SUCCESS"
+    },
+    "requested_operation": "EXECUTE",
+    "request_reference": {
+      "entity_type": "SourceArtifact",
+      "object_id": "src_fixture-source"
+    },
+    "authority_context_reference": {
+      "entity_type": "AgentContext",
+      "object_id": "ctx_fixture-context"
+    },
+    "correlation_metadata": {
+      "correlation_id": "cor_fixture",
+      "request_id": "req_fixture"
+    }
+  },
+  "Job": {
+    "entity_type": "Job",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/job.schema.json",
+    "schema_version": "1.0.0",
+    "job_id": "job_fixture-job",
+    "record_version": 2,
+    "command_id": "cmd_fixture-command",
+    "created_at": "2026-08-10T12:00:16Z",
+    "queued_at": "2026-08-10T12:00:16Z",
+    "started_at": "2026-08-10T12:00:17Z",
+    "updated_at": "2026-08-10T12:00:18Z",
+    "finished_at": "2026-08-10T12:00:18Z",
+    "state": "SUCCEEDED",
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_milliseconds": 1000,
+      "backoff_strategy": "FIXED"
+    },
+    "current_attempt_number": 1,
+    "last_attempt_id": "jatt_fixture-attempt",
+    "reconciliation_state": "NONE",
+    "result": {
+      "result_code": "COMPLETED",
+      "summary_code": "FIXTURE_SUCCESS"
+    }
+  },
+  "JobAttempt": {
+    "entity_type": "JobAttempt",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/job-attempt.schema.json",
+    "schema_version": "1.0.0",
+    "job_attempt_id": "jatt_fixture-attempt",
+    "record_version": 2,
+    "job_id": "job_fixture-job",
+    "attempt_number": 1,
+    "worker_identity": "fixture-success",
+    "worker_type": "FIXTURE",
+    "claimed_at": "2026-08-10T12:00:17Z",
+    "started_at": "2026-08-10T12:00:17Z",
+    "ended_at": "2026-08-10T12:00:18Z",
+    "outcome": "SUCCEEDED",
+    "retry_decision": "NOT_APPLICABLE",
+    "result": {
+      "result_code": "COMPLETED",
+      "summary_code": "FIXTURE_SUCCESS"
+    }
+  },
+  "ProgressEvent": {
+    "entity_type": "ProgressEvent",
+    "schema_id": "https://schemas.sportsagentslab.local/mef/1.0.0/progress-event.schema.json",
+    "schema_version": "1.0.0",
+    "progress_event_id": "pev_fixture-event",
+    "record_version": 1,
+    "job_id": "job_fixture-job",
+    "job_attempt_id": "jatt_fixture-attempt",
+    "sequence": 1,
+    "occurred_at": "2026-08-10T12:00:17Z",
+    "phase": "RUNNING",
+    "message_code": "STEP_COMPLETED",
+    "progress_value": 1
+  }
+}

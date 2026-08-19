@@ -1,0 +1,782 @@
+{
+  "components": {
+    "schemas": {
+      "AcquisitionConfigurationContract": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AcquisitionConfigurationContract"
+      },
+      "AcquisitionConfigurationResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AcquisitionConfigurationResolution"
+      },
+      "AcquisitionState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AcquisitionState"
+      },
+      "Actor": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Actor"
+      },
+      "AgentContext": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AgentContext"
+      },
+      "AgentContextId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AgentContextId"
+      },
+      "ApiError": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "$ref": "#/components/schemas/ApiErrorCode"
+              },
+              "message": {
+                "$ref": "#/components/schemas/ReasonText"
+              }
+            },
+            "required": [
+              "code",
+              "message"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "type": "object"
+      },
+      "ApiErrorCode": {
+        "enum": [
+          "INVALID_REQUEST",
+          "INVALID_COMMAND_PAYLOAD",
+          "IDEMPOTENCY_CONFLICT",
+          "JOB_NOT_FOUND",
+          "JOB_NOT_CLAIMABLE",
+          "INVALID_JOB_TRANSITION",
+          "JOB_ALREADY_TERMINAL",
+          "CANCELLATION_NOT_ALLOWED",
+          "ATTEMPT_LIMIT_EXCEEDED",
+          "WORKER_FAILURE_RETRYABLE",
+          "WORKER_FAILURE_NON_RETRYABLE",
+          "EXECUTION_OUTCOME_UNKNOWN",
+          "JOB_PERSISTENCE_FAILED",
+          "UNKNOWN_COMMAND_TYPE",
+          "UNKNOWN_WORKER_TYPE",
+          "PROGRESS_SEQUENCE_CONFLICT",
+          "RECONCILIATION_REQUIRED",
+          "INVALID_PROGRESS_EVENT"
+        ],
+        "type": "string"
+      },
+      "AuditAction": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AuditAction"
+      },
+      "AuditEvent": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AuditEvent"
+      },
+      "AuditEventId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AuditEventId"
+      },
+      "AxisSignResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/AxisSignResolution"
+      },
+      "CalibrationResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CalibrationResolution"
+      },
+      "CancellationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "reason_code": {
+            "enum": [
+              "USER_REQUESTED"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason_code"
+        ],
+        "type": "object"
+      },
+      "CanonicalAcquisition": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalAcquisition"
+      },
+      "CanonicalAcquisitionId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalAcquisitionId"
+      },
+      "CanonicalAcquisitionManifest": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalAcquisitionManifest"
+      },
+      "CanonicalChannel": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalChannel"
+      },
+      "CanonicalIntegrityCheck": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalIntegrityCheck"
+      },
+      "CanonicalIntegrityFinding": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalIntegrityFinding"
+      },
+      "CanonicalIntegrityFindingId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalIntegrityFindingId"
+      },
+      "CanonicalIntegrityReport": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalIntegrityReport"
+      },
+      "CanonicalMappingManifestId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalMappingManifestId"
+      },
+      "CanonicalSignalArtifact": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalSignalArtifact"
+      },
+      "CanonicalSourceMapping": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalSourceMapping"
+      },
+      "CanonicalTimebase": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalTimebase"
+      },
+      "CanonicalTransformation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalTransformation"
+      },
+      "CanonicalizationResult": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CanonicalizationResult"
+      },
+      "Channel": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Channel"
+      },
+      "ChannelCapability": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ChannelCapability"
+      },
+      "ChannelId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ChannelId"
+      },
+      "Command": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Command"
+      },
+      "CommandAccepted": {
+        "additionalProperties": false,
+        "properties": {
+          "command": {
+            "$ref": "#/components/schemas/Command"
+          },
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "reused": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "command",
+          "job",
+          "reused"
+        ],
+        "type": "object"
+      },
+      "CommandId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CommandId"
+      },
+      "CommandPayload": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CommandPayload"
+      },
+      "CommandSubmission": {
+        "additionalProperties": false,
+        "properties": {
+          "authority_context_reference": {
+            "$ref": "#/components/schemas/ObjectReference"
+          },
+          "command_type": {
+            "$ref": "#/components/schemas/CommandType"
+          },
+          "correlation_metadata": {
+            "$ref": "#/components/schemas/CorrelationMetadata"
+          },
+          "idempotency_key": {
+            "$ref": "#/components/schemas/IdempotencyKey"
+          },
+          "request_payload": {
+            "$ref": "#/components/schemas/CommandPayload"
+          },
+          "request_reference": {
+            "$ref": "#/components/schemas/ObjectReference"
+          },
+          "requested_operation": {
+            "$ref": "#/components/schemas/RequestedOperation"
+          }
+        },
+        "required": [
+          "command_type",
+          "idempotency_key",
+          "request_payload",
+          "requested_operation",
+          "authority_context_reference",
+          "correlation_metadata"
+        ],
+        "type": "object"
+      },
+      "CommandType": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CommandType"
+      },
+      "ConditionObservation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConditionObservation"
+      },
+      "ConfigurationContract": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationContract"
+      },
+      "ConfigurationContractId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationContractId"
+      },
+      "ConfigurationEvidenceReference": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationEvidenceReference"
+      },
+      "ConfigurationFinding": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationFinding"
+      },
+      "ConfigurationResolutionState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationResolutionState"
+      },
+      "ConfigurationState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ConfigurationState"
+      },
+      "ContextScope": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ContextScope"
+      },
+      "ContextState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ContextState"
+      },
+      "ContractError": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ContractError"
+      },
+      "CorrelationMetadata": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/CorrelationMetadata"
+      },
+      "DecisionState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/DecisionState"
+      },
+      "DecisionValue": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/DecisionValue"
+      },
+      "Diagnostic": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Diagnostic"
+      },
+      "DirectionalProbability": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/DirectionalProbability"
+      },
+      "Disposition": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Disposition"
+      },
+      "EntityRecord": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EntityRecord"
+      },
+      "EntityType": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EntityType"
+      },
+      "EpochApprovalState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EpochApprovalState"
+      },
+      "EpochMaturityState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EpochMaturityState"
+      },
+      "ErrorCode": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ErrorCode"
+      },
+      "EvidenceManifest": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EvidenceManifest"
+      },
+      "EvidenceManifestId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EvidenceManifestId"
+      },
+      "EvidenceReference": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/EvidenceReference"
+      },
+      "ExecutionError": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ExecutionError"
+      },
+      "ExecutionErrorCode": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ExecutionErrorCode"
+      },
+      "FailureCategory": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/FailureCategory"
+      },
+      "FixtureScenario": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/FixtureScenario"
+      },
+      "IdempotencyKey": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/IdempotencyKey"
+      },
+      "ImportAttempt": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ImportAttempt"
+      },
+      "ImportAttemptId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ImportAttemptId"
+      },
+      "ImportAttemptState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ImportAttemptState"
+      },
+      "InferenceResult": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/InferenceResult"
+      },
+      "InferenceResultId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/InferenceResultId"
+      },
+      "InferenceState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/InferenceState"
+      },
+      "Integrity": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Integrity"
+      },
+      "Job": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Job"
+      },
+      "JobAttempt": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobAttempt"
+      },
+      "JobAttemptId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobAttemptId"
+      },
+      "JobAttemptOutcome": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobAttemptOutcome"
+      },
+      "JobCancellation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobCancellation"
+      },
+      "JobId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobId"
+      },
+      "JobResult": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobResult"
+      },
+      "JobState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/JobState"
+      },
+      "Limitation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Limitation"
+      },
+      "MachineRecommendation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/MachineRecommendation"
+      },
+      "ManifestState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ManifestState"
+      },
+      "Membership": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Membership"
+      },
+      "MetricDefinition": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/MetricDefinition"
+      },
+      "MetricDefinitionId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/MetricDefinitionId"
+      },
+      "MetricObservation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/MetricObservation"
+      },
+      "MetricObservationId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/MetricObservationId"
+      },
+      "NonEmptyString": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/NonEmptyString"
+      },
+      "NumericValue": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/NumericValue"
+      },
+      "ObjectReference": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ObjectReference"
+      },
+      "ObservationState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ObservationState"
+      },
+      "PracticalThresholdInterpretation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PracticalThresholdInterpretation"
+      },
+      "PractitionerActor": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PractitionerActor"
+      },
+      "PractitionerDecision": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PractitionerDecision"
+      },
+      "PractitionerDecisionId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PractitionerDecisionId"
+      },
+      "PractitionerDisposition": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PractitionerDisposition"
+      },
+      "PractitionerOverride": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PractitionerOverride"
+      },
+      "Precision": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Precision"
+      },
+      "PreprocessingResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/PreprocessingResolution"
+      },
+      "ProcessorReference": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProcessorReference"
+      },
+      "ProgressCode": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProgressCode"
+      },
+      "ProgressEvent": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProgressEvent"
+      },
+      "ProgressEventCollection": {
+        "additionalProperties": false,
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/ProgressEvent"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "events"
+        ],
+        "type": "object"
+      },
+      "ProgressEventId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProgressEventId"
+      },
+      "ProgressPhase": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProgressPhase"
+      },
+      "ProtocolContract": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProtocolContract"
+      },
+      "ProtocolContractId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProtocolContractId"
+      },
+      "ProtocolEligibilityResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProtocolEligibilityResolution"
+      },
+      "ProtocolState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ProtocolState"
+      },
+      "QualityState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/QualityState"
+      },
+      "ReasonReference": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ReasonReference"
+      },
+      "ReasonText": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ReasonText"
+      },
+      "ReconciliationState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ReconciliationState"
+      },
+      "ReferenceEpoch": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ReferenceEpoch"
+      },
+      "ReferenceEpochId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ReferenceEpochId"
+      },
+      "RequestedOperation": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/RequestedOperation"
+      },
+      "RetryDecision": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/RetryDecision"
+      },
+      "RetryPolicy": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/RetryPolicy"
+      },
+      "SampleRateResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SampleRateResolution"
+      },
+      "SchemaVersion": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SchemaVersion"
+      },
+      "ScopeSlot": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ScopeSlot"
+      },
+      "SemanticDeclaration": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SemanticDeclaration"
+      },
+      "SemanticState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SemanticState"
+      },
+      "Session": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Session"
+      },
+      "SessionId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SessionId"
+      },
+      "SessionState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SessionState"
+      },
+      "Sha256": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Sha256"
+      },
+      "SourceArtifact": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SourceArtifact"
+      },
+      "SourceArtifactId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SourceArtifactId"
+      },
+      "SourceArtifactLifecycleState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SourceArtifactLifecycleState"
+      },
+      "SourceMapping": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SourceMapping"
+      },
+      "SourceObservationId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SourceObservationId"
+      },
+      "SynchronizationResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/SynchronizationResolution"
+      },
+      "Timestamp": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Timestamp"
+      },
+      "Trial": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Trial"
+      },
+      "TrialId": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/TrialId"
+      },
+      "TrialOutcome": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/TrialOutcome"
+      },
+      "TrialState": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/TrialState"
+      },
+      "Uncertainty": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Uncertainty"
+      },
+      "Unit": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/Unit"
+      },
+      "UnitDeclaration": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/UnitDeclaration"
+      },
+      "WorkerType": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/WorkerType"
+      },
+      "ZeroingResolution": {
+        "$ref": "./schemas/domain-contracts.schema.json#/$defs/ZeroingResolution"
+      }
+    }
+  },
+  "info": {
+    "description": "ML-97 typed command/job execution API and canonical domain contracts.",
+    "title": "Measurement Evidence Factory domain contracts",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/commands": {
+      "post": {
+        "operationId": "submitCommand",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandSubmission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandAccepted"
+                }
+              }
+            },
+            "description": "Typed response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid command"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Idempotency conflict"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Persistence failure"
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "operationId": "getJob",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/JobId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            },
+            "description": "Typed response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Job not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Persistence failure"
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}/cancellation": {
+      "post": {
+        "operationId": "requestJobCancellation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/JobId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancellationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            },
+            "description": "Typed response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Job not found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Cancellation is not allowed"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Persistence failure"
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}/progress": {
+      "get": {
+        "operationId": "getJobProgress",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/JobId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressEventCollection"
+                }
+              }
+            },
+            "description": "Typed response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Job not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Persistence failure"
+          }
+        }
+      }
+    }
+  }
+}

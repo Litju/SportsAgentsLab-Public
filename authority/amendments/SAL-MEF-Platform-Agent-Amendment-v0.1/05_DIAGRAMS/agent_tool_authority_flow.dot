@@ -1,0 +1,25 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", labelloc=t, label="Eve Tool and Authority Flow", fontsize=20];
+  node [shape=box, style="rounded", fontname="Arial"];
+  user [label="Practitioner"];
+  eve [label="Eve Session"];
+  model [label="OpenCode Model"];
+  tool [label="Typed Eve Tool"];
+  api [label="Governed Application Boundary"];
+  job [label="ML-97 Command/Job\nwhen mutation/long-running"];
+  core [label="MEF Core / Evidence"];
+  hitl [label="Eve HITL Interaction\n(runtime UX only)"];
+  decision [label="MEF PractitionerDecision\nSystem-of-record authority"];
+  user -> eve;
+  eve -> model;
+  model -> eve;
+  eve -> tool;
+  tool -> api;
+  api -> core [label="read"];
+  api -> job [label="command"];
+  job -> core;
+  eve -> hitl [label="may request"];
+  hitl -> api [label="authorized action request"];
+  api -> decision [label="validate + persist"];
+  decision -> core [label="audit/evidence linkage"];
+}

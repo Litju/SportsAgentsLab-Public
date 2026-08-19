@@ -1,6 +1,10 @@
 # Security
 
-Report a suspected security or privacy issue privately to the repository owner
-through the contact method listed on the owner's GitHub profile. Do not include
-secrets, personal data, or exploit details in a public issue. This snapshot does
-not expose production infrastructure or require a service credential.
+Please do not publish suspected vulnerabilities, credentials, private data, or
+operational details in a public issue. Report a concern privately to the
+repository owner and include enough detail to reproduce it safely. Do not use
+real secrets or production data in issue reports or pull requests.
+
+The public source-release pipeline scans every staged public file for secrets,
+PII, local metadata, third-party rights markers, and held-out evaluation
+material before publication.

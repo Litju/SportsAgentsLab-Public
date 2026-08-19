@@ -1,0 +1,7 @@
+{
+  "manifest_version": "0.1.0",
+  "artifact_path": "fixtures/contracts/positive-entities.json",
+  "artifact_selector": "SourceArtifact",
+  "contract_schema_path": "packages/contracts/schemas/domain-contracts.schema.json",
+  "expected_canonical_sha256": "ab2c7dd21a2e14d92f53ab3e8c18dd0a117e897899db1b08c327b2f9b93880a8"
+}

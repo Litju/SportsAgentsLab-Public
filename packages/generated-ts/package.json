@@ -1,0 +1,17 @@
+{
+  "name": "@mef/generated-ts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@mef/contracts": "workspace:*"
+  },
+  "scripts": {
+    "test": "node ../../scripts/package_smoke.mjs"
+  },
+  "mefSmokePaths": [
+    "src/index.ts",
+    "src/models/domain.ts",
+    "src/runtime.ts"
+  ]
+}
