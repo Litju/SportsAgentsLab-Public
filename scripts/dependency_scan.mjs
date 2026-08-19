@@ -98,7 +98,11 @@ const pythonVulnerabilities = Array.isArray(pythonPayload)
   ? pythonPayload.reduce((total, item) => total + (item.vulns?.length ?? 0), 0)
   : (pythonPayload.dependencies ?? []).reduce((total, item) => total + (item.vulns?.length ?? 0), 0);
 if (pythonAudit.status !== 0 && pythonVulnerabilities === 0) {
-  throw new Error("pip-audit exited non-zero without a vulnerability result");
+  const diagnostic = (pythonAudit.stderr || pythonAudit.stdout || "").trim().slice(-4000);
+  throw new Error(
+    "pip-audit exited non-zero without a vulnerability result" +
+    (diagnostic ? `: ${diagnostic}` : "")
+  );
 }
 if (nodeHighOrCritical > 0 || pythonVulnerabilities > 0) {
   throw new Error("VULNERABILITY_SCAN=FAIL unresolved high/critical or Python vulnerabilities found");
