@@ -83,6 +83,9 @@ def verify(root: Path, *, private_repo: Path | None = None) -> dict[str, object]
         "ci": len(workflows) >= 3,
     }
     missing_source = sorted(name for name, present in actual_source.items() if not present)
+    actual_tree_hash = tree_hash(root, exclude={"PUBLIC_SOURCE_RELEASE.json"})
+    if metadata.get("tree_sha256") != actual_tree_hash:
+        readme_errors.append("PUBLIC_SOURCE_RELEASE.json tree_sha256 does not match the public tree")
     result: dict[str, object] = {
         "root": str(root),
         "public_file_count": len(paths),
@@ -93,7 +96,7 @@ def verify(root: Path, *, private_repo: Path | None = None) -> dict[str, object]
         "workflow_errors": workflow_errors,
         "missing_source_categories": missing_source,
         "metadata": metadata,
-        "tree_sha256": tree_hash(root, exclude={"PUBLIC_SOURCE_RELEASE.json"}),
+        "tree_sha256": actual_tree_hash,
     }
     if private_repo is not None:
         result["private_repo_checked"] = str(private_repo.resolve())

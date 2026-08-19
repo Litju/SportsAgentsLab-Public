@@ -107,6 +107,19 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def canonical_tree_bytes(path: Path) -> bytes:
+    """Hash text as Git stores it, regardless of Windows checkout mode."""
+
+    data = path.read_bytes()
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return data
+    if "\x00" in text:
+        return data
+    return text.replace("\r\n", "\n").encode("utf-8")
+
+
 def public_path_for(relative: str) -> str:
     if relative.startswith(GENERATED_PREFIX):
         return relative[len(GENERATED_PREFIX) :]
@@ -220,13 +233,11 @@ def canonical_json(value: object) -> bytes:
 def tree_hash(root: Path, *, exclude: Iterable[str] = ()) -> str:
     excluded = {item.replace("\\", "/") for item in exclude}
     entries: list[dict[str, str]] = []
-    for path in sorted(root.rglob("*")):
-        if not path.is_file() or path.is_symlink():
-            continue
+    for path in iter_files(root):
         relative = path.relative_to(root).as_posix()
         if relative in excluded:
             continue
-        entries.append({"path": relative, "sha256": sha256_file(path)})
+        entries.append({"path": relative, "sha256": sha256_bytes(canonical_tree_bytes(path))})
     return sha256_bytes(canonical_json(entries))
 
 
@@ -317,7 +328,7 @@ def generate_env_example_text(text: str) -> str:
 
 
 def iter_files(root: Path) -> Iterable[Path]:
-    for path in sorted(root.rglob("*")):
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
         if path.is_symlink() or not path.is_file():
             continue
         relative_parts = {part.lower() for part in path.relative_to(root).parts}

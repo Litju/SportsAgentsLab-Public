@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from release_common import inventory, repo_path, sha256_bytes, sha256_file
+from release_common import canonical_tree_bytes, inventory, repo_path, sha256_bytes
 
 
 def compare(private_repo: Path, public_root: Path) -> dict[str, object]:
@@ -30,8 +30,8 @@ def compare(private_repo: Path, public_root: Path) -> dict[str, object]:
             mismatches.append({"path": record.path, "kind": "missing_public_path"})
             continue
         if record.classification == "PUBLISH_AS_IS":
-            expected = sha256_file(repo_path(private_repo, record.path))
-            actual = sha256_file(destination)
+            expected = sha256_bytes(canonical_tree_bytes(repo_path(private_repo, record.path)))
+            actual = sha256_bytes(canonical_tree_bytes(destination))
             if expected != actual:
                 mismatches.append({"path": record.path, "kind": "byte_hash_mismatch"})
             else:
